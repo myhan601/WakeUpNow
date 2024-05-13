@@ -13,8 +13,8 @@
 		AB0766902BF1C5C200CDA2D2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AB07668F2BF1C5C200CDA2D2 /* Base */; };
 		AB0766922BF1C5C300CDA2D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */; };
 		AB0766952BF1C5C300CDA2D2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AB0766942BF1C5C300CDA2D2 /* Base */; };
-		AB07669E2BF1C6E100CDA2D2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB07669D2BF1C6E100CDA2D2 /* SnapKit */; };
 		AB118D2C2BF1E5A900672AB1 /* AlarmPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB118D2B2BF1E5A900672AB1 /* AlarmPageVC.swift */; };
+		AB118D362BF1E7DD00672AB1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB118D352BF1E7DD00672AB1 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB07669E2BF1C6E100CDA2D2 /* SnapKit in Frameworks */,
+				AB118D362BF1E7DD00672AB1 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +89,7 @@
 			);
 			name = WakeUpNow;
 			packageProductDependencies = (
-				AB07669D2BF1C6E100CDA2D2 /* SnapKit */,
+				AB118D352BF1E7DD00672AB1 /* SnapKit */,
 			);
 			productName = WakeUpNow;
 			productReference = AB0766852BF1C5C200CDA2D2 /* WakeUpNow.app */;
@@ -386,7 +386,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AB07669D2BF1C6E100CDA2D2 /* SnapKit */ = {
+		AB118D352BF1E7DD00672AB1 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AB07669C2BF1C6E100CDA2D2 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
