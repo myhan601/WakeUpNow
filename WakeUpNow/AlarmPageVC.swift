@@ -52,6 +52,13 @@ class AlarmPageVC: UIViewController {
     @objc func addButtonTapped() {
         // 추가 관련 동작 구현
         print("'+' 버튼이 탭되었습니다.")
+        let setAlarmVC = SetAlarmVC()
+        
+        // SetAlarmVC를 UINavigationController의 루트 뷰 컨트롤러로 설정
+        let navigationController = UINavigationController(rootViewController: setAlarmVC)
+        
+        // 네비게이션 컨트롤러를 모달 형태로 표시
+        self.present(navigationController, animated: true, completion: nil)
     }
 }
 
