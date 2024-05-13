@@ -62,12 +62,12 @@
 			children = (
 				AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */,
 				AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */,
+				AB118D2B2BF1E5A900672AB1 /* AlarmPageVC.swift */,
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
 				AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */,
 				AB0766932BF1C5C300CDA2D2 /* LaunchScreen.storyboard */,
 				AB0766962BF1C5C300CDA2D2 /* Info.plist */,
-				AB118D2B2BF1E5A900672AB1 /* AlarmPageVC.swift */,
 			);
 			path = WakeUpNow;
 			sourceTree = "<group>";
