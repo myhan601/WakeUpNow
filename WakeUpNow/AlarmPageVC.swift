@@ -15,38 +15,22 @@ class AlarmPageVC: UIViewController {
         
         view.backgroundColor = .white
         
-        // 레이블 생성
-        let label = UILabel()
+        // 네비게이션 바의 왼쪽에 '편집' 버튼 추가
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(editButtonTapped))
         
-        // 레이블에 표시될 텍스트 설정
-        label.text = "안녕하세요, 레이블입니다!"
-        
-        // 레이블의 텍스트 정렬 설정
-        label.textAlignment = .center
-        
-        // 레이블을 뷰에 추가
-        self.view.addSubview(label)
-        
-        // SnapKit을 사용하여 레이블의 위치와 크기 설정
-        label.snp.makeConstraints { (make) in
-            // 화면 중앙에 오도록 설정
-            make.center.equalToSuperview()
-            
-            // 레이블의 너비와 높이 설정 (필요한 경우)
-            make.width.equalTo(300)
-            make.height.equalTo(20)
-        }
+        // 네비게이션 바의 오른쪽에 '+' 버튼 추가
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
     }
     
+    // '편집' 버튼이 탭되었을 때 호출될 메서드
+    @objc func editButtonTapped() {
+        // 편집 관련 동작 구현
+        print("편집 버튼이 탭되었습니다.")
+    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    // '+' 버튼이 탭되었을 때 호출될 메서드
+    @objc func addButtonTapped() {
+        // 추가 관련 동작 구현
+        print("'+' 버튼이 탭되었습니다.")
+    }
 }
