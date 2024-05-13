@@ -15,7 +15,7 @@ class AlarmPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         // 네비게이션 바의 왼쪽에 '편집' 버튼 추가
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(editButtonTapped))
@@ -36,7 +36,7 @@ class AlarmPageVC: UIViewController {
         
         view.addSubview(tableView)
         
-        // SnapKit을 사용하여 테이블뷰의 제약조건 설정
+        // SnapKit을 사용
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -50,8 +50,6 @@ class AlarmPageVC: UIViewController {
     
     // '+' 버튼이 탭되었을 때 호출될 메서드
     @objc func addButtonTapped() {
-        // 추가 관련 동작 구현
-        print("'+' 버튼이 탭되었습니다.")
         let setAlarmVC = SetAlarmVC()
         
         // SetAlarmVC를 UINavigationController의 루트 뷰 컨트롤러로 설정
@@ -64,7 +62,6 @@ class AlarmPageVC: UIViewController {
 
 extension AlarmPageVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 섹션당 행의 수를 5로 설정
         return 5
     }
     

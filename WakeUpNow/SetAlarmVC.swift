@@ -10,10 +10,25 @@ import SnapKit
 
 class SetAlarmVC: UIViewController {
     
+    let amPm = ["오전", "오후"]
+    let hours: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    let minutes: [String] = [
+        "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
+        "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+        "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
+        "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
+        "40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
+        "50", "51", "52", "53", "54", "55", "56", "57", "58", "59",
+    ]
+    
+    let pickerView = UIPickerView()
+    let label = UILabel()
+    let numberLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         self.title = "알람 추가"
         
@@ -21,20 +36,68 @@ class SetAlarmVC: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
         
-        setupNextButton()
-        setupSoundSettingButton() // '소리 설정' 버튼 설정 함수 호출
+        setupDayButton()
+        setupSoundSettingButton()
+        setupLabels()
+        setupPickerView()
     }
     
-    func setupNextButton() {
+    func setupLabels() {
+        // label 설정
+        label.text = "선택된 시간대"
+        label.textAlignment = .center
+        view.addSubview(label)
+        
+        // numberLabel 설정
+        numberLabel.text = "선택된 숫자"
+        numberLabel.textAlignment = .center
+        view.addSubview(numberLabel)
+        
+        // SnapKit을 사용하여 label의 위치와 크기를 설정합니다.
+        label.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-100) // 화면 하단으로부터 100pt 위에 위치하도록 설정
+            make.width.equalTo(200)
+            make.height.equalTo(40)
+        }
+        
+        // SnapKit을 사용하여 numberLabel의 위치와 크기를 설정합니다.
+        numberLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(label.snp.top).offset(-20) // label 위로 20pt 떨어진 위치에 설정
+            make.width.equalTo(200)
+            make.height.equalTo(40)
+        }
+    }
+    
+    func setupPickerView() {
+        // pickerView 설정
+        view.addSubview(pickerView)
+        
+        // pickerView의 delegate와 dataSource 설정
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        // SnapKit을 사용하여 pickerView의 위치와 크기를 설정
+        pickerView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview() // 중앙 정렬
+            make.top.equalToSuperview().offset(100) // 상단으로부터 100의 거리에 위치
+            make.width.equalToSuperview().multipliedBy(0.8) // 화면 너비의 80%
+            make.height.equalTo(200) // 높이는 200으로 설정
+        }
+    }
+
+    
+    func setupDayButton() {
         let nextButton = UIButton(type: .system)
         nextButton.setTitle("반복요일", for: .normal)
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(repDayButtonTapped), for: .touchUpInside)
         view.addSubview(nextButton)
         
         // SnapKit을 사용한 제약 설정
         nextButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-30) // '소리 설정' 버튼과 겹치지 않도록 조정
+            make.centerY.equalToSuperview().offset(-30)
             make.width.equalTo(100)
             make.height.equalTo(50)
         }
@@ -49,14 +112,19 @@ class SetAlarmVC: UIViewController {
         // SnapKit을 사용한 제약 설정
         soundSettingButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(30) // '반복요일' 버튼에 대해 상대적으로 위치 조정
+            make.centerY.equalToSuperview().offset(30)
             make.width.equalTo(100)
             make.height.equalTo(50)
         }
     }
     
-    @objc func nextButtonTapped() {
+    @objc func repDayButtonTapped() {
         let nextVC = SetDayVC()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc func soundSettingButtonTapped() {
+        let nextVC = SetSoundVC()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -66,14 +134,56 @@ class SetAlarmVC: UIViewController {
     
     @objc func saveButtonTapped() {
         print("알람이 저장되었습니다.")
-    }
-    
-    @objc func soundSettingButtonTapped() {
-        let nextVC = SetSoundVC()
-        self.navigationController?.pushViewController(nextVC, animated: true)
-        // '소리 설정' 버튼이 탭되었을 때의 로직 구현
-        print("소리 설정 화면으로 이동합니다.")
-        // 여기에 소리 설정 화면으로 이동하는 코드 추가
+        // 알람을 저장하는 로직
+        self.dismiss(animated: true, completion: nil)
     }
 }
+
+extension SetAlarmVC: UIPickerViewDataSource {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return amPm.count
+        } else if component == 1 {
+            return hours.count
+        } else {
+            return minutes.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            // 오전/오후 선택 시
+            label.text = amPm[row]
+        } else if component == 1 {
+            // 시간 선택 시
+            numberLabel.text = hours[row]
+        } else {
+            // 분 선택 시
+            // 여기에서 '60'을 제거해야 합니다. 'minutes' 배열은 0부터 59까지 있어야 합니다.
+            numberLabel.text = minutes[row]
+        }
+    }
+
+    
+    // pickerView에서 보여주고 싶은 아이템의 제목
+    // 각각의 component 마다 다른 값을 갖게 한다.
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            return amPm[row]
+        } else if component == 1 {
+            return hours[row]
+        } else {
+            return minutes[row]
+        }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 3
+    }
+}
+
+extension SetAlarmVC: UIPickerViewDelegate {
+    
+}
+
 

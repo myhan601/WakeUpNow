@@ -14,7 +14,7 @@ class SetDayVC: UIViewController {
 
         self.title = "반복"
         // 화면의 배경색 설정
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         // 사용자 정의 뒤로 가기 버튼 추가
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: self, action: #selector(goBack))
@@ -26,4 +26,3 @@ class SetDayVC: UIViewController {
     }
 
 }
-
