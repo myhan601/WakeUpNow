@@ -5,23 +5,79 @@
 //  Created by 한철희 on 5/13/24.
 //
 
+
 import UIKit
+import SnapKit
 
 class SetSoundVC: UIViewController {
-
+    
+    var tableView: UITableView!
+    let sounds = ["사운드1", "사운드2", "사운드3", "사운드4", "사운드5", "사운드6", "사운드7", "사운드8", "사운드9", "사운드10"]
+    var selectedSound: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = "사운드"
-        // 화면의 배경색 설정
-        view.backgroundColor = .systemBackground
         
-        // 사용자 정의 뒤로 가기 버튼 추가
+        self.title = "사운드"
+        view.backgroundColor = .systemBackground
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: self, action: #selector(goBack))
+        
+        configureTableView()
+        configureNavigationBar()
     }
     
     @objc func goBack() {
-        // 네비게이션 컨트롤러를 사용하여 이전 화면으로 이동
         self.navigationController?.popViewController(animated: true)
     }
+    
+    private func configureNavigationBar() {
+        // 네비게이션바 배경과 구분선을 투명하게 만듭니다.
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        // 여기서 추가적으로 네비게이션바의 색상을 변경하거나 다른 스타일링을 적용할 수 있습니다.
+    }
+    
+    private func configureTableView() {
+        tableView = UITableView(frame: .zero, style: .plain)
+        tableView.isScrollEnabled = false // 스크롤 비활성화
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "soundCell") // 셀 등록
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0) // 컨텐츠 인셋 조정
+        tableView.layer.borderWidth = 0.7 // 테이블뷰의 테두리 너비
+        tableView.layer.borderColor = UIColor.gray.cgColor // 테이블뷰의 테두리 색상
+        tableView.layer.cornerRadius = 10 // 테이블뷰의 모서리 둥글기
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview() // 부모 뷰의 중앙에 위치
+            make.top.equalToSuperview().offset(100) // 상단에서 100포인트 떨어진 위치
+            make.width.equalToSuperview().multipliedBy(0.8) // 부모 뷰 너비의 80% 만큼
+            make.height.equalTo(400) // 높이는 315포인트
+        }
+    }
 }
+
+// MARK: - UITableViewDelegate
+extension SetSoundVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedSound = sounds[indexPath.row]
+        tableView.reloadData()
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension SetSoundVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        sounds.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "soundCell", for: indexPath)
+        let sound = sounds[indexPath.row]
+        cell.textLabel?.text = "    \(sound)" // 왼쪽 여백 추가
+        cell.accessoryType = (sound == selectedSound) ? .checkmark : .none
+        return cell
+    }
+}
+
