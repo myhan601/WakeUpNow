@@ -6,31 +6,53 @@
 //
 
 import UIKit
+import SnapKit
 
 class SetDayVC: UIViewController, UITableViewDataSource {
-
+    
     // 테이블뷰 인스턴스 생성
     var tableView: UITableView!
     
     // 데이터 소스 배열
     let days = ["일요일마다", "월요일마다", "화요일마다", "수요일마다", "목요일마다", "금요일마다", "토요일마다"]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.title = "반복"
         view.backgroundColor = .systemBackground
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: self, action: #selector(goBack))
         
-        // 테이블뷰 설정
-        tableView = UITableView(frame: view.bounds, style: .plain)
-        tableView.isScrollEnabled = false
-        tableView.dataSource = self  // 데이터 소스 설정
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0) // 상단 여백 추가
-        view.addSubview(tableView)
+        setupTableView()
     }
+    
+    func setupTableView() {
+        // 테이블뷰 설정
+        tableView = UITableView(frame: CGRect.zero, style: .plain) // frame을 CGRect.zero로 초기 설정
+        tableView.isScrollEnabled = false
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        // 상단 여백 추가
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        
+        // 테이블뷰에 테두리 추가
+        tableView.layer.borderWidth = 0.7
+        tableView.layer.borderColor = UIColor.gray.cgColor
+        tableView.layer.cornerRadius = 10
+        
+        view.addSubview(tableView)
+        
+        // SnapKit을 사용한 오토레이아웃 설정
+        tableView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(100) // 상단 여백을 조정하여 위치를 적절히 조정
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalTo(315)
+        }
+    }
+    
     
     @objc func goBack() {
         self.navigationController?.popViewController(animated: true)

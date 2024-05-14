@@ -98,7 +98,6 @@ class SetAlarmVC: UIViewController {
         // tableView 설정
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .gray
         tableView.layer.cornerRadius = 10
         tableView.layer.borderColor = UIColor.black.cgColor // 테두리 색상을 설정합니다.
         tableView.layer.borderWidth = 0.7 // 테두리 두께를 설정합니다.
@@ -110,7 +109,7 @@ class SetAlarmVC: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(pickerView.snp.bottom).offset(20)
             make.width.equalToSuperview().multipliedBy(0.8)
-            make.height.equalTo(180)
+            make.height.equalTo(225)
         }
     }
     
@@ -172,39 +171,27 @@ class SetAlarmVC: UIViewController {
 
 extension SetAlarmVC: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        let infiniteRows = 10000 // 순환을 위한 충분히 큰 값
         if component == 0 {
             return amPm.count
-        } else if component == 1 {
-            return hours.count
         } else {
-            return minutes.count
+            // 시간과 분을 위한 순환 행의 수
+            return infiniteRows
         }
     }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if component == 0 {
-            // 오전/오후 선택 시
-            label.text = amPm[row]
-        } else if component == 1 {
-            // 시간 선택 시
-            numberLabel.text = hours[row]
-        } else {
-            // 분 선택 시
-            // 여기에서 '60'을 제거해야 합니다. 'minutes' 배열은 0부터 59까지 있어야 합니다.
-            numberLabel.text = minutes[row]
-        }
-    }
-    
     
     // pickerView에서 보여주고 싶은 아이템의 제목
-    // 각각의 component 마다 다른 값을 갖게 한다.
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             return amPm[row]
         } else if component == 1 {
-            return hours[row]
+            // 시간 순환
+            let actualHour = hours[row % hours.count] // modulo 연산으로 순환 효과 구현
+            return actualHour
         } else {
-            return minutes[row]
+            // 분 순환
+            let actualMinute = minutes[row % minutes.count] // modulo 연산으로 순환 효과 구현
+            return actualMinute
         }
     }
     
@@ -214,63 +201,102 @@ extension SetAlarmVC: UIPickerViewDataSource {
 }
 
 extension SetAlarmVC: UIPickerViewDelegate {
-    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            label.text = amPm[row]
+        } else if component == 1 {
+            // 시간 선택 시
+            let actualHour = hours[row % hours.count] // modulo 연산으로 실제 시간 계산
+            numberLabel.text = actualHour
+        } else {
+            // 분 선택 시
+            let actualMinute = minutes[row % minutes.count] // modulo 연산으로 실제 분 계산
+            numberLabel.text = actualMinute
+        }
+    }
 }
 
+
 extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2 // 섹션을 두 개로 나눔: '미션여부'와 나머지 셀들
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4 // '반복요일'과 '소리 설정' 두 개의 셀
+        if section == 0 {
+            return 1 // '미션여부' 셀이 하나 있는 섹션
+        } else {
+            return 4 // '반복요일', '메모', '소리 설정', '다시 알림' 셀이 있는 섹션
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 1 {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        
+        // '미션여부' 셀 구성
+        if indexPath.section == 0 {
+            cell.textLabel?.text = "미션여부"
             
-            // "메모" 레이블 추가
-            let label = UILabel()
-            label.text = "메모"
-            cell.contentView.addSubview(label)
-            
-            // 텍스트 필드 추가
-            let textField = UITextField()
-            textField.placeholder = "메모 입력"
-            textField.textAlignment = .right // 오른쪽 정렬
-            textField.clearButtonMode = .whileEditing
-            cell.contentView.addSubview(textField)
-            
-            // SnapKit을 사용하여 레이블과 텍스트 필드의 위치와 크기 설정
-            label.snp.makeConstraints { make in
-                make.left.equalToSuperview().offset(15)
-                make.centerY.equalToSuperview()
-                make.width.equalTo(50)
-            }
-            
-            textField.snp.makeConstraints { make in
-                make.left.equalTo(label.snp.right).offset(10)
-                make.centerY.equalToSuperview()
-                make.right.equalToSuperview().offset(-15)
-                make.height.equalTo(30)
-            }
-            
-            return cell
+            let switchView = UISwitch()
+            cell.accessoryView = switchView
         } else {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+            // 나머지 셀들 구성
             if indexPath.row == 0 {
                 cell.textLabel?.text = "반복요일"
+            } else if indexPath.row == 1 {
+                // "메모" 셀 구성이 여기에 들어갑니다.
+                let label = UILabel()
+                label.text = "메모"
+                cell.contentView.addSubview(label)
+                
+                let textField = UITextField()
+                textField.placeholder = "메모 입력"
+                textField.textAlignment = .right
+                textField.clearButtonMode = .whileEditing
+                cell.contentView.addSubview(textField)
+                
+                label.snp.makeConstraints { make in
+                    make.left.equalToSuperview().offset(15)
+                    make.centerY.equalToSuperview()
+                    make.width.equalTo(50)
+                }
+                
+                textField.snp.makeConstraints { make in
+                    make.left.equalTo(label.snp.right).offset(10)
+                    make.centerY.equalToSuperview()
+                    make.right.equalToSuperview().offset(-15)
+                    make.height.equalTo(30)
+                }
             } else if indexPath.row == 2 {
                 cell.textLabel?.text = "소리 설정"
-            } else {
+            } else if indexPath.row == 3 {
                 cell.textLabel?.text = "다시 알림"
+                
+                let switchView = UISwitch()
+                cell.accessoryView = switchView
             }
-            return cell
         }
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            repDayButtonTapped()
-        } else if indexPath.row == 2 {
-            soundSettingButtonTapped()
+        // 섹션에 따른 액션 처리 추가
+        if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                repDayButtonTapped()
+            } else if indexPath.row == 2 {
+                soundSettingButtonTapped()
+            }
+            // '미션여부' 셀에 대한 액션도 추가할 수 있습니다.
         }
+    }
+    
+    // 섹션 헤더 높이를 조절하여 '미션여부' 섹션과 나머지 섹션 사이의 간격을 조절할 수 있습니다.
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 50 // 원하는 간격
+        }
+        return 0
     }
 }
