@@ -18,9 +18,7 @@ class SetSoundVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "사운드"
         view.backgroundColor = .systemBackground
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: self, action: #selector(goBack))
         
         configureTableView()
         configureNavigationBar()
@@ -31,11 +29,12 @@ class SetSoundVC: UIViewController {
     }
     
     private func configureNavigationBar() {
+        self.title = "사운드"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: self, action: #selector(goBack))
         // 네비게이션바 배경과 구분선을 투명하게 만듭니다.
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-        // 여기서 추가적으로 네비게이션바의 색상을 변경하거나 다른 스타일링을 적용할 수 있습니다.
     }
     
     private func configureTableView() {

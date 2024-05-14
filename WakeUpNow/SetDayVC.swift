@@ -23,6 +23,10 @@ class SetDayVC: UIViewController {
         self.title = "반복"
         view.backgroundColor = .systemBackground
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: self, action: #selector(goBack))
+        // 네비게이션바 배경과 구분선을 투명하게 만듭니다.
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
     }
     
     private func configureTableView() {

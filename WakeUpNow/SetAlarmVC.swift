@@ -31,22 +31,29 @@ class SetAlarmVC: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        self.title = "알람 추가"
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelButtonTapped))
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         // 제스처가 테이블뷰 셀 선택에 영향을 주지 않도록 설정
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
         
+        configureNavigationBar()
         setupDayButton()
         setupSoundSettingButton()
         setupLabels()
         setupPickerView()
         setupTableView()
+    }
+    
+    private func configureNavigationBar() {
+        self.title = "알람 추가"
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelButtonTapped))
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
+        // 네비게이션바 배경과 구분선을 투명하게 만듭니다.
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
     }
     
     func setupLabels() {
