@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FA82BF369190043FDF7 /* TimerViewController.swift */; };
+		2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */; };
 		AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */; };
 		AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */; };
 		AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2EC95FA82BF369190043FDF7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingViewController.swift; sourceTree = "<group>"; };
 		AB0766852BF1C5C200CDA2D2 /* WakeUpNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeUpNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +43,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EC95FA72BF368F70043FDF7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2EC95FA82BF369190043FDF7 /* TimerViewController.swift */,
+				2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		AB07667C2BF1C5C200CDA2D2 = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +74,7 @@
 				AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */,
 				AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */,
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
+				2EC95FA72BF368F70043FDF7 /* ViewControllers */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
 				AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */,
 				AB0766932BF1C5C300CDA2D2 /* LaunchScreen.storyboard */,
@@ -146,7 +160,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
+				2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */,
 				AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */,
 				AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */,
 			);
