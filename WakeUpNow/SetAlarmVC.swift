@@ -24,6 +24,7 @@ class SetAlarmVC: UIViewController {
     let pickerView = UIPickerView()
     let label = UILabel()
     let numberLabel = UILabel()
+    let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +37,16 @@ class SetAlarmVC: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        // 제스처가 테이블뷰 셀 선택에 영향을 주지 않도록 설정
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        
         setupDayButton()
         setupSoundSettingButton()
         setupLabels()
         setupPickerView()
+        setupTableView()
     }
     
     func setupLabels() {
@@ -56,7 +63,7 @@ class SetAlarmVC: UIViewController {
         // SnapKit을 사용하여 label의 위치와 크기를 설정합니다.
         label.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-100) // 화면 하단으로부터 100pt 위에 위치하도록 설정
+            make.bottom.equalToSuperview().offset(-200) // 화면 하단으로부터 100pt 위에 위치하도록 설정
             make.width.equalTo(200)
             make.height.equalTo(40)
         }
@@ -86,7 +93,27 @@ class SetAlarmVC: UIViewController {
             make.height.equalTo(200) // 높이는 200으로 설정
         }
     }
-
+    
+    func setupTableView() {
+        // tableView 설정
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .gray
+        tableView.layer.cornerRadius = 10
+        tableView.layer.borderColor = UIColor.black.cgColor // 테두리 색상을 설정합니다.
+        tableView.layer.borderWidth = 0.7 // 테두리 두께를 설정합니다.
+        tableView.isScrollEnabled = false
+        view.addSubview(tableView)
+        
+        // SnapKit을 사용하여 tableView의 위치와 크기를 설정
+        tableView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(pickerView.snp.bottom).offset(20)
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalTo(180)
+        }
+    }
+    
     
     func setupDayButton() {
         let nextButton = UIButton(type: .system)
@@ -97,7 +124,7 @@ class SetAlarmVC: UIViewController {
         // SnapKit을 사용한 제약 설정
         nextButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-30)
+            make.centerY.equalToSuperview().offset(20)
             make.width.equalTo(100)
             make.height.equalTo(50)
         }
@@ -112,10 +139,14 @@ class SetAlarmVC: UIViewController {
         // SnapKit을 사용한 제약 설정
         soundSettingButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(30)
+            make.centerY.equalToSuperview().offset(20)
             make.width.equalTo(100)
             make.height.equalTo(50)
         }
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @objc func repDayButtonTapped() {
@@ -163,7 +194,7 @@ extension SetAlarmVC: UIPickerViewDataSource {
             numberLabel.text = minutes[row]
         }
     }
-
+    
     
     // pickerView에서 보여주고 싶은 아이템의 제목
     // 각각의 component 마다 다른 값을 갖게 한다.
@@ -186,4 +217,60 @@ extension SetAlarmVC: UIPickerViewDelegate {
     
 }
 
-
+extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4 // '반복요일'과 '소리 설정' 두 개의 셀
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 1 {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+            
+            // "메모" 레이블 추가
+            let label = UILabel()
+            label.text = "메모"
+            cell.contentView.addSubview(label)
+            
+            // 텍스트 필드 추가
+            let textField = UITextField()
+            textField.placeholder = "메모 입력"
+            textField.textAlignment = .right // 오른쪽 정렬
+            textField.clearButtonMode = .whileEditing
+            cell.contentView.addSubview(textField)
+            
+            // SnapKit을 사용하여 레이블과 텍스트 필드의 위치와 크기 설정
+            label.snp.makeConstraints { make in
+                make.left.equalToSuperview().offset(15)
+                make.centerY.equalToSuperview()
+                make.width.equalTo(50)
+            }
+            
+            textField.snp.makeConstraints { make in
+                make.left.equalTo(label.snp.right).offset(10)
+                make.centerY.equalToSuperview()
+                make.right.equalToSuperview().offset(-15)
+                make.height.equalTo(30)
+            }
+            
+            return cell
+        } else {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "반복요일"
+            } else if indexPath.row == 2 {
+                cell.textLabel?.text = "소리 설정"
+            } else {
+                cell.textLabel?.text = "다시 알림"
+            }
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            repDayButtonTapped()
+        } else if indexPath.row == 2 {
+            soundSettingButtonTapped()
+        }
+    }
+}
