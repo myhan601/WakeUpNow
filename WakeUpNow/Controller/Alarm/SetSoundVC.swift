@@ -74,7 +74,7 @@ extension SetSoundVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "soundCell", for: indexPath)
         let sound = sounds[indexPath.row]
-        cell.textLabel?.text = "    \(sound)" // 왼쪽 여백 추가
+        cell.textLabel?.text = "\(sound)" // 왼쪽 여백 추가
         cell.accessoryType = (sound == selectedSound) ? .checkmark : .none
         return cell
     }

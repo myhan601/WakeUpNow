@@ -39,7 +39,7 @@ class SetAlarmVC: UIViewController {
         configureNavigationBar()
         setupDayButton()
         setupSoundSettingButton()
-        setupLabels()
+//        setupLabels()
         setupPickerView()
         setupTableView()
     }
