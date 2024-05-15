@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */; };
+		11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */; };
 		AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */; };
 		AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */; };
 		AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
+		11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabTimeTableViewCell.swift; sourceTree = "<group>"; };
 		AB0766852BF1C5C200CDA2D2 /* WakeUpNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeUpNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 				AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */,
 				AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */,
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
+				11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */,
+				11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
 				AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */,
 				AB0766932BF1C5C300CDA2D2 /* LaunchScreen.storyboard */,
@@ -146,6 +152,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */,
+				11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
 				AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */,
 				AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */,
