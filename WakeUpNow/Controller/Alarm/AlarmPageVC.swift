@@ -64,7 +64,6 @@ class AlarmPageVC: UIViewController {
 
 extension AlarmPageVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 기존 알람 수에 1을 더해 반환
         return 6 // 기존에는 5였지만, 특별한 첫 번째 셀을 위해 1을 더함
     }
     

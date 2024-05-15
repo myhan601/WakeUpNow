@@ -21,15 +21,14 @@ class AlarmTableViewCell: UITableViewCell {
     
     private let meridiemLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
-        // 추가적인 라벨 설정
+        label.textAlignment = .left
         return label
     }()
     
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .right
-        // 추가적인 라벨 설정
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 45, weight: .light)
         return label
     }()
     
@@ -49,20 +48,19 @@ class AlarmTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
-        // 뷰에 요소들 추가
         addSubview(meridiemLabel)
         addSubview(timeLabel)
         addSubview(alarmSwitch)
         
         // SnapKit을 사용한 레이아웃 설정
         meridiemLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(0) // 왼쪽 여백을 0으로 설정
-            make.centerY.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.3)
+            make.left.equalToSuperview().offset(20) // 왼쪽 여백을 0으로 설정
+            make.centerY.equalToSuperview().offset(10)
+            make.width.equalToSuperview().multipliedBy(0.1)
         }
         
         timeLabel.snp.makeConstraints { make in
-            make.left.equalTo(meridiemLabel.snp.right).offset(10)
+            make.left.equalTo(meridiemLabel.snp.right).offset(-7)
             make.centerY.equalToSuperview()
             make.right.lessThanOrEqualTo(alarmSwitch.snp.left).offset(-10)
         }
