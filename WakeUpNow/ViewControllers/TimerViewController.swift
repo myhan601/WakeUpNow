@@ -58,10 +58,22 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
         return view
     }()
     
+    var circularTimerView: CircularTimerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
+        circularTimerView = CircularTimerView()
+        circularTimerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(circularTimerView)
+        NSLayoutConstraint.activate([
+            circularTimerView.widthAnchor.constraint(equalToConstant: 200),
+            circularTimerView.heightAnchor.constraint(equalToConstant: 200),
+            circularTimerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            circularTimerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50)
+        ])
         
         setupSubviews()
         setupConstraints()
@@ -153,8 +165,8 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
         timerCancelBtn.isEnabled = false
         timerCancelBtn.setTitleColor(.lightGray, for: .normal)
     }
-
-
+    
+    
     
     private func setupTimer(with totalSeconds: Double) {
         timer.invalidate()
@@ -165,6 +177,7 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
             
             let elapsedTimeSeconds = Int(Date().timeIntervalSince(startTime))
             let remainSeconds = Int(totalSeconds) - elapsedTimeSeconds
+            let progress = CGFloat(elapsedTimeSeconds) / CGFloat(totalSeconds)
             
             if remainSeconds <= 0 {
                 timer.invalidate()
@@ -179,6 +192,7 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
             let seconds = remainSeconds % 60
             DispatchQueue.main.async {
                 strongSelf.countDownLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+                strongSelf.circularTimerView.progress = progress
             }
         }
     }
