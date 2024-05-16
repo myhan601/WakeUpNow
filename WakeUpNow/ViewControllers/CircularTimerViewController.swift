@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CircularTimerView: UIView {
+class CircularTimerViewController: UIView {
     private var backgroundLayer: CAShapeLayer!
     private var foregroundLayer: CAShapeLayer!
 

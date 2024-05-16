@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FA82BF369190043FDF7 /* TimerViewController.swift */; };
 		2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */; };
-		2EC95FAD2BF5CAE50043FDF7 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */; };
+		2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */; };
 		AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */; };
 		AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */; };
 		AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */; };
@@ -22,7 +22,7 @@
 /* Begin PBXFileReference section */
 		2EC95FA82BF369190043FDF7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingViewController.swift; sourceTree = "<group>"; };
-		2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
+		2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerViewController.swift; sourceTree = "<group>"; };
 		AB0766852BF1C5C200CDA2D2 /* WakeUpNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeUpNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 			children = (
 				2EC95FA82BF369190043FDF7 /* TimerViewController.swift */,
 				2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */,
-				2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */,
+				2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 				2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
 				2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */,
-				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerView.swift in Sources */,
+				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */,
 				AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */,
 				AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */,
 			);

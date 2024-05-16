@@ -58,14 +58,14 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
         return view
     }()
     
-    var circularTimerView: CircularTimerView!
+    var circularTimerView: CircularTimerViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         
-        circularTimerView = CircularTimerView()
+        circularTimerView = CircularTimerViewController()
         circularTimerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(circularTimerView)
         NSLayoutConstraint.activate([
@@ -143,7 +143,7 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
         }
         
         if timer.isValid {
-            timer.invalidate()
+//            timer.invalidate()
             timerStartBtn.setTitle("재시작", for: .normal)
         } else {
             let totalSeconds = selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds
