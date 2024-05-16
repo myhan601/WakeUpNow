@@ -14,6 +14,12 @@
 		AB0766922BF1C5C300CDA2D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */; };
 		AB0766952BF1C5C300CDA2D2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AB0766942BF1C5C300CDA2D2 /* Base */; };
 		AB07669E2BF1C6E100CDA2D2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB07669D2BF1C6E100CDA2D2 /* SnapKit */; };
+		F162EC452BF4AE4E00720B64 /* ttang.wav in Resources */ = {isa = PBXBuildFile; fileRef = F162EC442BF4AE4E00720B64 /* ttang.wav */; };
+		F162EC472BF4B3E800720B64 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = F162EC462BF4B3E800720B64 /* correct.wav */; };
+		F1C83BCD2BF1DC9900D29985 /* MissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C83BCC2BF1DC9900D29985 /* MissionVC.swift */; };
+		F1C83BD32BF1F08200D29985 /* APIDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C83BD22BF1F08200D29985 /* APIDataManager.swift */; };
+		F1C83BD52BF1F0A400D29985 /* VocaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C83BD42BF1F0A400D29985 /* VocaData.swift */; };
+		F1C83BD92BF20FB500D29985 /* MissionSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C83BD82BF20FB500D29985 /* MissionSuccessVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +31,12 @@
 		AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB0766942BF1C5C300CDA2D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB0766962BF1C5C300CDA2D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F162EC442BF4AE4E00720B64 /* ttang.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ttang.wav; sourceTree = "<group>"; };
+		F162EC462BF4B3E800720B64 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
+		F1C83BCC2BF1DC9900D29985 /* MissionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionVC.swift; sourceTree = "<group>"; };
+		F1C83BD22BF1F08200D29985 /* APIDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataManager.swift; sourceTree = "<group>"; };
+		F1C83BD42BF1F0A400D29985 /* VocaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocaData.swift; sourceTree = "<group>"; };
+		F1C83BD82BF20FB500D29985 /* MissionSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionSuccessVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,13 +72,27 @@
 			children = (
 				AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */,
 				AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */,
+				F1C83BD62BF1F0AE00D29985 /* Model */,
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
+				F1C83BCC2BF1DC9900D29985 /* MissionVC.swift */,
+				F1C83BD82BF20FB500D29985 /* MissionSuccessVC.swift */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
 				AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */,
+				F162EC442BF4AE4E00720B64 /* ttang.wav */,
+				F162EC462BF4B3E800720B64 /* correct.wav */,
 				AB0766932BF1C5C300CDA2D2 /* LaunchScreen.storyboard */,
 				AB0766962BF1C5C300CDA2D2 /* Info.plist */,
 			);
 			path = WakeUpNow;
+			sourceTree = "<group>";
+		};
+		F1C83BD62BF1F0AE00D29985 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F1C83BD22BF1F08200D29985 /* APIDataManager.swift */,
+				F1C83BD42BF1F0A400D29985 /* VocaData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,7 +160,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB0766922BF1C5C300CDA2D2 /* Assets.xcassets in Resources */,
+				F162EC452BF4AE4E00720B64 /* ttang.wav in Resources */,
 				AB0766952BF1C5C300CDA2D2 /* Base in Resources */,
+				F162EC472BF4B3E800720B64 /* correct.wav in Resources */,
 				AB0766902BF1C5C200CDA2D2 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +175,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
+				F1C83BD92BF20FB500D29985 /* MissionSuccessVC.swift in Sources */,
+				F1C83BD32BF1F08200D29985 /* APIDataManager.swift in Sources */,
+				F1C83BD52BF1F0A400D29985 /* VocaData.swift in Sources */,
+				F1C83BCD2BF1DC9900D29985 /* MissionVC.swift in Sources */,
 				AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */,
 				AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */,
 			);
