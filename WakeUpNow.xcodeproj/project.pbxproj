@@ -10,19 +10,28 @@
 		2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FA82BF369190043FDF7 /* TimerViewController.swift */; };
 		2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */; };
 		2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */; };
+		11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */; };
+		11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */; };
 		AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */; };
 		AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */; };
 		AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */; };
 		AB0766902BF1C5C200CDA2D2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AB07668F2BF1C5C200CDA2D2 /* Base */; };
 		AB0766922BF1C5C300CDA2D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */; };
 		AB0766952BF1C5C300CDA2D2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AB0766942BF1C5C300CDA2D2 /* Base */; };
-		AB07669E2BF1C6E100CDA2D2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB07669D2BF1C6E100CDA2D2 /* SnapKit */; };
+		AB118D2C2BF1E5A900672AB1 /* AlarmPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB118D2B2BF1E5A900672AB1 /* AlarmPageVC.swift */; };
+		AB118D362BF1E7DD00672AB1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AB118D352BF1E7DD00672AB1 /* SnapKit */; };
+		AB118D382BF2478F00672AB1 /* SetAlarmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB118D372BF2478F00672AB1 /* SetAlarmVC.swift */; };
+		AB118D3A2BF24E9000672AB1 /* SetDayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB118D392BF24E9000672AB1 /* SetDayVC.swift */; };
+		AB118D3C2BF24FEB00672AB1 /* SetSoundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB118D3B2BF24FEB00672AB1 /* SetSoundVC.swift */; };
+		AB66D2EB2BF3A6A8000D72DA /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2EA2BF3A6A8000D72DA /* AlarmTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2EC95FA82BF369190043FDF7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingViewController.swift; sourceTree = "<group>"; };
 		2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerViewController.swift; sourceTree = "<group>"; };
+		11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
+		11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabTimeTableViewCell.swift; sourceTree = "<group>"; };
 		AB0766852BF1C5C200CDA2D2 /* WakeUpNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeUpNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,6 +40,11 @@
 		AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB0766942BF1C5C300CDA2D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB0766962BF1C5C300CDA2D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB118D2B2BF1E5A900672AB1 /* AlarmPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPageVC.swift; sourceTree = "<group>"; };
+		AB118D372BF2478F00672AB1 /* SetAlarmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmVC.swift; sourceTree = "<group>"; };
+		AB118D392BF24E9000672AB1 /* SetDayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDayVC.swift; sourceTree = "<group>"; };
+		AB118D3B2BF24FEB00672AB1 /* SetSoundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetSoundVC.swift; sourceTree = "<group>"; };
+		AB66D2EA2BF3A6A8000D72DA /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB07669E2BF1C6E100CDA2D2 /* SnapKit in Frameworks */,
+				AB118D362BF1E7DD00672AB1 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +90,8 @@
 			children = (
 				AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */,
 				AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */,
+				AB66D2EC2BF5CAF3000D72DA /* View */,
+				AB66D2E82BF3992A000D72DA /* Controller */,
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
 				2EC95FA72BF368F70043FDF7 /* ViewControllers */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
@@ -84,6 +100,51 @@
 				AB0766962BF1C5C300CDA2D2 /* Info.plist */,
 			);
 			path = WakeUpNow;
+			sourceTree = "<group>";
+		};
+		AB66D2E72BF39921000D72DA /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				AB118D2B2BF1E5A900672AB1 /* AlarmPageVC.swift */,
+				AB118D372BF2478F00672AB1 /* SetAlarmVC.swift */,
+				AB118D392BF24E9000672AB1 /* SetDayVC.swift */,
+				AB118D3B2BF24FEB00672AB1 /* SetSoundVC.swift */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
+		AB66D2E82BF3992A000D72DA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AB66D2ED2BF5E117000D72DA /* StopWatch */,
+				AB66D2E72BF39921000D72DA /* Alarm */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AB66D2E92BF3A687000D72DA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */,
+				AB66D2EA2BF3A6A8000D72DA /* AlarmTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		AB66D2EC2BF5CAF3000D72DA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AB66D2E92BF3A687000D72DA /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AB66D2ED2BF5E117000D72DA /* StopWatch */ = {
+			isa = PBXGroup;
+			children = (
+				11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */,
+			);
+			path = StopWatch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,7 +164,7 @@
 			);
 			name = WakeUpNow;
 			packageProductDependencies = (
-				AB07669D2BF1C6E100CDA2D2 /* SnapKit */,
+				AB118D352BF1E7DD00672AB1 /* SnapKit */,
 			);
 			productName = WakeUpNow;
 			productReference = AB0766852BF1C5C200CDA2D2 /* WakeUpNow.app */;
@@ -167,8 +228,16 @@
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
 				2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */,
 				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */,
+				11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */,
+				11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */,
+				AB118D3C2BF24FEB00672AB1 /* SetSoundVC.swift in Sources */,
+				AB118D3A2BF24E9000672AB1 /* SetDayVC.swift in Sources */,
+				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
+				AB66D2EB2BF3A6A8000D72DA /* AlarmTableViewCell.swift in Sources */,
 				AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */,
 				AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */,
+				AB118D2C2BF1E5A900672AB1 /* AlarmPageVC.swift in Sources */,
+				AB118D382BF2478F00672AB1 /* SetAlarmVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,7 +471,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AB07669D2BF1C6E100CDA2D2 /* SnapKit */ = {
+		AB118D352BF1E7DD00672AB1 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AB07669C2BF1C6E100CDA2D2 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
