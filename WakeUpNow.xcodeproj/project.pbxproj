@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FA82BF369190043FDF7 /* TimerViewController.swift */; };
+		2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */; };
+		2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */; };
 		11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */; };
 		11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */; };
 		AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */; };
@@ -24,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2EC95FA82BF369190043FDF7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingViewController.swift; sourceTree = "<group>"; };
+		2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerViewController.swift; sourceTree = "<group>"; };
 		11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
 		11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabTimeTableViewCell.swift; sourceTree = "<group>"; };
 		AB0766852BF1C5C200CDA2D2 /* WakeUpNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeUpNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +59,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EC95FA72BF368F70043FDF7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2EC95FA82BF369190043FDF7 /* TimerViewController.swift */,
+				2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */,
+				2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		AB07667C2BF1C5C200CDA2D2 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +93,7 @@
 				AB66D2EC2BF5CAF3000D72DA /* View */,
 				AB66D2E82BF3992A000D72DA /* Controller */,
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
+				2EC95FA72BF368F70043FDF7 /* ViewControllers */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
 				AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */,
 				AB0766932BF1C5C300CDA2D2 /* LaunchScreen.storyboard */,
@@ -207,6 +224,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */,
+				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
+				2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */,
+				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */,
 				11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */,
 				11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */,
 				AB118D3C2BF24FEB00672AB1 /* SetSoundVC.swift in Sources */,
