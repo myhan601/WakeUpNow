@@ -24,16 +24,16 @@ class MissionSuccessVC: UIViewController {
         view.addSubview(backButton)
         
         correctLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
+            make.top.equalToSuperview().offset(150)
             make.leading.equalToSuperview().offset(30)
             make.trailing.equalToSuperview().offset(-30)
-            make.bottom.equalToSuperview().offset(-700)
+            make.bottom.equalToSuperview().offset(-650)
         }
         scoreLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(200)
+            make.top.equalToSuperview().offset(250)
             make.leading.equalToSuperview().offset(30)
             make.trailing.equalToSuperview().offset(-30)
-            make.bottom.equalToSuperview().offset(-250)
+            make.bottom.equalToSuperview().offset(-300)
         }
         backButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(50)
@@ -53,7 +53,12 @@ class MissionSuccessVC: UIViewController {
         correctLabel.font = UIFont.boldSystemFont(ofSize: 25)
         
         scoreLabel.backgroundColor = .clear
-        scoreLabel.text = "\(score)점"
+        scoreLabel.numberOfLines = 0
+        scoreLabel.text = """
+Total score
+
+\(score)점
+"""
         scoreLabel.textColor = #colorLiteral(red: 0, green: 0.4218143225, blue: 0.9270003438, alpha: 1)
         scoreLabel.textAlignment = .center
         scoreLabel.font = UIFont.boldSystemFont(ofSize: 30)
@@ -80,8 +85,11 @@ class MissionSuccessVC: UIViewController {
         setConstrains()
     }
 
+    //버튼 누르면 알람페이지로 이동
     @objc private func tappedBackButton() {
-        self.dismiss(animated: true, completion: nil)
+        let arlmPage = AlarmPageVC()
+        navigationController?.pushViewController(arlmPage, animated: true)
+        print("연결확인")
     }
 }
 
