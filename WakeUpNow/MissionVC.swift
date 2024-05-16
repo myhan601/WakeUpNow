@@ -13,6 +13,10 @@ class MissionVC: UIViewController {
     
     private var currentWord: Words?
     
+    private var score: Int = 10
+    var time: Float = 0.0
+    var timer = Timer()
+    
     var ttangSoundPlayer: AVAudioPlayer?
     var correctSoundPlayer: AVAudioPlayer?
     
@@ -28,6 +32,7 @@ class MissionVC: UIViewController {
         view.addSubview(answer1)
         view.addSubview(answer2)
         view.addSubview(answer3)
+        //타이머 바
         view.addSubview(progressView)
         
         questionLabel.snp.makeConstraints { make in
@@ -55,10 +60,10 @@ class MissionVC: UIViewController {
             make.bottom.equalToSuperview().offset(-80)
         }
         progressView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
+            make.top.equalToSuperview().offset(50)
             make.leading.equalToSuperview().offset(30)
             make.trailing.equalToSuperview().offset(-30)
-            make.bottom.equalToSuperview().offset(-750)
+            make.bottom.equalToSuperview().offset(-800)
         }
     }
     
@@ -96,9 +101,8 @@ class MissionVC: UIViewController {
         answer3.setTitleColor(.black, for: .normal)
         answer3.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
         
-        progressView.trackTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        progressView.progressTintColor = .systemBlue
-        progressView.progress = 0.1
+        progressView.progressViewStyle = .default
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(setProgress), userInfo: nil, repeats: true)
     }
     
     override func viewDidLoad() {
@@ -109,6 +113,7 @@ class MissionVC: UIViewController {
         fetchRandom()
         setTtangSound()
         setCorrectSound()
+        
     }
     
     //APIDataManager 호출하기
@@ -155,42 +160,21 @@ class MissionVC: UIViewController {
         }
     }
     
-    //틀린 보기를 위한 더미데이터
+    //오답 보기를 위한 더미데이터
     private func getDummyWord() -> String? {
         let dummyWord = [ "気立て", "差額", "青白い", "届け", "吃逆", "知る", "意地悪", "グラフ", "収容", "曖昧", "パンク", "洗う", "規準", "テーブル", "あなた" ]
         return dummyWord.randomElement()
     }
     
-    //보기 버튼 클릭 시 실행되는 액션
-    @objc private func clickButton(_ sender: UIButton) {
-        guard let selectedWord = sender.titleLabel?.text else {
-            return
-        }
-        //정답 버튼 클릭 시
-        if selectedWord == currentWord?.furigana {
-            sender.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
-            correctSoundPlayer?.play()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.successScreen()
-            }
-        } else {
-            //틀린 버튼 클릭 시
-            sender.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-            ttangSoundPlayer?.play()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.resetScreen()
-            }
-        }
-    }
-    
     //정답 버튼 클릭 시 사전페이지로
     private func successScreen() {
         let successVC = MissionSuccessVC()
-        successVC.modalPresentationStyle = .fullScreen
+        successVC.modalPresentationStyle = .overFullScreen
+        successVC.score = score
         present(successVC, animated: true, completion: nil)
     }
     
-    //틀린 버튼 클릭 시 다른 문제로
+    //오답 버튼 클릭 시 다른 문제로
     private func resetScreen() {
         questionLabel.text = nil
         answer1.setTitle(nil, for: .normal)
@@ -200,9 +184,13 @@ class MissionVC: UIViewController {
         answer2.backgroundColor = UIColor.clear
         answer3.backgroundColor = UIColor.clear
         fetchRandom()
+        
+        time = 0.0
+        progressView.setProgress(time, animated: false)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(setProgress), userInfo: nil, repeats: true)
     }
     
-    //"땡"소리 삽입
+    //오답 효과음
     private func setTtangSound() {
         guard let path = Bundle.main.path(forResource: "ttang.wav", ofType: nil) else { return }
         let url = URL(fileURLWithPath: path)
@@ -214,6 +202,7 @@ class MissionVC: UIViewController {
         }
     }
     
+    //정답 효과음
     private func setCorrectSound() {
         guard let path = Bundle.main.path(forResource: "correct.wav", ofType: nil) else { return }
         let url = URL(fileURLWithPath: path)
@@ -222,6 +211,39 @@ class MissionVC: UIViewController {
             correctSoundPlayer?.prepareToPlay()
         } catch {
             print("file Error2")
+        }
+    }
+    
+    //보기 버튼 클릭 시 실행되는 액션
+    @objc private func clickButton(_ sender: UIButton) {
+        guard let selectedWord = sender.titleLabel?.text else {
+            return
+        }
+        //정답 버튼 클릭 시
+        if selectedWord == currentWord?.furigana {
+            sender.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+            correctSoundPlayer?.play()
+            score += 5
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.successScreen()
+            }
+        } else {
+            //오답 버튼 클릭 시
+            sender.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+            ttangSoundPlayer?.play()
+            score -= 2
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.resetScreen()
+            }
+        }
+    }
+    
+    @objc func setProgress() {
+        time += 0.05
+        progressView.setProgress(time, animated: true)
+        if time >= 1.0 {
+            timer.invalidate()
+            resetScreen()
         }
     }
 }

@@ -11,15 +11,16 @@ import SnapKit
 class MissionSuccessVC: UIViewController {
     
     private var currentWord: Words?
+    var score: Int = 0
         
     let correctLabel = UILabel()
-    let dictionaryLabel = UILabel()
+    let scoreLabel = UILabel()
     let backButton = UIButton()
     
     private func setConstrains() {
-        
+
         view.addSubview(correctLabel)
-        view.addSubview(dictionaryLabel)
+        view.addSubview(scoreLabel)
         view.addSubview(backButton)
         
         correctLabel.snp.makeConstraints { make in
@@ -28,7 +29,7 @@ class MissionSuccessVC: UIViewController {
             make.trailing.equalToSuperview().offset(-30)
             make.bottom.equalToSuperview().offset(-700)
         }
-        dictionaryLabel.snp.makeConstraints { make in
+        scoreLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(200)
             make.leading.equalToSuperview().offset(30)
             make.trailing.equalToSuperview().offset(-30)
@@ -44,17 +45,18 @@ class MissionSuccessVC: UIViewController {
     
     private func setPage() {
         
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         
         correctLabel.text = "정답!!"
         correctLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         correctLabel.textAlignment = .center
         correctLabel.font = UIFont.boldSystemFont(ofSize: 25)
         
-        dictionaryLabel.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        dictionaryLabel.layer.borderWidth = 1
-        dictionaryLabel.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        dictionaryLabel.layer.cornerRadius = 10
+        scoreLabel.backgroundColor = .clear
+        scoreLabel.text = "\(score)점"
+        scoreLabel.textColor = #colorLiteral(red: 0, green: 0.4218143225, blue: 0.9270003438, alpha: 1)
+        scoreLabel.textAlignment = .center
+        scoreLabel.font = UIFont.boldSystemFont(ofSize: 30)
         
         backButton.setTitle("메인으로", for: .normal)
         backButton.setTitleColor(.lightGray, for: .normal)
@@ -62,9 +64,18 @@ class MissionSuccessVC: UIViewController {
         
     }
     
+    private func setBlur() {
+        let blurEffect = UIBlurEffect(style: .light)
+        let visualEffect = UIVisualEffectView(effect: blurEffect)
+        view.addSubview(visualEffect)
+        view.sendSubviewToBack(visualEffect)
+        visualEffect.frame = view.bounds
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBlur()
         setPage()
         setConstrains()
     }
