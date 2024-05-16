@@ -77,8 +77,6 @@
 				AB66D2EC2BF5CAF3000D72DA /* View */,
 				AB66D2E82BF3992A000D72DA /* Controller */,
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
-				11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */,
-				11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
 				AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */,
 				AB0766932BF1C5C300CDA2D2 /* LaunchScreen.storyboard */,
@@ -101,6 +99,7 @@
 		AB66D2E82BF3992A000D72DA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AB66D2ED2BF5E117000D72DA /* StopWatch */,
 				AB66D2E72BF39921000D72DA /* Alarm */,
 			);
 			path = Controller;
@@ -109,6 +108,7 @@
 		AB66D2E92BF3A687000D72DA /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */,
 				AB66D2EA2BF3A6A8000D72DA /* AlarmTableViewCell.swift */,
 			);
 			path = Cell;
@@ -120,6 +120,14 @@
 				AB66D2E92BF3A687000D72DA /* Cell */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AB66D2ED2BF5E117000D72DA /* StopWatch */ = {
+			isa = PBXGroup;
+			children = (
+				11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */,
+			);
+			path = StopWatch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
