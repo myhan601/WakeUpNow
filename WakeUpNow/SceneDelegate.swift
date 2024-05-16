@@ -21,11 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let mainVC = TabBarVC()
-        
-        let navigationController = UINavigationController(rootViewController: mainVC)
-        
-        window.rootViewController = navigationController
+        window.rootViewController = TabBarVC()
         
         window.makeKeyAndVisible()
         
