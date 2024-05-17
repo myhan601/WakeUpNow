@@ -88,7 +88,7 @@ extension AlarmPageVC: UITableViewDataSource {
         let viewModel = AlarmViewModel(
             meridiem: alarm.amPm,
             time: String(format: "%02d:%02d", alarm.hour, alarm.minute),
-            isActive: true
+            isActive: true, memo: alarm.memo!
         )
         
         cell.configure(with: viewModel)
@@ -99,7 +99,7 @@ extension AlarmPageVC: UITableViewDataSource {
 
 extension AlarmPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70 // 원하는 셀의 높이를 지정
+        return 80 // 원하는 셀의 높이를 지정
     }
 }
 

@@ -219,6 +219,9 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         // 클로저 호출하여 알람 전달
         onSave?(alarm)
         
+        // 알람 데이터 확인
+        print(alarm)
+        
         self.dismiss(animated: true, completion: nil)
     }
     // 사용자가 입력한 메모를 가져오는 함수
