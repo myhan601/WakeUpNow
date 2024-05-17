@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class SetAlarmVC: UIViewController, SetDayVCDelegate {
+    
     var selectedDays = [String]()
     var isMissionEnabled = false
     var isReminderEnabled = false
@@ -181,18 +182,50 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
     
     @objc func missionSwitchValueChanged(_ sender: UISwitch) {
         isMissionEnabled = sender.isOn
-        print(sender)
+        print(isMissionEnabled)
     }
     
     @objc func reminderSwitchValueChanged(_ sender: UISwitch) {
         isReminderEnabled = sender.isOn
-        print(sender)
+        print(isReminderEnabled)
     }
     
     @objc func saveButtonTapped() {
         print("알람이 저장되었습니다.")
         // 알람을 저장하는 로직
+        
+        // pickerView에서 선택한 시간 정보를 가져옵니다.
+        let hourComponent = pickerView.selectedRow(inComponent: 1) % hours.count
+        let minuteComponent = pickerView.selectedRow(inComponent: 2) % minutes.count
+        
+        // 시간과 분을 문자열에서 정수로 변환합니다.
+        let hour = Int(hours[hourComponent]) ?? 0
+        let minute = Int(minutes[minuteComponent]) ?? 0
+        
+        // 알람 데이터를 생성합니다.
+        let alarm = Alarm(
+            isMissionEnabled: isMissionEnabled,
+            amPm: label.text ?? "오전",
+            hour: hour,
+            minute: minute,
+            selectedDays: selectedDays,
+            memo: getMemoText(),
+            isReminderEnabled: isReminderEnabled
+        )
+        // 생성된 알람 데이터를 출력합니다.
+        print("알람 데이터:", alarm)
+        
         self.dismiss(animated: true, completion: nil)
+    }
+    // 사용자가 입력한 메모를 가져오는 함수
+    func getMemoText() -> String {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 1)) {
+            if let textField = cell.viewWithTag(100) as? UITextField {
+                // textField.text가 빈 문자열인 경우도 처리하도록 수정
+                return textField.text?.isEmpty == false ? textField.text! : "알람"
+            }
+        }
+        return "알람" // 아무것도 입력하지 않았을 경우 "알람"을 반환
     }
 }
 
@@ -269,11 +302,9 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
             switchView.addTarget(self, action: #selector(missionSwitchValueChanged(_:)), for: .valueChanged)
             cell.accessoryView = switchView
         } else {
-            // 나머지 셀들 구성
             if indexPath.row == 0 {
                 cell.textLabel?.text = "반복요일"
                 let detailLabel = UILabel()
-//                detailLabel.text = "선택 안 함"
                 detailLabel.text = selectedDaysText()
                 detailLabel.textColor = .gray
                 detailLabel.sizeToFit()
@@ -304,6 +335,7 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                 cell.contentView.addSubview(label)
                 
                 let textField = UITextField()
+                textField.tag = 100
                 textField.placeholder = "메모 입력"
                 textField.textAlignment = .right
                 textField.clearButtonMode = .whileEditing

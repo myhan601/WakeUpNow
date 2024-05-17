@@ -31,6 +31,7 @@
 		AB66D2F92BF5F706000D72DA /* MissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2F72BF5F706000D72DA /* MissionVC.swift */; };
 		AB66D2FA2BF5F706000D72DA /* MissionSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */; };
 		AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */; };
+		AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3012BF76C93000D72DA /* Alarm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		AB66D2F72BF5F706000D72DA /* MissionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionVC.swift; sourceTree = "<group>"; };
 		AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionSuccessVC.swift; sourceTree = "<group>"; };
 		AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		AB66D3012BF76C93000D72DA /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 			children = (
 				AB66D2EE2BF5F6C7000D72DA /* APIDataManager.swift */,
 				AB66D2EF2BF5F6C7000D72DA /* VocaData.swift */,
+				AB66D3012BF76C93000D72DA /* Alarm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */,
 				11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */,
 				11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */,
+				AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */,
 				AB118D3C2BF24FEB00672AB1 /* SetSoundVC.swift in Sources */,
 				AB118D3A2BF24E9000672AB1 /* SetDayVC.swift in Sources */,
 				AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */,
