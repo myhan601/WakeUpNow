@@ -10,6 +10,8 @@ import SnapKit
 
 class SetAlarmVC: UIViewController, SetDayVCDelegate {
     var selectedDays = [String]()
+    var isMissionEnabled = false
+    var isReminderEnabled = false
     
     let amPm = ["오전", "오후"]
     let hours: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
@@ -177,6 +179,16 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @objc func missionSwitchValueChanged(_ sender: UISwitch) {
+        isMissionEnabled = sender.isOn
+        print(sender)
+    }
+    
+    @objc func reminderSwitchValueChanged(_ sender: UISwitch) {
+        isReminderEnabled = sender.isOn
+        print(sender)
+    }
+    
     @objc func saveButtonTapped() {
         print("알람이 저장되었습니다.")
         // 알람을 저장하는 로직
@@ -253,6 +265,8 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "미션여부"
             
             let switchView = UISwitch()
+            switchView.isOn = isMissionEnabled
+            switchView.addTarget(self, action: #selector(missionSwitchValueChanged(_:)), for: .valueChanged)
             cell.accessoryView = switchView
         } else {
             // 나머지 셀들 구성
@@ -309,10 +323,12 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                 }
             } else if indexPath.row == 2 {
                 cell.textLabel?.text = "소리 설정"
-            } else if indexPath.row == 3 {
+            } else if indexPath.section == 1 && indexPath.row == 3 {
                 cell.textLabel?.text = "다시 알림"
                 
                 let switchView = UISwitch()
+                switchView.isOn = isReminderEnabled
+                switchView.addTarget(self, action: #selector(reminderSwitchValueChanged(_:)), for: .valueChanged)
                 cell.accessoryView = switchView
             }
         }
