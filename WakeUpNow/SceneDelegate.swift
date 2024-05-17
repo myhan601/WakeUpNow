@@ -20,13 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        
-        let mainVC = AlarmPageVC()
-        
-        let navigationController = UINavigationController(rootViewController: mainVC)
-        
-        window.rootViewController = navigationController
-        
+        window.rootViewController = TabBarVC()
         window.makeKeyAndVisible()
         
         self.window = window

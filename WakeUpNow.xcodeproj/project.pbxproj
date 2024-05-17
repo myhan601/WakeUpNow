@@ -30,6 +30,7 @@
 		AB66D2F62BF5F6F0000D72DA /* ttang.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB66D2F42BF5F6F0000D72DA /* ttang.wav */; };
 		AB66D2F92BF5F706000D72DA /* MissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2F72BF5F706000D72DA /* MissionVC.swift */; };
 		AB66D2FA2BF5F706000D72DA /* MissionSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */; };
+		AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		AB66D2F42BF5F6F0000D72DA /* ttang.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ttang.wav; sourceTree = "<group>"; };
 		AB66D2F72BF5F706000D72DA /* MissionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionVC.swift; sourceTree = "<group>"; };
 		AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionSuccessVC.swift; sourceTree = "<group>"; };
+		AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 		AB66D2E82BF3992A000D72DA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AB66D2FC2BF5FDEC000D72DA /* TabBar */,
 				AB66D2FB2BF5F747000D72DA /* Mission */,
 				2EC95FA72BF368F70043FDF7 /* Timer */,
 				AB66D2ED2BF5E117000D72DA /* StopWatch */,
@@ -179,6 +182,14 @@
 				AB66D2F72BF5F706000D72DA /* MissionVC.swift */,
 			);
 			path = Mission;
+			sourceTree = "<group>";
+		};
+		AB66D2FC2BF5FDEC000D72DA /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +280,7 @@
 				11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */,
 				AB118D3C2BF24FEB00672AB1 /* SetSoundVC.swift in Sources */,
 				AB118D3A2BF24E9000672AB1 /* SetDayVC.swift in Sources */,
+				AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */,
 				AB66D2F92BF5F706000D72DA /* MissionVC.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
 				AB66D2EB2BF3A6A8000D72DA /* AlarmTableViewCell.swift in Sources */,
