@@ -225,7 +225,8 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
             minute: minute,
             selectedDays: selectedDays,
             memo: getMemoText(),
-            isReminderEnabled: isReminderEnabled
+            isReminderEnabled: isReminderEnabled,
+            isAlarmOn: true
         )
         
         // 클로저 호출하여 알람 전달

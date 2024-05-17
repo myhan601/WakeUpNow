@@ -83,7 +83,7 @@ class AlarmTableViewCell: UITableViewCell {
     func configure(with alarm: Alarm) {
         meridiemLabel.text = alarm.amPm
         timeLabel.text = alarm.formattedTime
-        alarmSwitch.isOn = alarm.isReminderEnabled
+        alarmSwitch.isOn = alarm.isAlarmOn
         memoLabel.text = alarm.memo
     }
 }
