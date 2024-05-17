@@ -58,22 +58,17 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
         return view
     }()
     
-    var circularTimerView: CircularTimerViewController!
+    private var circularTimerView: CircularTimerViewController! = {
+        let view = CircularTimerViewController()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
-        circularTimerView = CircularTimerViewController()
-        circularTimerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(circularTimerView)
-        NSLayoutConstraint.activate([
-            circularTimerView.widthAnchor.constraint(equalToConstant: 200),
-            circularTimerView.heightAnchor.constraint(equalToConstant: 200),
-            circularTimerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            circularTimerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50)
-        ])
         
         setupSubviews()
         setupConstraints()
@@ -84,29 +79,37 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
         view.addSubview(timerCancelBtn)
         view.addSubview(timerStartBtn)
         view.addSubview(spacer)
+        view.addSubview(circularTimerView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            countDownLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
-            countDownLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            spacer.topAnchor.constraint(equalTo: countDownLabel.bottomAnchor, constant: 24),
+            circularTimerView.widthAnchor.constraint(equalToConstant: 300),
+            circularTimerView.heightAnchor.constraint(equalToConstant: 300),
+            circularTimerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            circularTimerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
+            
+            countDownLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            countDownLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
+            
+            spacer.topAnchor.constraint(equalTo: circularTimerView.bottomAnchor, constant: 24),
             spacer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             spacer.widthAnchor.constraint(equalToConstant: 100),
             
-            timerCancelBtn.topAnchor.constraint(equalTo: countDownLabel.bottomAnchor, constant: 24),
+            timerCancelBtn.topAnchor.constraint(equalTo: circularTimerView.bottomAnchor, constant: 24),
             timerCancelBtn.trailingAnchor.constraint(equalTo: spacer.leadingAnchor),
             timerCancelBtn.widthAnchor.constraint(equalToConstant: 100),
             timerCancelBtn.heightAnchor.constraint(equalToConstant: 100),
             
-            timerStartBtn.topAnchor.constraint(equalTo: countDownLabel.bottomAnchor, constant: 24),
+            timerStartBtn.topAnchor.constraint(equalTo: circularTimerView.bottomAnchor, constant: 24),
             timerStartBtn.leadingAnchor.constraint(equalTo: spacer.trailingAnchor),
             timerStartBtn.widthAnchor.constraint(equalToConstant: 100),
             timerStartBtn.heightAnchor.constraint(equalToConstant: 100)
         ])
         timerStartBtn.layer.cornerRadius = 50
         timerCancelBtn.layer.cornerRadius = 50
+        view.bringSubviewToFront(countDownLabel)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -143,7 +146,7 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
         }
         
         if timer.isValid {
-//            timer.invalidate()
+            timer.invalidate()
             timerStartBtn.setTitle("재시작", for: .normal)
         } else {
             let totalSeconds = selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds
