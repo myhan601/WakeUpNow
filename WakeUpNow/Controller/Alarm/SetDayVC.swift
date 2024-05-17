@@ -8,7 +8,12 @@
 import UIKit
 import SnapKit
 
+protocol SetDayVCDelegate: AnyObject {
+    func didSelectDays(_ selectedDays: [String])
+}
+
 class SetDayVC: UIViewController {
+    weak var delegate: SetDayVCDelegate?
     var selectedDays = [String]()
     var tableView: UITableView!
     let days = ["일요일마다", "월요일마다", "화요일마다", "수요일마다", "목요일마다", "금요일마다", "토요일마다"]
@@ -49,6 +54,7 @@ class SetDayVC: UIViewController {
     }
     
     @objc func goBack() {
+        delegate?.didSelectDays(selectedDays)
         self.navigationController?.popViewController(animated: true)
     }
 }

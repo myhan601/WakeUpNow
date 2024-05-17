@@ -8,7 +8,8 @@
 import UIKit
 import SnapKit
 
-class SetAlarmVC: UIViewController {
+class SetAlarmVC: UIViewController, SetDayVCDelegate {
+    var selectedDays = [String]()
     
     let amPm = ["오전", "오후"]
     let hours: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
@@ -151,12 +152,19 @@ class SetAlarmVC: UIViewController {
         }
     }
     
+    func didSelectDays(_ selectedDays: [String]) {
+        self.selectedDays = selectedDays
+        tableView.reloadData()
+    }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
     @objc func repDayButtonTapped() {
         let nextVC = SetDayVC()
+        nextVC.selectedDays = selectedDays
+        nextVC.delegate = self
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -251,7 +259,8 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 0 {
                 cell.textLabel?.text = "반복요일"
                 let detailLabel = UILabel()
-                detailLabel.text = "선택 안 함"
+//                detailLabel.text = "선택 안 함"
+                detailLabel.text = selectedDaysText()
                 detailLabel.textColor = .gray
                 detailLabel.sizeToFit()
                 
@@ -309,6 +318,20 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    private func selectedDaysText() -> String {
+        switch selectedDays.count {
+        case 0:
+            return "선택 안 함"
+        case 1:
+            return selectedDays[0]
+        default:
+            let lastDay = selectedDays.removeLast()
+            let daysText = selectedDays.joined(separator: ", ")
+            selectedDays.append(lastDay)
+            return "\(daysText) 및 \(lastDay)"
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
