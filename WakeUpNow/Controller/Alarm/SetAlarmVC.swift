@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class SetAlarmVC: UIViewController, SetDayVCDelegate {
-    
+    // MARK: - variable
     var onSave: ((Alarm) -> Void)?
     var alarms = [Alarm]()
     var selectedDays = [String]()
@@ -50,6 +50,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         setupTableView()
     }
     
+    // MARK: - func
     private func configureNavigationBar() {
         self.title = "알람 추가"
         
@@ -126,7 +127,6 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         }
     }
     
-    
     func setupDayButton() {
         let nextButton = UIButton(type: .system)
         nextButton.setTitle("반복요일", for: .normal)
@@ -162,6 +162,18 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         tableView.reloadData()
     }
     
+    // 사용자가 입력한 메모를 가져오는 함수
+    func getMemoText() -> String {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 1)) {
+            if let textField = cell.viewWithTag(100) as? UITextField {
+                // textField.text가 빈 문자열인 경우도 처리하도록 수정
+                return textField.text?.isEmpty == false ? textField.text! : "알람"
+            }
+        }
+        return "알람" // 아무것도 입력하지 않았을 경우 "알람"을 반환
+    }
+    
+    // MARK: - @objc func
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -224,18 +236,9 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         
         self.dismiss(animated: true, completion: nil)
     }
-    // 사용자가 입력한 메모를 가져오는 함수
-    func getMemoText() -> String {
-        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 1)) {
-            if let textField = cell.viewWithTag(100) as? UITextField {
-                // textField.text가 빈 문자열인 경우도 처리하도록 수정
-                return textField.text?.isEmpty == false ? textField.text! : "알람"
-            }
-        }
-        return "알람" // 아무것도 입력하지 않았을 경우 "알람"을 반환
-    }
 }
 
+// MARK: - UIPickerViewDataSource
 extension SetAlarmVC: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         let infiniteRows = 10000 // 순환을 위한 충분히 큰 값
@@ -267,6 +270,7 @@ extension SetAlarmVC: UIPickerViewDataSource {
     }
 }
 
+// MARK: - UIPickerViewDelegate
 extension SetAlarmVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
@@ -283,7 +287,7 @@ extension SetAlarmVC: UIPickerViewDelegate {
     }
 }
 
-
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2 // 섹션을 두 개로 나눔: '미션여부'와 나머지 셀들
