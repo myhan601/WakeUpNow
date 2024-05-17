@@ -15,4 +15,8 @@ struct Alarm {
     var selectedDays: [String]
     var memo: String?
     var isReminderEnabled: Bool
+    
+    var formattedTime: String {
+        return String(format: "%02d:%02d", hour, minute)
+    }
 }

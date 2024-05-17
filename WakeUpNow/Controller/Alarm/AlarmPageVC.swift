@@ -1,11 +1,3 @@
-
-//
-//  AlarmPageVC.swift
-//  WakeUpNow
-//
-//  Created by 한철희 on 5/13/24.
-//
-
 //
 //  AlarmPageVC.swift
 //  WakeUpNow
@@ -85,13 +77,7 @@ extension AlarmPageVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: AlarmTableViewCell.identifier, for: indexPath) as! AlarmTableViewCell
         
         let alarm = alarms[indexPath.row]
-        let viewModel = AlarmViewModel(
-            meridiem: alarm.amPm,
-            time: String(format: "%02d:%02d", alarm.hour, alarm.minute),
-            isActive: true, memo: alarm.memo!
-        )
-        
-        cell.configure(with: viewModel)
+        cell.configure(with: alarm)
         
         return cell
     }
@@ -102,4 +88,3 @@ extension AlarmPageVC: UITableViewDelegate {
         return 80 // 원하는 셀의 높이를 지정
     }
 }
-

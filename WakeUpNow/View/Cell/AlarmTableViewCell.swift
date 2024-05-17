@@ -8,14 +8,6 @@
 import UIKit
 import SnapKit
 
-// 뷰 모델 정의
-struct AlarmViewModel {
-    let meridiem: String
-    let time: String
-    let isActive: Bool
-    let memo: String
-}
-
 class AlarmTableViewCell: UITableViewCell {
     
     static let identifier = "AlarmTableViewCell"
@@ -88,11 +80,11 @@ class AlarmTableViewCell: UITableViewCell {
     }
     
     // 셀의 데이터를 설정하는 메서드
-    func configure(with viewModel: AlarmViewModel) {
-        meridiemLabel.text = viewModel.meridiem
-        timeLabel.text = viewModel.time
-        alarmSwitch.isOn = viewModel.isActive
-        memoLabel.text = viewModel.memo
+    func configure(with alarm: Alarm) {
+        meridiemLabel.text = alarm.amPm
+        timeLabel.text = alarm.formattedTime
+        alarmSwitch.isOn = alarm.isReminderEnabled
+        memoLabel.text = alarm.memo
     }
 }
 
