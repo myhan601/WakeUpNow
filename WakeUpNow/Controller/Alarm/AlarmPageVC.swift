@@ -46,8 +46,15 @@ class AlarmPageVC: UIViewController {
     
     // '편집' 버튼이 탭되었을 때 호출될 메서드
     @objc func editButtonTapped() {
-        // 편집 관련 동작 구현
-        print("편집 버튼이 탭되었습니다.")
+        if tableView.isEditing {
+            // 현재 편집 모드이면 완료 모드로 변경
+            tableView.setEditing(false, animated: true)
+            self.navigationItem.leftBarButtonItem?.title = "편집"
+        } else {
+            // 현재 완료 모드이면 편집 모드로 변경
+            tableView.setEditing(true, animated: true)
+            self.navigationItem.leftBarButtonItem?.title = "완료"
+        }
     }
     
     // '+' 버튼이 탭되었을 때 호출될 메서드
@@ -84,6 +91,10 @@ extension AlarmPageVC: UITableViewDataSource {
 }
 
 extension AlarmPageVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80 // 원하는 셀의 높이를 지정
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // 해당 indexPath에 있는 알람을 삭제합니다.
@@ -91,9 +102,5 @@ extension AlarmPageVC: UITableViewDelegate {
             // 테이블 뷰에서 해당 셀을 삭제합니다.
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80 // 원하는 셀의 높이를 지정
     }
 }
