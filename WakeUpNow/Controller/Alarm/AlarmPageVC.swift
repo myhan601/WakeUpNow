@@ -6,11 +6,19 @@
 //  Created by 한철희 on 5/13/24.
 //
 
+//
+//  AlarmPageVC.swift
+//  WakeUpNow
+//
+//  Created by 한철희 on 5/13/24.
+//
+
 import UIKit
 import SnapKit
 
 class AlarmPageVC: UIViewController {
     
+    var alarms: [Alarm] = []
     var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -31,14 +39,14 @@ class AlarmPageVC: UIViewController {
     func setupTableView() {
         // 테이블뷰 초기화 및 설정
         tableView = UITableView()
-        tableView.register(AlarmTableViewCell.self, forCellReuseIdentifier: "AlarmTableViewCell")
+        tableView.register(AlarmTableViewCell.self, forCellReuseIdentifier: AlarmTableViewCell.identifier)
         
         tableView.dataSource = self
         tableView.delegate = self
         
         view.addSubview(tableView)
         
-        // SnapKit을 사용
+        // SnapKit을 사용하여 레이아웃 설정
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -54,6 +62,12 @@ class AlarmPageVC: UIViewController {
     @objc func addButtonTapped() {
         let setAlarmVC = SetAlarmVC()
         
+        // 알람을 설정하고 완료했을 때 호출될 클로저를 정의합니다.
+        setAlarmVC.onSave = { [weak self] newAlarm in
+            self?.alarms.append(newAlarm)
+            self?.tableView.reloadData()
+        }
+        
         // SetAlarmVC를 UINavigationController의 루트 뷰 컨트롤러로 설정
         let navigationController = UINavigationController(rootViewController: setAlarmVC)
         
@@ -64,33 +78,28 @@ class AlarmPageVC: UIViewController {
 
 extension AlarmPageVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6 // 기존에는 5였지만, 특별한 첫 번째 셀을 위해 1을 더함
+        return alarms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") ?? UITableViewCell(style: .default, reuseIdentifier: "cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: AlarmTableViewCell.identifier, for: indexPath) as! AlarmTableViewCell
         
-        // 첫 번째 셀에는 '알람'만 표시
-        if indexPath.row == 0 {
-            cell.textLabel?.text = "알람"
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AlarmTableViewCell", for: indexPath) as! AlarmTableViewCell
-            
-            // 알람 데이터를 생성합니다. 실제 앱에서는 이 부분을 데이터 소스로부터 가져온 데이터로 교체해야 합니다.
-            let dummyViewModel = AlarmViewModel(meridiem: indexPath.row % 2 == 0 ? "오전" : "오후", time: "\(indexPath.row + 7):00", isActive: indexPath.row % 2 == 0)
-            
-            // 셀을 구성합니다.
-            cell.configure(with: dummyViewModel)
-            
-            return cell
-        }
+        let alarm = alarms[indexPath.row]
+        let viewModel = AlarmViewModel(
+            meridiem: alarm.amPm,
+            time: String(format: "%02d:%02d", alarm.hour, alarm.minute),
+            isActive: true
+        )
+        
+        cell.configure(with: viewModel)
+        
+        return cell
     }
 }
-
 
 extension AlarmPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70 // 원하는 셀의 높이를 지정
     }
 }
+

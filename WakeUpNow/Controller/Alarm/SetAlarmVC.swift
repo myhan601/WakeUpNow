@@ -10,6 +10,8 @@ import SnapKit
 
 class SetAlarmVC: UIViewController, SetDayVCDelegate {
     
+    var onSave: ((Alarm) -> Void)?
+    var alarms = [Alarm]()
     var selectedDays = [String]()
     var isMissionEnabled = false
     var isReminderEnabled = false
@@ -195,25 +197,27 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         // 알람을 저장하는 로직
         
         // pickerView에서 선택한 시간 정보를 가져옵니다.
+        let amPmComponent = pickerView.selectedRow(inComponent: 0)
         let hourComponent = pickerView.selectedRow(inComponent: 1) % hours.count
         let minuteComponent = pickerView.selectedRow(inComponent: 2) % minutes.count
         
         // 시간과 분을 문자열에서 정수로 변환합니다.
+        let amPm = self.amPm[amPmComponent]
         let hour = Int(hours[hourComponent]) ?? 0
         let minute = Int(minutes[minuteComponent]) ?? 0
         
-        // 알람 데이터를 생성합니다.
         let alarm = Alarm(
             isMissionEnabled: isMissionEnabled,
-            amPm: label.text ?? "오전",
+            amPm: amPm,
             hour: hour,
             minute: minute,
             selectedDays: selectedDays,
             memo: getMemoText(),
             isReminderEnabled: isReminderEnabled
         )
-        // 생성된 알람 데이터를 출력합니다.
-        print("알람 데이터:", alarm)
+        
+        // 클로저 호출하여 알람 전달
+        onSave?(alarm)
         
         self.dismiss(animated: true, completion: nil)
     }
