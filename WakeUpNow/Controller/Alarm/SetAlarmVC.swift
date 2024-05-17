@@ -39,7 +39,7 @@ class SetAlarmVC: UIViewController {
         configureNavigationBar()
         setupDayButton()
         setupSoundSettingButton()
-//        setupLabels()
+        //        setupLabels()
         setupPickerView()
         setupTableView()
     }
@@ -250,6 +250,30 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
             // 나머지 셀들 구성
             if indexPath.row == 0 {
                 cell.textLabel?.text = "반복요일"
+                let detailLabel = UILabel()
+                detailLabel.text = "선택 안 함"
+                detailLabel.textColor = .gray
+                detailLabel.sizeToFit()
+                
+                let accessory = UIView(frame: CGRect(x: 0, y: 0, width: detailLabel.frame.width + 20, height: detailLabel.frame.height))
+                accessory.addSubview(detailLabel)
+                
+                detailLabel.snp.makeConstraints { make in
+                    make.left.equalToSuperview()
+                    make.centerY.equalToSuperview()
+                }
+                
+                let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+                arrowImageView.tintColor = .gray // 여기서 색상을 텍스트와 동일한 색상으로 설정합니다.
+                accessory.addSubview(arrowImageView)
+                
+                arrowImageView.snp.makeConstraints { make in
+                    make.left.equalTo(detailLabel.snp.right).offset(5)
+                    make.centerY.equalToSuperview()
+                    make.right.equalToSuperview()
+                }
+                
+                cell.accessoryView = accessory
             } else if indexPath.row == 1 {
                 // "메모" 셀 구성이 여기에 들어갑니다.
                 let label = UILabel()
