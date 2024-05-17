@@ -325,7 +325,7 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return "선택 안 함"
         case 1:
-            return selectedDays[0]
+            return "\(selectedDays[0])요일마다"
         default:
             let lastDay = selectedDays.removeLast()
             let daysText = selectedDays.joined(separator: ", ")
