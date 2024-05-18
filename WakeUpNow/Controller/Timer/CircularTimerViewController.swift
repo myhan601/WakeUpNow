@@ -54,4 +54,7 @@ class CircularTimerViewController: UIView {
         foregroundLayer.frame = bounds
         foregroundLayer.path = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: bounds.width / 2, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi - CGFloat.pi / 2, clockwise: true).cgPath
     }
+    func updateProgress(_ progress: CGFloat) {
+            foregroundLayer.strokeEnd = progress
+        }
 }

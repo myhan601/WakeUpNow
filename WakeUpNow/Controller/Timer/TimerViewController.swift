@@ -6,13 +6,15 @@
 //
 
 import UIKit
-
 class TimerViewController : UIViewController, TimeSettingDelegate {
     private var timer = Timer()
     private var selectedHours: Int = 0
     private var selectedMinutes: Int = 0
     private var selectedSeconds: Int = 0
     private var isTimerSet: Bool = false
+    private var isTimerRunning: Bool = false  // 타이머가 현재 실행 중인지 나타내는 플래그
+      private var remainingTimeInSeconds: Int = 0  // 타이머의 남은 시간을 초 단위로 저장
+      private var startTime: Date?  // 타이머가 시작된 시간
     
     lazy var timerStartBtn: UIButton = {
         let button = UIButton()
@@ -114,7 +116,9 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        timer.invalidate()
+        if isTimerRunning {
+            timer.invalidate()
+        }
     }
     
     @objc func didSelectTimeTapped() {
@@ -144,14 +148,23 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
             present(alertController, animated: true, completion: nil)
             return
         }
-        
-        if timer.isValid {
+
+        if isTimerRunning {
             timer.invalidate()
+            if let start = startTime {
+                remainingTimeInSeconds -= Int(Date().timeIntervalSince(start)) // 남은 시간 업데이트
+            }
             timerStartBtn.setTitle("재시작", for: .normal)
+            isTimerRunning = false
         } else {
             let totalSeconds = selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds
-            setupTimer(with: Double(totalSeconds))
+            if remainingTimeInSeconds > 0 {
+                setupTimer(with: Double(remainingTimeInSeconds))
+            } else {
+                setupTimer(with: Double(totalSeconds))
+            }
             timerStartBtn.setTitle("멈춤", for: .normal)
+            isTimerRunning = true
         }
         timerCancelBtn.isEnabled = true
         timerCancelBtn.setTitleColor(.systemBlue, for: .normal)
@@ -169,35 +182,37 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
         timerCancelBtn.setTitleColor(.lightGray, for: .normal)
     }
     
-    
-    
     private func setupTimer(with totalSeconds: Double) {
+        remainingTimeInSeconds = Int(totalSeconds)
         timer.invalidate()
-        let startTime = Date()
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+        startTime = Date()
+
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             guard let strongSelf = self else { return }
-            
-            let elapsedTimeSeconds = Int(Date().timeIntervalSince(startTime))
-            let remainSeconds = Int(totalSeconds) - elapsedTimeSeconds
-            let progress = CGFloat(elapsedTimeSeconds) / CGFloat(totalSeconds)
-            
-            if remainSeconds <= 0 {
-                timer.invalidate()
+
+            strongSelf.remainingTimeInSeconds -= 1
+
+            if strongSelf.remainingTimeInSeconds <= 0 {
+                strongSelf.timer.invalidate()
                 DispatchQueue.main.async {
                     strongSelf.timerDidFinish()
                 }
                 return
             }
-            
-            let hours = remainSeconds / 3600
-            let minutes = (remainSeconds % 3600) / 60
-            let seconds = remainSeconds % 60
+
             DispatchQueue.main.async {
-                strongSelf.countDownLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-                strongSelf.circularTimerView.progress = progress
+                strongSelf.updateTimerLabel()
             }
         }
+    }
+
+    private func updateTimerLabel() {
+        let hours = remainingTimeInSeconds / 3600
+        let minutes = (remainingTimeInSeconds % 3600) / 60
+        let seconds = remainingTimeInSeconds % 60
+        countDownLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        let totalSeconds = Double(selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds)
+        circularTimerView.updateProgress(CGFloat(remainingTimeInSeconds) / CGFloat(totalSeconds))
     }
     
     private func timerDidFinish() {
@@ -214,7 +229,6 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
 }
 
 extension TimeInterval {
-    /// %02d: 빈자리를 0으로 채우고, 2자리 정수로 표현
     var time: String {
         return String(format:"%02d:%02d", Int(self/60), Int(ceil(truncatingRemainder(dividingBy: 60))) )
     }
