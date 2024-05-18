@@ -28,10 +28,10 @@ class CircularTimerViewController: UIView {
     }
 
     private func setupLayers() {
-        backgroundLayer = createCircularLayer(strokeColor: UIColor.lightGray.cgColor, fillColor: UIColor.clear.cgColor)
+        backgroundLayer = createCircularLayer(strokeColor: UIColor(red: 220/255, green: 218/255, blue: 214/255, alpha: 1).cgColor, fillColor: UIColor.clear.cgColor)
         layer.addSublayer(backgroundLayer)
 
-        foregroundLayer = createCircularLayer(strokeColor: UIColor.blue.cgColor, fillColor: UIColor.clear.cgColor)
+        foregroundLayer = createCircularLayer(strokeColor: UIColor(red: 190/255, green: 66/255, blue: 54/255, alpha: 1).cgColor, fillColor: UIColor.clear.cgColor)
         foregroundLayer.strokeEnd = 0
         layer.addSublayer(foregroundLayer)
     }
@@ -41,7 +41,7 @@ class CircularTimerViewController: UIView {
         circularLayer.path = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: bounds.width / 2, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi - CGFloat.pi / 2, clockwise: true).cgPath
         circularLayer.fillColor = fillColor
         circularLayer.strokeColor = strokeColor
-        circularLayer.lineWidth = 10
+        circularLayer.lineWidth = 20
         circularLayer.lineCap = .round
         return circularLayer
     }
@@ -57,4 +57,9 @@ class CircularTimerViewController: UIView {
     func updateProgress(_ progress: CGFloat) {
             foregroundLayer.strokeEnd = progress
         }
+    
+    func resetProgress() {
+        self.progress = 0.0
+    }
+
 }

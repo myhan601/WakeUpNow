@@ -12,9 +12,9 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
     private var selectedMinutes: Int = 0
     private var selectedSeconds: Int = 0
     private var isTimerSet: Bool = false
-    private var isTimerRunning: Bool = false  // 타이머가 현재 실행 중인지 나타내는 플래그
-      private var remainingTimeInSeconds: Int = 0  // 타이머의 남은 시간을 초 단위로 저장
-      private var startTime: Date?  // 타이머가 시작된 시간
+    private var isTimerRunning: Bool = false
+    private var remainingTimeInSeconds: Int = 0
+    private var startTime: Date?
     
     lazy var timerStartBtn: UIButton = {
         let button = UIButton()
@@ -65,7 +65,6 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,19 +150,14 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
 
         if isTimerRunning {
             timer.invalidate()
-            if let start = startTime {
-                remainingTimeInSeconds -= Int(Date().timeIntervalSince(start)) // 남은 시간 업데이트
-            }
-            timerStartBtn.setTitle("재시작", for: .normal)
             isTimerRunning = false
+            timerStartBtn.setTitle("재개", for: .normal)
         } else {
-            let totalSeconds = selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds
-            if remainingTimeInSeconds > 0 {
-                setupTimer(with: Double(remainingTimeInSeconds))
-            } else {
-                setupTimer(with: Double(totalSeconds))
+            if remainingTimeInSeconds <= 0 {
+                remainingTimeInSeconds = selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds
             }
-            timerStartBtn.setTitle("멈춤", for: .normal)
+            setupTimer(with: Double(remainingTimeInSeconds))
+            timerStartBtn.setTitle("일시정지", for: .normal)
             isTimerRunning = true
         }
         timerCancelBtn.isEnabled = true
@@ -180,6 +174,8 @@ class TimerViewController : UIViewController, TimeSettingDelegate {
         timerStartBtn.setTitle("시작", for: .normal)
         timerCancelBtn.isEnabled = false
         timerCancelBtn.setTitleColor(.lightGray, for: .normal)
+        
+        circularTimerView.resetProgress()
     }
     
     private func setupTimer(with totalSeconds: Double) {
