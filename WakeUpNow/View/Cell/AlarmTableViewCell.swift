@@ -73,6 +73,8 @@ class AlarmTableViewCell: UITableViewCell {
         contentView.addSubview(arrowImageView)
         contentView.addSubview(memoLabel)
         
+        alarmSwitch.addTarget(self, action: #selector(alarmSwitchValueChanged), for: .valueChanged)
+        
         // SnapKit을 사용한 레이아웃 설정
         meridiemLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
@@ -107,6 +109,10 @@ class AlarmTableViewCell: UITableViewCell {
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         contentView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func alarmSwitchValueChanged() {
+        print("Switch value changed. isAlarmOn: \(alarmSwitch.isOn)")
     }
     
     @objc private func didTapCell() {
