@@ -12,6 +12,10 @@ protocol TimeSettingDelegate: AnyObject {
 }
 
 class TimeSettingViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    // MARK: - Properties
+    weak var delegate: TimeSettingDelegate?
+    
     let hours = Array(0...23)
     let minutes = Array(0...59)
     let seconds = Array(0...59)
@@ -32,14 +36,15 @@ class TimeSettingViewController: UIViewController, UIPickerViewDelegate, UIPicke
         return button
     }()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
         setupSubviews()
         setupConstraints()
     }
     
+    // MARK: - Methods
     private func setupSubviews() {
         view.addSubview(timePicker)
         view.addSubview(confirmButton)
@@ -56,6 +61,16 @@ class TimeSettingViewController: UIViewController, UIPickerViewDelegate, UIPicke
         ])
     }
     
+    @objc func confirmButtonTapped() {
+        let selectedHours = hours[timePicker.selectedRow(inComponent: 0)]
+        let selectedMinutes = minutes[timePicker.selectedRow(inComponent: 1)]
+        let selectedSeconds = seconds[timePicker.selectedRow(inComponent: 2)]
+        
+        delegate?.didSelectTime(hours: selectedHours, minutes: selectedMinutes, seconds: selectedSeconds)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - UIPickerViewDataSource
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
     }
@@ -73,6 +88,7 @@ class TimeSettingViewController: UIViewController, UIPickerViewDelegate, UIPicke
         }
     }
     
+    // MARK: - UIPickerViewDelegate
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
@@ -84,16 +100,5 @@ class TimeSettingViewController: UIViewController, UIPickerViewDelegate, UIPicke
         default:
             return nil
         }
-    }
-    
-    weak var delegate: TimeSettingDelegate?
-    
-    @objc func confirmButtonTapped() {
-        let selectedHours = hours[timePicker.selectedRow(inComponent: 0)]
-        let selectedMinutes = minutes[timePicker.selectedRow(inComponent: 1)]
-        let selectedSeconds = seconds[timePicker.selectedRow(inComponent: 2)]
-        
-        delegate?.didSelectTime(hours: selectedHours, minutes: selectedMinutes, seconds: selectedSeconds)
-        dismiss(animated: true, completion: nil)
     }
 }
