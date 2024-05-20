@@ -49,8 +49,6 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         setupSoundSettingButton()
         setupPickerView()
         setupTableView()
-        
-        // pickerView의 초기 선택 시간을 설정합니다.
         setInitialPickerViewTime()
     }
     
@@ -81,7 +79,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         // SnapKit을 사용하여 label의 위치와 크기를 설정합니다.
         label.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-200) // 화면 하단으로부터 100pt 위에 위치하도록 설정
+            make.bottom.equalToSuperview().offset(-200)
             make.width.equalTo(200)
             make.height.equalTo(40)
         }
@@ -89,7 +87,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         // SnapKit을 사용하여 numberLabel의 위치와 크기를 설정합니다.
         numberLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(label.snp.top).offset(-20) // label 위로 20pt 떨어진 위치에 설정
+            make.bottom.equalTo(label.snp.top).offset(-20)
             make.width.equalTo(200)
             make.height.equalTo(40)
         }
@@ -117,8 +115,8 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layer.cornerRadius = 10
-        tableView.layer.borderColor = UIColor.black.cgColor // 테두리 색상을 설정합니다.
-        tableView.layer.borderWidth = 0.7 // 테두리 두께를 설정합니다.
+        tableView.layer.borderColor = UIColor.black.cgColor
+        tableView.layer.borderWidth = 0.7
         tableView.isScrollEnabled = false
         view.addSubview(tableView)
         
@@ -199,7 +197,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
                 return textField.text?.isEmpty == false ? textField.text! : "알람"
             }
         }
-        return "알람" // 아무것도 입력하지 않았을 경우 "알람"을 반환
+        return "알람" // 아무것도 입력하지 않았을 경우
     }
     
     // MARK: - @objc func
@@ -426,7 +424,6 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                 cell.accessoryView = switchView
             }
         }
-        
         return cell
     }
     

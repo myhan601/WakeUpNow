@@ -103,14 +103,12 @@ extension AlarmPageVC: UITableViewDataSource {
 
 extension AlarmPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80 // 원하는 셀의 높이를 지정
+        return 80
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // 해당 indexPath에 있는 알람을 삭제합니다.
             alarms.remove(at: indexPath.row)
-            // 테이블 뷰에서 해당 셀을 삭제합니다.
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
