@@ -77,7 +77,6 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         numberLabel.textAlignment = .center
         view.addSubview(numberLabel)
         
-        // SnapKit을 사용하여 label의 위치와 크기를 설정합니다.
         label.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-200)
@@ -85,7 +84,6 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
             make.height.equalTo(40)
         }
         
-        // SnapKit을 사용하여 numberLabel의 위치와 크기를 설정합니다.
         numberLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(label.snp.top).offset(-20)
@@ -268,11 +266,26 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
             }
         }
 
+        // 12시간제로 변환하여 알람 저장
+        var alarmHour = hour
+        let alarmAmPm: String
+        if hour >= 12 {
+            alarmAmPm = "오후"
+            if hour > 12 {
+                alarmHour -= 12
+            }
+        } else {
+            alarmAmPm = "오전"
+            if hour == 0 {
+                alarmHour = 12
+            }
+        }
+
         // 알람을 저장하는 로직
         let alarm = Alarm(
             isMissionEnabled: isMissionEnabled,
-            amPm: amPm,
-            hour: hour,
+            amPm: alarmAmPm,
+            hour: alarmHour,
             minute: minute,
             selectedDays: selectedDays,
             memo: getMemoText(),
@@ -307,7 +320,6 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
 
         self.dismiss(animated: true, completion: nil)
     }
-
 }
 
 // MARK: - UIPickerViewDataSource
@@ -401,7 +413,7 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
-                arrowImageView.tintColor = .gray // 여기서 색상을 텍스트와 동일한 색상으로 설정합니다.
+                arrowImageView.tintColor = .gray
                 accessory.addSubview(arrowImageView)
                 
                 arrowImageView.snp.makeConstraints { make in
@@ -472,14 +484,12 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.row == 2 {
                 soundSettingButtonTapped()
             }
-            // '미션여부' 셀에 대한 액션도 추가할 수 있습니다.
         }
     }
     
-    // 섹션 헤더 높이를 조절하여 '미션여부' 섹션과 나머지 섹션 사이의 간격을 조절할 수 있습니다.
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 1 {
-            return 50 // 원하는 간격
+            return 50
         }
         return 0
     }

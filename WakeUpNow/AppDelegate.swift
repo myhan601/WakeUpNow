@@ -32,6 +32,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             completionHandler([.alert, .sound])
         }
     }
+    
+    // 알림을 클릭했을 때 처리
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // 전체화면 알람 뷰 컨트롤러를 표시하는 로직
+        if let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController {
+            let wakeUpVC = WakeUpVC() // 전체화면으로 표시할 뷰 컨트롤러
+            wakeUpVC.modalPresentationStyle = .fullScreen
+            rootViewController.present(wakeUpVC, animated: true, completion: nil)
+        }
+
+        completionHandler()
+    }
+
 
     // MARK: UISceneSession Lifecycle
 
