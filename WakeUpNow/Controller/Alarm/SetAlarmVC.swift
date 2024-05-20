@@ -163,7 +163,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         // 현재 시간을 가져옵니다.
         let currentDate = Date()
         let calendar = Calendar.current
-        var components = calendar.dateComponents([.hour, .minute], from: currentDate)
+        let components = calendar.dateComponents([.hour, .minute], from: currentDate)
         
         // pickerView의 시간 및 분 구성 요소의 초기 선택된 행을 설정합니다.
         if let hour = components.hour, let minute = components.minute {
@@ -235,7 +235,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         // 현재 시간을 가져옵니다.
         let currentDate = Date()
         let calendar = Calendar.current
-        var components = calendar.dateComponents([.hour, .minute], from: currentDate)
+        let components = calendar.dateComponents([.hour, .minute], from: currentDate)
 
         // pickerView에서 선택한 시간 정보를 가져옵니다.
         let selectedAmPmIndex = pickerView.selectedRow(inComponent: 0)
@@ -249,8 +249,10 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
 
         // 24시간제로 변환하여 현재 시간과 비교합니다.
         var hour = Int(hours[hourComponent]) ?? 0
-        if amPm == "오후" {
+        if amPm == "오후" && hour != 12 {
             hour += 12
+        } else if amPm == "오전" && hour == 12 {
+            hour = 0
         }
         let minute = Int(minutes[minuteComponent]) ?? 0
 
