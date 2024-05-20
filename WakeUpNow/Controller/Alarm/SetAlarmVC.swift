@@ -234,19 +234,40 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
     }
     
     @objc func saveButtonTapped() {
-        print("알람이 저장되었습니다.")
-        // 알람을 저장하는 로직
-        
+        // 현재 시간을 가져옵니다.
+        let currentDate = Date()
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.hour, .minute], from: currentDate)
+
         // pickerView에서 선택한 시간 정보를 가져옵니다.
-        let amPmComponent = pickerView.selectedRow(inComponent: 0)
-        let hourComponent = pickerView.selectedRow(inComponent: 1) % hours.count
-        let minuteComponent = pickerView.selectedRow(inComponent: 2) % minutes.count
-        
+        let selectedAmPmIndex = pickerView.selectedRow(inComponent: 0)
+        let selectedHourIndex = pickerView.selectedRow(inComponent: 1)
+        let selectedMinuteIndex = pickerView.selectedRow(inComponent: 2)
+
         // 시간과 분을 문자열에서 정수로 변환합니다.
-        let amPm = self.amPm[amPmComponent]
-        let hour = Int(hours[hourComponent]) ?? 0
+        let amPm = self.amPm[selectedAmPmIndex]
+        let hourComponent = selectedHourIndex % hours.count
+        let minuteComponent = selectedMinuteIndex % minutes.count
+
+        // 24시간제로 변환하여 현재 시간과 비교합니다.
+        var hour = Int(hours[hourComponent]) ?? 0
+        if amPm == "오후" {
+            hour += 12
+        }
         let minute = Int(minutes[minuteComponent]) ?? 0
-        
+
+        // 선택한 시간과 현재 시간을 비교하여 알림을 띄울지 결정합니다.
+        if let selectedHour = components.hour, let selectedMinute = components.minute {
+            if hour == selectedHour && minute == selectedMinute {
+                // 현재 시간과 선택한 시간이 동일한 경우 알림을 띄웁니다.
+                let alert = UIAlertController(title: "알림", message: "현재 시간과 동일한 시간으로 알람을 설정할 수 없습니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+        }
+
+        // 알람을 저장하는 로직
         let alarm = Alarm(
             isMissionEnabled: isMissionEnabled,
             amPm: amPm,
@@ -257,13 +278,13 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
             isReminderEnabled: isReminderEnabled,
             isAlarmOn: true
         )
-        
+
         // 클로저 호출하여 알람 전달
         onSave?(alarm)
-        
+
         // 알람 데이터 확인
         print(alarm)
-        
+
         self.dismiss(animated: true, completion: nil)
     }
 }
