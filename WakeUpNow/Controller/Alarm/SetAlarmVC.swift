@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import UserNotifications
 
 class SetAlarmVC: UIViewController, SetDayVCDelegate {
     // MARK: - variable
@@ -285,8 +286,28 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         // 알람 데이터 확인
         print(alarm)
 
+        // 로컬 알림 스케줄링
+        let content = UNMutableNotificationContent()
+        content.title = "알람"
+        content.body = "일어날 시간입니다!"
+        content.sound = UNNotificationSound.default
+
+        var dateComponents = DateComponents()
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("알림 스케줄링 중 오류 발생: \(error)")
+            }
+        }
+
         self.dismiss(animated: true, completion: nil)
     }
+
 }
 
 // MARK: - UIPickerViewDataSource
