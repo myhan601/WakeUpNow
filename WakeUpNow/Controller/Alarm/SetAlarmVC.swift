@@ -49,7 +49,41 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         setupSoundSettingButton()
         setupPickerView()
         setupTableView()
+        
+        // pickerView의 초기 선택 시간을 설정합니다.
+        setInitialPickerViewTime()
     }
+
+    func setInitialPickerViewTime() {
+        // 현재 시간을 가져옵니다.
+        let currentDate = Date()
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.hour, .minute], from: currentDate)
+        
+        // 분이 30분 이상이면 시간을 1 늘려주기 위해 처리합니다.
+        if components.minute! >= 30 {
+            components.hour! += 1
+        }
+        
+        // pickerView의 시간 및 분 구성 요소의 초기 선택된 행을 설정합니다.
+        if let hour = components.hour, let minute = components.minute {
+            pickerView.selectRow(hour, inComponent: 1, animated: false)
+            pickerView.selectRow(minute, inComponent: 2, animated: false)
+            
+            // 시간에 따라 amPm 구성 요소의 초기 선택된 행을 설정합니다.
+            let selectedAmPmIndex = hour < 12 ? 0 : 1
+            pickerView.selectRow(selectedAmPmIndex, inComponent: 0, animated: false)
+            
+            // 시간을 12시간 형식으로 변환하여 레이블을 업데이트합니다.
+            let displayHour = hour % 12 == 0 ? 12 : hour % 12 // 0시를 12시로 표시
+            label.text = amPm[selectedAmPmIndex]
+            numberLabel.text = String(displayHour)
+        }
+    }
+
+
+
+
     
     // MARK: - func
     private func configureNavigationBar() {
