@@ -8,10 +8,19 @@
 import UIKit
 import SnapKit
 
-class AlarmPageVC: UIViewController {
+class AlarmPageVC: UIViewController, AlarmTableViewCellDelegate {
     
     var alarms: [Alarm] = []
     var tableView: UITableView!
+    
+    func didTapCell(_ cell: AlarmTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let alarm = alarms[indexPath.row]
+        
+        let setAlarmVC = SetAlarmVC()
+        setAlarmVC.alarm = alarm // 필요한 경우 알람 데이터를 전달
+        present(setAlarmVC, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +96,7 @@ extension AlarmPageVC: UITableViewDataSource {
         
         let alarm = alarms[indexPath.row]
         cell.configure(with: alarm)
-        
+        cell.delegate = self
         return cell
     }
 }

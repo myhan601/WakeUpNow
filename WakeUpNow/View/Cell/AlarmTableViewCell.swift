@@ -8,9 +8,19 @@
 import UIKit
 import SnapKit
 
+protocol AlarmTableViewCellDelegate: AnyObject {
+    func didTapCell(_ cell: AlarmTableViewCell)
+}
+
 class AlarmTableViewCell: UITableViewCell {
     
+    weak var delegate: AlarmTableViewCellDelegate?
+    
     static let identifier = "AlarmTableViewCell"
+    
+    @objc private func handleTap() {
+        delegate?.didTapCell(self)
+    }
     
     private let meridiemLabel: UILabel = {
         let label = UILabel()
@@ -49,6 +59,7 @@ class AlarmTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
+        setupGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -91,6 +102,15 @@ class AlarmTableViewCell: UITableViewCell {
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
+    }
+    
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        contentView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func didTapCell() {
+        delegate?.didTapCell(self)
     }
     
     // 셀의 데이터를 설정하는 메서드

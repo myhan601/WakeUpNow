@@ -10,6 +10,8 @@ import SnapKit
 
 class SetAlarmVC: UIViewController, SetDayVCDelegate {
     // MARK: - variable
+    
+    var alarm: Alarm?
     var onSave: ((Alarm) -> Void)?
     var alarms = [Alarm]()
     var selectedDays = [String]()
@@ -45,7 +47,6 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         configureNavigationBar()
         setupDayButton()
         setupSoundSettingButton()
-        //        setupLabels()
         setupPickerView()
         setupTableView()
     }
