@@ -55,6 +55,8 @@ class AlarmPageVC: UIViewController {
             tableView.setEditing(true, animated: true)
             self.navigationItem.leftBarButtonItem?.title = "완료"
         }
+        
+        tableView.reloadData()
     }
     
     // '+' 버튼이 탭되었을 때 호출될 메서드

@@ -27,15 +27,22 @@ class AlarmTableViewCell: UITableViewCell {
     
     private let alarmSwitch: UISwitch = {
         let switchControl = UISwitch()
-        // 스위치 설정
         return switchControl
+    }()
+    
+    private let arrowImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "chevron.right")
+        imageView.tintColor = .gray
+        imageView.isHidden = true // 처음에는 숨겨진 상태
+        return imageView
     }()
     
     private let memoLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: 16) // 메모 텍스트의 크기는 조정 가능
-        label.textColor = .gray // 메모 텍스트의 색상은 조정 가능
+        label.font = .systemFont(ofSize: 16)
+        label.textColor = .gray
         return label
     }()
     
@@ -49,14 +56,15 @@ class AlarmTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
-        addSubview(meridiemLabel)
-        addSubview(timeLabel)
-        addSubview(alarmSwitch)
-        addSubview(memoLabel)
+        contentView.addSubview(meridiemLabel)
+        contentView.addSubview(timeLabel)
+        contentView.addSubview(alarmSwitch)
+        contentView.addSubview(arrowImageView)
+        contentView.addSubview(memoLabel)
         
         // SnapKit을 사용한 레이아웃 설정
         meridiemLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20) // 왼쪽 여백을 0으로 설정
+            make.left.equalToSuperview().offset(20)
             make.centerY.equalToSuperview().offset(0)
             make.width.equalToSuperview().multipliedBy(0.1)
         }
@@ -72,10 +80,16 @@ class AlarmTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
         
+        arrowImageView.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(20) // 화살표 크기 조정
+        }
+        
         memoLabel.snp.makeConstraints { make in
-            make.top.equalTo(meridiemLabel.snp.bottom).offset(5) // meridiemLabel 바로 아래에 위치
-            make.left.equalToSuperview().offset(20) // 왼쪽 여백 설정
-            make.right.equalToSuperview().offset(-20) // 오른쪽 여백 설정
+            make.top.equalTo(meridiemLabel.snp.bottom).offset(5)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
         }
     }
     
@@ -86,7 +100,20 @@ class AlarmTableViewCell: UITableViewCell {
         alarmSwitch.isOn = alarm.isAlarmOn
         memoLabel.text = alarm.memo
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // 편집 모드일 때 셀의 내용을 오른쪽으로 이동
+        if isEditing {
+            let editingOffset: CGFloat = 40.0
+            contentView.transform = CGAffineTransform(translationX: editingOffset, y: 0)
+            alarmSwitch.isHidden = true
+            arrowImageView.isHidden = false
+        } else {
+            contentView.transform = CGAffineTransform.identity
+            alarmSwitch.isHidden = false
+            arrowImageView.isHidden = true
+        }
+    }
 }
-
-
-
