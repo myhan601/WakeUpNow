@@ -396,6 +396,7 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
         
         // 셀의 배경색 설정
         cell.backgroundColor = ColorPalette.wakeBeige
+        cell.textLabel?.textColor = ColorPalette.wakeDarkGray
         
         // '미션여부' 셀 구성
         if indexPath.section == 0 {
@@ -437,6 +438,7 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                 // "메모" 셀 구성이 여기에 들어갑니다.
                 let label = UILabel()
                 label.text = "메모"
+                label.textColor = ColorPalette.wakeDarkGray
                 cell.contentView.addSubview(label)
                 
                 let textField = UITextField()
