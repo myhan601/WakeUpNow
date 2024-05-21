@@ -37,6 +37,7 @@ class AlarmTableViewCell: UITableViewCell {
     
     private let alarmSwitch: UISwitch = {
         let switchControl = UISwitch()
+        switchControl.onTintColor = ColorPalette.wakeBlue
         return switchControl
     }()
     

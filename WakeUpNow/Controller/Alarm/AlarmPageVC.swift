@@ -47,6 +47,7 @@ class AlarmPageVC: UIViewController, AlarmTableViewCellDelegate {
         tableView.register(AlarmTableViewCell.self, forCellReuseIdentifier: AlarmTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = ColorPalette.wakeLightBeige
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in
@@ -83,6 +84,7 @@ extension AlarmPageVC: UITableViewDataSource {
             cell.textLabel?.text = "알람"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 35, weight: .medium)
             cell.textLabel?.textAlignment = .left
+            cell.backgroundColor = ColorPalette.wakeLightBeige
             return cell
         } else {
             // indexPath.row에 1을 빼서 실제 alarms 배열의 인덱스에 맞춤
@@ -91,6 +93,7 @@ extension AlarmPageVC: UITableViewDataSource {
             let alarm = alarms[alarmIndex]
             cell.configure(with: alarm)
             cell.delegate = self
+            cell.backgroundColor = ColorPalette.wakeBeige
             return cell
         }
     }

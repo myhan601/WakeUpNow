@@ -57,9 +57,15 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
     private func configureNavigationBar() {
         self.title = "알람 추가"
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelButtonTapped))
+        let cancelButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelButtonTapped))
+        cancelButtonItem.tintColor = .black
+        self.navigationItem.leftBarButtonItem = cancelButtonItem
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
+        
+        let saveButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
+        saveButtonItem.tintColor = ColorPalette.wakeBlue
+        self.navigationItem.rightBarButtonItem = saveButtonItem
+    
         // 네비게이션바 배경과 구분선을 투명하게 만듭니다.
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -388,11 +394,15 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         
+        // 셀의 배경색 설정
+        cell.backgroundColor = ColorPalette.wakeBeige
+        
         // '미션여부' 셀 구성
         if indexPath.section == 0 {
             cell.textLabel?.text = "미션여부"
             
             let switchView = UISwitch()
+            switchView.onTintColor = ColorPalette.wakeBlue
             switchView.isOn = isMissionEnabled
             switchView.addTarget(self, action: #selector(missionSwitchValueChanged(_:)), for: .valueChanged)
             cell.accessoryView = switchView
@@ -454,6 +464,7 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.text = "다시 알림"
                 
                 let switchView = UISwitch()
+                switchView.onTintColor = ColorPalette.wakeBlue
                 switchView.isOn = isReminderEnabled
                 switchView.addTarget(self, action: #selector(reminderSwitchValueChanged(_:)), for: .valueChanged)
                 cell.accessoryView = switchView
