@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11A04ECE2BF8E4F800D66648 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A04ECD2BF8E4F800D66648 /* ColorPalette.swift */; };
 		11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */; };
 		11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */; };
 		2E75EB182BFC4D4700FB8AB9 /* Alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB0C2BFC4D4600FB8AB9 /* Alarm.mp3 */; };
@@ -21,7 +22,7 @@
 		2E75EB212BFC4D4700FB8AB9 /* Bell Tower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB152BFC4D4700FB8AB9 /* Bell Tower.mp3 */; };
 		2E75EB222BFC4D4700FB8AB9 /* Circuit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB162BFC4D4700FB8AB9 /* Circuit.mp3 */; };
 		2E75EB232BFC4D4700FB8AB9 /* By The Seaside.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB172BFC4D4700FB8AB9 /* By The Seaside.mp3 */; };
-		2E75EB252BFC618D00FB8AB9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E75EB242BFC618D00FB8AB9 /* UIColor.swift */; };
+		2E75EB342BFC844300FB8AB9 /* UserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E75EB322BFC844200FB8AB9 /* UserModel.xcdatamodeld */; };
 		2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FA82BF369190043FDF7 /* TimerViewController.swift */; };
 		2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */; };
 		2EC95FAD2BF5CAE50043FDF7 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */; };
@@ -45,9 +46,14 @@
 		AB66D2F92BF5F706000D72DA /* MissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2F72BF5F706000D72DA /* MissionVC.swift */; };
 		AB66D2FA2BF5F706000D72DA /* MissionSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */; };
 		AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */; };
+		AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3012BF76C93000D72DA /* Alarm.swift */; };
+		AB66D3042BFBAFA9000D72DA /* WakeUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */; };
+		F162EC4C2BF7685C00720B64 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4B2BF7685C00720B64 /* CoreData.swift */; };
+		F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11A04ECD2BF8E4F800D66648 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
 		11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabTimeTableViewCell.swift; sourceTree = "<group>"; };
 		2E75EB0C2BFC4D4600FB8AB9 /* Alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Alarm.mp3; sourceTree = "<group>"; };
@@ -62,7 +68,7 @@
 		2E75EB152BFC4D4700FB8AB9 /* Bell Tower.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bell Tower.mp3"; sourceTree = "<group>"; };
 		2E75EB162BFC4D4700FB8AB9 /* Circuit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Circuit.mp3; sourceTree = "<group>"; };
 		2E75EB172BFC4D4700FB8AB9 /* By The Seaside.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "By The Seaside.mp3"; sourceTree = "<group>"; };
-		2E75EB242BFC618D00FB8AB9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		2E75EB332BFC844200FB8AB9 /* UserModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserModel.xcdatamodel; sourceTree = "<group>"; };
 		2EC95FA82BF369190043FDF7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingViewController.swift; sourceTree = "<group>"; };
 		2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
@@ -87,6 +93,10 @@
 		AB66D2F72BF5F706000D72DA /* MissionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionVC.swift; sourceTree = "<group>"; };
 		AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionSuccessVC.swift; sourceTree = "<group>"; };
 		AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		AB66D3012BF76C93000D72DA /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpVC.swift; sourceTree = "<group>"; };
+		F162EC4B2BF7685C00720B64 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +111,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11A04ECC2BF8E4E200D66648 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				11A04ECD2BF8E4F800D66648 /* ColorPalette.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		2E75EB0B2BFC4CCB00FB8AB9 /* Ringtones */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +173,7 @@
 				AB66D2F02BF5F6C7000D72DA /* Model */,
 				AB66D2EC2BF5CAF3000D72DA /* View */,
 				AB66D2E82BF3992A000D72DA /* Controller */,
+				11A04ECC2BF8E4E200D66648 /* Utility */,
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
 				2E75EB0B2BFC4CCB00FB8AB9 /* Ringtones */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
@@ -163,6 +182,7 @@
 				AB66D2F42BF5F6F0000D72DA /* ttang.wav */,
 				AB0766932BF1C5C300CDA2D2 /* LaunchScreen.storyboard */,
 				AB0766962BF1C5C300CDA2D2 /* Info.plist */,
+				2E75EB322BFC844200FB8AB9 /* UserModel.xcdatamodeld */,
 			);
 			path = WakeUpNow;
 			sourceTree = "<group>";
@@ -174,6 +194,7 @@
 				AB118D372BF2478F00672AB1 /* SetAlarmVC.swift */,
 				AB118D392BF24E9000672AB1 /* SetDayVC.swift */,
 				AB118D3B2BF24FEB00672AB1 /* SetSoundVC.swift */,
+				AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -220,7 +241,9 @@
 			children = (
 				AB66D2EE2BF5F6C7000D72DA /* APIDataManager.swift */,
 				AB66D2EF2BF5F6C7000D72DA /* VocaData.swift */,
-				2E75EB242BFC618D00FB8AB9 /* UIColor.swift */,
+				F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */,
+				F162EC4B2BF7685C00720B64 /* CoreData.swift */,
+				AB66D3012BF76C93000D72DA /* Alarm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,15 +357,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */,
-				2E75EB252BFC618D00FB8AB9 /* UIColor.swift in Sources */,
 				AB66D2F12BF5F6C7000D72DA /* APIDataManager.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
 				2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */,
 				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerView.swift in Sources */,
+				F162EC4C2BF7685C00720B64 /* CoreData.swift in Sources */,
 				11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */,
 				11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */,
+				AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */,
 				AB118D3C2BF24FEB00672AB1 /* SetSoundVC.swift in Sources */,
 				AB118D3A2BF24E9000672AB1 /* SetDayVC.swift in Sources */,
+				11A04ECE2BF8E4F800D66648 /* ColorPalette.swift in Sources */,
+				F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */,
 				AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */,
 				AB66D2F92BF5F706000D72DA /* MissionVC.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
@@ -351,9 +377,11 @@
 				2EF10D1E2BFADD0E00343D24 /* SoundSettingViewController.swift in Sources */,
 				AB66D2FA2BF5F706000D72DA /* MissionSuccessVC.swift in Sources */,
 				AB66D2F22BF5F6C7000D72DA /* VocaData.swift in Sources */,
+				AB66D3042BFBAFA9000D72DA /* WakeUpVC.swift in Sources */,
 				AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */,
 				AB118D2C2BF1E5A900672AB1 /* AlarmPageVC.swift in Sources */,
 				AB118D382BF2478F00672AB1 /* SetAlarmVC.swift in Sources */,
+				2E75EB342BFC844300FB8AB9 /* UserModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,6 +621,20 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		2E75EB322BFC844200FB8AB9 /* UserModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2E75EB332BFC844200FB8AB9 /* UserModel.xcdatamodel */,
+			);
+			currentVersion = 2E75EB332BFC844200FB8AB9 /* UserModel.xcdatamodel */;
+			name = UserModel.xcdatamodeld;
+			path = "/Users/seohyelim/Downloads/WakeUpNow-develop/WakeUpNow/UserModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AB07667D2BF1C5C200CDA2D2 /* Project object */;
 }

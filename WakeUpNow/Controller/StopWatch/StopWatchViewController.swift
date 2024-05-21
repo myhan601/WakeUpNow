@@ -50,6 +50,7 @@ class StopWatchViewController: UIViewController {
 
     lazy var labTimeTableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = ColorPalette.wakeBeige
         tableView.register(LabTimeTableViewCell.self, forCellReuseIdentifier: LabTimeTableViewCell.cellId)
 
         tableView.delegate = self
@@ -60,7 +61,7 @@ class StopWatchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = ColorPalette.wakeLightBeige
 
         configureHierarchy()
         configureLayout()
@@ -136,7 +137,7 @@ class StopWatchViewController: UIViewController {
                 self?.rightButton.setTitle("중단", for: .normal)
                 self?.rightButton.setTitleColor(#colorLiteral(red: 1, green: 0.1656707525, blue: 0.2545326352, alpha: 1), for: .normal)
                 self?.rightButton.backgroundColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1)
-
+                self?.leftButton.setTitle("랩", for: .normal)
             })
         }
         isRunning.toggle()

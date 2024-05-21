@@ -72,8 +72,8 @@ class SoundSettingViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = soundOptions[indexPath.row]
-        cell.backgroundColor = UIColor(red: 230/255, green: 224/255, blue: 212/255, alpha: 1)
-        cell.textLabel?.textColor = UIColor(red: 30/255, green: 38/255, blue: 41/255, alpha: 1)
+        cell.backgroundColor = ColorPalette.wakeBeige
+        cell.textLabel?.textColor = ColorPalette.wakeDeepNavy
         
         if indexPath.row == 0 {
             cell.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)

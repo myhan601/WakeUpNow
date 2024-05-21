@@ -28,8 +28,8 @@ class CircularTimerView: UIView {
     }
 
     private func setupLayers() {
-        backgroundLayer = createCircularLayer(strokeColor: UIColor(red: 220/255, green: 218/255, blue: 214/255, alpha: 1).cgColor, fillColor: UIColor.clear.cgColor)
-        foregroundLayer = createCircularLayer(strokeColor: UIColor(red: 190/255, green: 66/255, blue: 54/255, alpha: 1).cgColor, fillColor: UIColor.clear.cgColor)
+        backgroundLayer = createCircularLayer(strokeColor: ColorPalette.wakeBrightGray.cgColor, fillColor: UIColor.clear.cgColor)
+        foregroundLayer = createCircularLayer(strokeColor: ColorPalette.wakeRed.cgColor, fillColor: UIColor.clear.cgColor)
         foregroundLayer.strokeEnd = 0
 
         layer.addSublayer(backgroundLayer)

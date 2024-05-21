@@ -9,11 +9,19 @@ import UIKit
 import SnapKit
 import AVFoundation
 
+//protocol선언
+protocol MissionVCDelegate: AnyObject {
+    func missionVCDelegate()
+}
+
 class MissionVC: UIViewController {
     
+    weak var delegate: MissionVCDelegate?
     private var currentWord: Words?
+    var Core = CoreDataManager()
     
-    private var score: Int = 10
+    private var score: Int = 0
+    var wrongCount: Int = 0
     var time: Float = 0.0
     var timer = Timer()
     
@@ -24,6 +32,7 @@ class MissionVC: UIViewController {
     let answer1 = UIButton()
     let answer2 = UIButton()
     let answer3 = UIButton()
+    //타이머 바
     let progressView = UIProgressView()
     
     private func setConstrains() {
@@ -32,7 +41,6 @@ class MissionVC: UIViewController {
         view.addSubview(answer1)
         view.addSubview(answer2)
         view.addSubview(answer3)
-        //타이머 바
         view.addSubview(progressView)
         
         questionLabel.snp.makeConstraints { make in
@@ -69,40 +77,32 @@ class MissionVC: UIViewController {
     
     private func setPage() {
         
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.9594840407, green: 0.9445981383, blue: 0.9232942462, alpha: 1)
         
-        questionLabel.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        questionLabel.layer.borderWidth = 0
-        questionLabel.layer.borderColor = UIColor.black.cgColor
+        questionLabel.backgroundColor = #colorLiteral(red: 0.890609324, green: 0.86582762, blue: 0.8187091351, alpha: 1)
         questionLabel.layer.masksToBounds = true
         questionLabel.layer.cornerRadius = 10
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 0
         questionLabel.font = UIFont.boldSystemFont(ofSize: 35)
         
-        answer1.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        answer1.layer.borderWidth = 1
-        answer1.layer.borderColor = UIColor.black.cgColor
+        answer1.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
         answer1.layer.cornerRadius = 10
         answer1.setTitleColor(.black, for: .normal)
         answer1.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
         
-        answer2.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        answer2.layer.borderWidth = 1
-        answer2.layer.borderColor = UIColor.black.cgColor
+        answer2.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
         answer2.layer.cornerRadius = 10
         answer2.setTitleColor(.black, for: .normal)
         answer2.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
         
-        answer3.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        answer3.layer.borderWidth = 1
-        answer3.layer.borderColor = UIColor.black.cgColor
+        answer3.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
         answer3.layer.cornerRadius = 10
         answer3.setTitleColor(.black, for: .normal)
         answer3.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
         
         progressView.progressViewStyle = .default
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(setProgress), userInfo: nil, repeats: true)
+        resetTimer()
     }
     
     override func viewDidLoad() {
@@ -170,8 +170,16 @@ class MissionVC: UIViewController {
     private func successScreen() {
         let successVC = MissionSuccessVC()
         successVC.modalPresentationStyle = .overFullScreen
-        successVC.score = score
+        successVC.score = self.score //Total점수
+        successVC.correctWord = self.currentWord //정답 맞힌 단어
+        successVC.wrongCount = self.wrongCount //틀린 개수
         present(successVC, animated: true, completion: nil)
+        
+        Core.saveUser(user: User(score: self.score))
+        
+        //미션페이지의 작업 완료를 알림
+        self.delegate?.missionVCDelegate()
+//        print(delegate)
     }
     
     //오답 버튼 클릭 시 다른 문제로
@@ -180,14 +188,22 @@ class MissionVC: UIViewController {
         answer1.setTitle(nil, for: .normal)
         answer2.setTitle(nil, for: .normal)
         answer3.setTitle(nil, for: .normal)
-        answer1.backgroundColor = UIColor.clear
-        answer2.backgroundColor = UIColor.clear
-        answer3.backgroundColor = UIColor.clear
+        answer1.setTitleColor(.black, for: .normal)
+        answer2.setTitleColor(.black, for: .normal)
+        answer3.setTitleColor(.black, for: .normal)
+        answer1.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
+        answer2.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
+        answer3.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
         fetchRandom()
-        
+        resetTimer() //다른 문제로 넘어갔을 떄, progressBar도 초기화
+    }
+    
+    //progressBar 초기화
+    private func resetTimer() {
         time = 0.0
+        timer.invalidate()
         progressView.setProgress(time, animated: false)
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(setProgress), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(setProgress), userInfo: nil, repeats: true)
     }
     
     //오답 효과음
@@ -221,25 +237,29 @@ class MissionVC: UIViewController {
         }
         //정답 버튼 클릭 시
         if selectedWord == currentWord?.furigana {
-            sender.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+            sender.backgroundColor = #colorLiteral(red: 0.1250983775, green: 0.4217019081, blue: 0.532646358, alpha: 1)
+            sender.setTitleColor(.white, for: .normal)
             correctSoundPlayer?.play()
-            score += 5
+            score += 5 //정답 클릭 시 점수 변동
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.successScreen()
+                self.successScreen() //정답 클릭 시 다른 액션보다 늦게
             }
         } else {
             //오답 버튼 클릭 시
-            sender.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+            sender.backgroundColor = #colorLiteral(red: 0.745804131, green: 0.2601789236, blue: 0.2126921713, alpha: 1)
+            sender.setTitleColor(.white, for: .normal)
             ttangSoundPlayer?.play()
-            score -= 2
+            wrongCount += 1 //오답 클릭 시 틀린 개수 증가
+            score -= 2 //오답 클릭 시 점수 변동
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.resetScreen()
             }
         }
     }
     
+    //progressBar 구현
     @objc func setProgress() {
-        time += 0.05
+        time += 0.0005
         progressView.setProgress(time, animated: true)
         if time >= 1.0 {
             timer.invalidate()

@@ -33,20 +33,20 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     lazy var soundSettingBtn: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .wakeBeige
+        button.backgroundColor = ColorPalette.wakeBeige
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         
         let titleLabel = UILabel()
         titleLabel.text = "알람 사운드"
-        titleLabel.textColor = .wakeNavy
+        titleLabel.textColor = ColorPalette.wakeDeepNavy
         titleLabel.font = .systemFont(ofSize: 18)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         button.addSubview(titleLabel)
         
         let soundNameLabel = UILabel()
         soundNameLabel.text = selectedSound
-        soundNameLabel.textColor = .wakeNavy
+        soundNameLabel.textColor = ColorPalette.wakeDeepNavy
         soundNameLabel.font = .systemFont(ofSize: 18)
         soundNameLabel.translatesAutoresizingMaskIntoConstraints = false
         soundNameLabel.textAlignment = .left
@@ -54,7 +54,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         self.soundNameLabel = soundNameLabel
         
         let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
-        arrowImageView.tintColor = .wakeNavy
+        arrowImageView.tintColor = ColorPalette.wakeDeepNavy
         arrowImageView.translatesAutoresizingMaskIntoConstraints = false
         button.addSubview(arrowImageView)
         
@@ -77,7 +77,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     
     lazy var soundNameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .wakeNavy
+        label.textColor = ColorPalette.wakeDeepNavy
         label.font = .systemFont(ofSize: 18)
         return label
     }()
@@ -91,8 +91,8 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 244/255, green: 241/255, blue: 236/255, alpha: 1)
-//        timerStartBtn.setTitleColor(.wakeRed, for: .normal)
+        view.backgroundColor = ColorPalette.wakeLightBeige
+//        timerStartBtn.setTitleColor(.ColorPalette.wakeLightBeige, for: .normal)
         timerStartBtn.titleLabel?.font = .boldSystemFont(ofSize: 20)
         setupSubviews()
         setupConstraints()
@@ -161,8 +161,8 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
-        button.backgroundColor = isEnabled ? .wakeBeige : .wakeLightGray
-        button.setTitleColor(isEnabled ? .wakeNavy : .gray, for: .normal)
+        button.backgroundColor = isEnabled ? ColorPalette.wakeBeige : ColorPalette.wakeLightGray
+        button.setTitleColor(isEnabled ? ColorPalette.wakeDeepNavy : .gray, for: .normal)
         button.setTitleColor(.white, for: .highlighted)
         button.isEnabled = isEnabled
         button.addTarget(self, action: action, for: .touchUpInside)
@@ -174,8 +174,8 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18)
-        button.backgroundColor = .wakeBeige
-        button.setTitleColor(isEnabled ? .wakeNavy : .lightGray, for: .normal)
+        button.backgroundColor = ColorPalette.wakeBeige
+        button.setTitleColor(isEnabled ? ColorPalette.wakeDeepNavy : .lightGray, for: .normal)
         button.setTitleColor(.white, for: .highlighted)
         button.isEnabled = isEnabled
         button.addTarget(self, action: action, for: .touchUpInside)
@@ -185,7 +185,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     private func timeLabel(text: String) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .wakeGray
+        label.textColor = ColorPalette.wakeGray
         label.font = .systemFont(ofSize: 65)
         label.text = text
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSelectTimeTapped))
@@ -196,7 +196,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     
     private func subLabel(text: String) -> UILabel {
         let label = UILabel()
-        label.textColor = .wakeGray
+        label.textColor = ColorPalette.wakeGray
         label.font = .systemFont(ofSize: 20)
         label.text = text
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -221,7 +221,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         selectedSeconds = seconds
         
         remainingTimeInSeconds = selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds
-        countDownLabel.textColor = .wakeNavy
+        countDownLabel.textColor = ColorPalette.wakeDeepNavy
         updateTimerLabel()
         isTimerSet = true
     }
@@ -248,7 +248,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
             isTimerRunning = true
         }
         timerCancelBtn.isEnabled = true
-        timerCancelBtn.setTitleColor(.wakeRed, for: .normal)
+        timerCancelBtn.setTitleColor(ColorPalette.wakeRed, for: .normal)
     }
     
     @objc func cancelTimer() {
