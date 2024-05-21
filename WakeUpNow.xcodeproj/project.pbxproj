@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11A04ECE2BF8E4F800D66648 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A04ECD2BF8E4F800D66648 /* ColorPalette.swift */; };
 		11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */; };
 		11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */; };
 		2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FA82BF369190043FDF7 /* TimerViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11A04ECD2BF8E4F800D66648 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
 		11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabTimeTableViewCell.swift; sourceTree = "<group>"; };
 		2EC95FA82BF369190043FDF7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11A04ECC2BF8E4E200D66648 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				11A04ECD2BF8E4F800D66648 /* ColorPalette.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		2EC95FA72BF368F70043FDF7 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +127,7 @@
 				AB66D2F02BF5F6C7000D72DA /* Model */,
 				AB66D2EC2BF5CAF3000D72DA /* View */,
 				AB66D2E82BF3992A000D72DA /* Controller */,
+				11A04ECC2BF8E4E200D66648 /* Utility */,
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
 				AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */,
@@ -297,6 +308,7 @@
 				AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */,
 				AB118D3C2BF24FEB00672AB1 /* SetSoundVC.swift in Sources */,
 				AB118D3A2BF24E9000672AB1 /* SetDayVC.swift in Sources */,
+				11A04ECE2BF8E4F800D66648 /* ColorPalette.swift in Sources */,
 				F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */,
 				AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */,
 				AB66D2F92BF5F706000D72DA /* MissionVC.swift in Sources */,
