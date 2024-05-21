@@ -8,10 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol SetDayVCDelegate: AnyObject {
+    func didSelectDays(_ selectedDays: [String])
+}
+
 class SetDayVC: UIViewController {
+    weak var delegate: SetDayVCDelegate?
     var selectedDays = [String]()
     var tableView: UITableView!
-    let days = ["일요일마다", "월요일마다", "화요일마다", "수요일마다", "목요일마다", "금요일마다", "토요일마다"]
+    let days = ["일", "월", "화", "수", "목", "금", "토"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +54,7 @@ class SetDayVC: UIViewController {
     }
     
     @objc func goBack() {
+        delegate?.didSelectDays(selectedDays)
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -62,7 +68,7 @@ extension SetDayVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let day = days[indexPath.row]
-        cell.textLabel?.text = day
+        cell.textLabel?.text = "\(day)요일마다"
         cell.accessoryType = selectedDays.contains(day) ? .checkmark : .none
         return cell
     }
@@ -80,4 +86,5 @@ extension SetDayVC: UITableViewDelegate {
         tableView.reloadData()
     }
 }
+
 
