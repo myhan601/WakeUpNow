@@ -24,7 +24,7 @@
 		2E75EB252BFC618D00FB8AB9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E75EB242BFC618D00FB8AB9 /* UIColor.swift */; };
 		2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FA82BF369190043FDF7 /* TimerViewController.swift */; };
 		2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */; };
-		2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */; };
+		2EC95FAD2BF5CAE50043FDF7 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */; };
 		2EF10D1E2BFADD0E00343D24 /* SoundSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF10D1D2BFADD0E00343D24 /* SoundSettingViewController.swift */; };
 		AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */; };
 		AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */; };
@@ -65,7 +65,7 @@
 		2E75EB242BFC618D00FB8AB9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		2EC95FA82BF369190043FDF7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingViewController.swift; sourceTree = "<group>"; };
-		2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerViewController.swift; sourceTree = "<group>"; };
+		2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
 		2EF10D1D2BFADD0E00343D24 /* SoundSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingViewController.swift; sourceTree = "<group>"; };
 		AB0766852BF1C5C200CDA2D2 /* WakeUpNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeUpNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 				2EC95FA82BF369190043FDF7 /* TimerViewController.swift */,
 				2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */,
 				2EF10D1D2BFADD0E00343D24 /* SoundSettingViewController.swift */,
-				2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */,
+				2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -338,7 +338,7 @@
 				AB66D2F12BF5F6C7000D72DA /* APIDataManager.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
 				2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */,
-				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */,
+				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerView.swift in Sources */,
 				11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */,
 				11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */,
 				AB118D3C2BF24FEB00672AB1 /* SetSoundVC.swift in Sources */,
