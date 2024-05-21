@@ -31,6 +31,9 @@
 		AB66D2F92BF5F706000D72DA /* MissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2F72BF5F706000D72DA /* MissionVC.swift */; };
 		AB66D2FA2BF5F706000D72DA /* MissionSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */; };
 		AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */; };
+		F162EC4A2BF75D9000720B64 /* UserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F162EC482BF75D9000720B64 /* UserModel.xcdatamodeld */; };
+		F162EC4C2BF7685C00720B64 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4B2BF7685C00720B64 /* CoreData.swift */; };
+		F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +62,9 @@
 		AB66D2F72BF5F706000D72DA /* MissionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionVC.swift; sourceTree = "<group>"; };
 		AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionSuccessVC.swift; sourceTree = "<group>"; };
 		AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		F162EC492BF75D9000720B64 /* UserModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserModel.xcdatamodel; sourceTree = "<group>"; };
+		F162EC4B2BF7685C00720B64 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,7 @@
 				AB66D2F42BF5F6F0000D72DA /* ttang.wav */,
 				AB0766932BF1C5C300CDA2D2 /* LaunchScreen.storyboard */,
 				AB0766962BF1C5C300CDA2D2 /* Info.plist */,
+				F162EC482BF75D9000720B64 /* UserModel.xcdatamodeld */,
 			);
 			path = WakeUpNow;
 			sourceTree = "<group>";
@@ -171,6 +178,8 @@
 			children = (
 				AB66D2EE2BF5F6C7000D72DA /* APIDataManager.swift */,
 				AB66D2EF2BF5F6C7000D72DA /* VocaData.swift */,
+				F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */,
+				F162EC4B2BF7685C00720B64 /* CoreData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -275,12 +284,15 @@
 				AB66D2F12BF5F6C7000D72DA /* APIDataManager.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
 				2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */,
+				F162EC4C2BF7685C00720B64 /* CoreData.swift in Sources */,
 				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */,
 				11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */,
 				11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */,
 				AB118D3C2BF24FEB00672AB1 /* SetSoundVC.swift in Sources */,
 				AB118D3A2BF24E9000672AB1 /* SetDayVC.swift in Sources */,
+				F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */,
 				AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */,
+				F162EC4A2BF75D9000720B64 /* UserModel.xcdatamodeld in Sources */,
 				AB66D2F92BF5F706000D72DA /* MissionVC.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
 				AB66D2EB2BF3A6A8000D72DA /* AlarmTableViewCell.swift in Sources */,
@@ -529,6 +541,20 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		F162EC482BF75D9000720B64 /* UserModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F162EC492BF75D9000720B64 /* UserModel.xcdatamodel */,
+			);
+			currentVersion = F162EC492BF75D9000720B64 /* UserModel.xcdatamodel */;
+			name = UserModel.xcdatamodeld;
+			path = /Users/SAMSUNG/Documents/GitHub/WakeUpNow/WakeUpNow/UserModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AB07667D2BF1C5C200CDA2D2 /* Project object */;
 }
