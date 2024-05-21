@@ -50,7 +50,7 @@ class StopWatchViewController: UIViewController {
 
     lazy var labTimeTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = ColorPalette.second
+        tableView.backgroundColor = ColorPalette.wakeBeige
         tableView.register(LabTimeTableViewCell.self, forCellReuseIdentifier: LabTimeTableViewCell.cellId)
 
         tableView.delegate = self
@@ -61,7 +61,7 @@ class StopWatchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = ColorPalette.primary
+        view.backgroundColor = ColorPalette.wakeLightBeige
 
         configureHierarchy()
         configureLayout()

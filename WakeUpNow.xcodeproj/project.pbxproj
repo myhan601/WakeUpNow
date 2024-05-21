@@ -10,9 +10,23 @@
 		11A04ECE2BF8E4F800D66648 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A04ECD2BF8E4F800D66648 /* ColorPalette.swift */; };
 		11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */; };
 		11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */; };
+		2E75EB182BFC4D4700FB8AB9 /* Alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB0C2BFC4D4600FB8AB9 /* Alarm.mp3 */; };
+		2E75EB192BFC4D4700FB8AB9 /* Boing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB0D2BFC4D4600FB8AB9 /* Boing.mp3 */; };
+		2E75EB1A2BFC4D4700FB8AB9 /* Chimes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB0E2BFC4D4600FB8AB9 /* Chimes.mp3 */; };
+		2E75EB1B2BFC4D4700FB8AB9 /* Apex.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB0F2BFC4D4600FB8AB9 /* Apex.mp3 */; };
+		2E75EB1C2BFC4D4700FB8AB9 /* Beacon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB102BFC4D4600FB8AB9 /* Beacon.mp3 */; };
+		2E75EB1D2BFC4D4700FB8AB9 /* Ascending.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB112BFC4D4700FB8AB9 /* Ascending.mp3 */; };
+		2E75EB1E2BFC4D4700FB8AB9 /* Bark.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB122BFC4D4700FB8AB9 /* Bark.mp3 */; };
+		2E75EB1F2BFC4D4700FB8AB9 /* Blues.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB132BFC4D4700FB8AB9 /* Blues.mp3 */; };
+		2E75EB202BFC4D4700FB8AB9 /* Bulletin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB142BFC4D4700FB8AB9 /* Bulletin.mp3 */; };
+		2E75EB212BFC4D4700FB8AB9 /* Bell Tower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB152BFC4D4700FB8AB9 /* Bell Tower.mp3 */; };
+		2E75EB222BFC4D4700FB8AB9 /* Circuit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB162BFC4D4700FB8AB9 /* Circuit.mp3 */; };
+		2E75EB232BFC4D4700FB8AB9 /* By The Seaside.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2E75EB172BFC4D4700FB8AB9 /* By The Seaside.mp3 */; };
+		2E75EB342BFC844300FB8AB9 /* UserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E75EB322BFC844200FB8AB9 /* UserModel.xcdatamodeld */; };
 		2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FA82BF369190043FDF7 /* TimerViewController.swift */; };
 		2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */; };
-		2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */; };
+		2EC95FAD2BF5CAE50043FDF7 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */; };
+		2EF10D1E2BFADD0E00343D24 /* SoundSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF10D1D2BFADD0E00343D24 /* SoundSettingViewController.swift */; };
 		AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */; };
 		AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */; };
 		AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */; };
@@ -34,7 +48,6 @@
 		AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */; };
 		AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3012BF76C93000D72DA /* Alarm.swift */; };
 		AB66D3042BFBAFA9000D72DA /* WakeUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */; };
-		AB66D30A2BFC736E000D72DA /* UserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3082BFC736E000D72DA /* UserModel.xcdatamodeld */; };
 		F162EC4C2BF7685C00720B64 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4B2BF7685C00720B64 /* CoreData.swift */; };
 		F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
@@ -43,9 +56,23 @@
 		11A04ECD2BF8E4F800D66648 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		11D4CACD2BF4C9E900C01E5A /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
 		11D4CACF2BF4E09E00C01E5A /* LabTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabTimeTableViewCell.swift; sourceTree = "<group>"; };
+		2E75EB0C2BFC4D4600FB8AB9 /* Alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Alarm.mp3; sourceTree = "<group>"; };
+		2E75EB0D2BFC4D4600FB8AB9 /* Boing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Boing.mp3; sourceTree = "<group>"; };
+		2E75EB0E2BFC4D4600FB8AB9 /* Chimes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chimes.mp3; sourceTree = "<group>"; };
+		2E75EB0F2BFC4D4600FB8AB9 /* Apex.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Apex.mp3; sourceTree = "<group>"; };
+		2E75EB102BFC4D4600FB8AB9 /* Beacon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Beacon.mp3; sourceTree = "<group>"; };
+		2E75EB112BFC4D4700FB8AB9 /* Ascending.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ascending.mp3; sourceTree = "<group>"; };
+		2E75EB122BFC4D4700FB8AB9 /* Bark.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bark.mp3; sourceTree = "<group>"; };
+		2E75EB132BFC4D4700FB8AB9 /* Blues.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Blues.mp3; sourceTree = "<group>"; };
+		2E75EB142BFC4D4700FB8AB9 /* Bulletin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bulletin.mp3; sourceTree = "<group>"; };
+		2E75EB152BFC4D4700FB8AB9 /* Bell Tower.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Bell Tower.mp3"; sourceTree = "<group>"; };
+		2E75EB162BFC4D4700FB8AB9 /* Circuit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Circuit.mp3; sourceTree = "<group>"; };
+		2E75EB172BFC4D4700FB8AB9 /* By The Seaside.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "By The Seaside.mp3"; sourceTree = "<group>"; };
+		2E75EB332BFC844200FB8AB9 /* UserModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserModel.xcdatamodel; sourceTree = "<group>"; };
 		2EC95FA82BF369190043FDF7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingViewController.swift; sourceTree = "<group>"; };
-		2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerViewController.swift; sourceTree = "<group>"; };
+		2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
+		2EF10D1D2BFADD0E00343D24 /* SoundSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingViewController.swift; sourceTree = "<group>"; };
 		AB0766852BF1C5C200CDA2D2 /* WakeUpNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeUpNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +95,6 @@
 		AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		AB66D3012BF76C93000D72DA /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpVC.swift; sourceTree = "<group>"; };
-		AB66D3092BFC736E000D72DA /* UserModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserModel.xcdatamodel; sourceTree = "<group>"; };
 		F162EC4B2BF7685C00720B64 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,12 +119,32 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		2E75EB0B2BFC4CCB00FB8AB9 /* Ringtones */ = {
+			isa = PBXGroup;
+			children = (
+				2E75EB0C2BFC4D4600FB8AB9 /* Alarm.mp3 */,
+				2E75EB0F2BFC4D4600FB8AB9 /* Apex.mp3 */,
+				2E75EB112BFC4D4700FB8AB9 /* Ascending.mp3 */,
+				2E75EB122BFC4D4700FB8AB9 /* Bark.mp3 */,
+				2E75EB102BFC4D4600FB8AB9 /* Beacon.mp3 */,
+				2E75EB152BFC4D4700FB8AB9 /* Bell Tower.mp3 */,
+				2E75EB132BFC4D4700FB8AB9 /* Blues.mp3 */,
+				2E75EB0D2BFC4D4600FB8AB9 /* Boing.mp3 */,
+				2E75EB142BFC4D4700FB8AB9 /* Bulletin.mp3 */,
+				2E75EB172BFC4D4700FB8AB9 /* By The Seaside.mp3 */,
+				2E75EB0E2BFC4D4600FB8AB9 /* Chimes.mp3 */,
+				2E75EB162BFC4D4700FB8AB9 /* Circuit.mp3 */,
+			);
+			path = Ringtones;
+			sourceTree = "<group>";
+		};
 		2EC95FA72BF368F70043FDF7 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
 				2EC95FA82BF369190043FDF7 /* TimerViewController.swift */,
 				2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */,
-				2EC95FAC2BF5CAE50043FDF7 /* CircularTimerViewController.swift */,
+				2EF10D1D2BFADD0E00343D24 /* SoundSettingViewController.swift */,
+				2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */,
 			);
 			path = Timer;
 			sourceTree = "<group>";
@@ -129,13 +175,14 @@
 				AB66D2E82BF3992A000D72DA /* Controller */,
 				11A04ECC2BF8E4E200D66648 /* Utility */,
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
+				2E75EB0B2BFC4CCB00FB8AB9 /* Ringtones */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
 				AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */,
 				AB66D2F32BF5F6F0000D72DA /* correct.wav */,
 				AB66D2F42BF5F6F0000D72DA /* ttang.wav */,
 				AB0766932BF1C5C300CDA2D2 /* LaunchScreen.storyboard */,
 				AB0766962BF1C5C300CDA2D2 /* Info.plist */,
-				AB66D3082BFC736E000D72DA /* UserModel.xcdatamodeld */,
+				2E75EB322BFC844200FB8AB9 /* UserModel.xcdatamodeld */,
 			);
 			path = WakeUpNow;
 			sourceTree = "<group>";
@@ -282,11 +329,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E75EB1B2BFC4D4700FB8AB9 /* Apex.mp3 in Resources */,
+				2E75EB232BFC4D4700FB8AB9 /* By The Seaside.mp3 in Resources */,
+				2E75EB212BFC4D4700FB8AB9 /* Bell Tower.mp3 in Resources */,
+				2E75EB182BFC4D4700FB8AB9 /* Alarm.mp3 in Resources */,
+				2E75EB1A2BFC4D4700FB8AB9 /* Chimes.mp3 in Resources */,
 				AB0766922BF1C5C300CDA2D2 /* Assets.xcassets in Resources */,
+				2E75EB1F2BFC4D4700FB8AB9 /* Blues.mp3 in Resources */,
 				AB66D2F62BF5F6F0000D72DA /* ttang.wav in Resources */,
 				AB66D2F52BF5F6F0000D72DA /* correct.wav in Resources */,
+				2E75EB1E2BFC4D4700FB8AB9 /* Bark.mp3 in Resources */,
 				AB0766952BF1C5C300CDA2D2 /* Base in Resources */,
 				AB0766902BF1C5C200CDA2D2 /* Base in Resources */,
+				2E75EB1D2BFC4D4700FB8AB9 /* Ascending.mp3 in Resources */,
+				2E75EB222BFC4D4700FB8AB9 /* Circuit.mp3 in Resources */,
+				2E75EB1C2BFC4D4700FB8AB9 /* Beacon.mp3 in Resources */,
+				2E75EB192BFC4D4700FB8AB9 /* Boing.mp3 in Resources */,
+				2E75EB202BFC4D4700FB8AB9 /* Bulletin.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,8 +360,8 @@
 				AB66D2F12BF5F6C7000D72DA /* APIDataManager.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
 				2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */,
+				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerView.swift in Sources */,
 				F162EC4C2BF7685C00720B64 /* CoreData.swift in Sources */,
-				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */,
 				11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */,
 				11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */,
 				AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */,
@@ -312,16 +371,17 @@
 				F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */,
 				AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */,
 				AB66D2F92BF5F706000D72DA /* MissionVC.swift in Sources */,
-				AB66D30A2BFC736E000D72DA /* UserModel.xcdatamodeld in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
 				AB66D2EB2BF3A6A8000D72DA /* AlarmTableViewCell.swift in Sources */,
 				AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */,
+				2EF10D1E2BFADD0E00343D24 /* SoundSettingViewController.swift in Sources */,
 				AB66D2FA2BF5F706000D72DA /* MissionSuccessVC.swift in Sources */,
 				AB66D2F22BF5F6C7000D72DA /* VocaData.swift in Sources */,
 				AB66D3042BFBAFA9000D72DA /* WakeUpVC.swift in Sources */,
 				AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */,
 				AB118D2C2BF1E5A900672AB1 /* AlarmPageVC.swift in Sources */,
 				AB118D382BF2478F00672AB1 /* SetAlarmVC.swift in Sources */,
+				2E75EB342BFC844300FB8AB9 /* UserModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,14 +623,14 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		AB66D3082BFC736E000D72DA /* UserModel.xcdatamodeld */ = {
+		2E75EB322BFC844200FB8AB9 /* UserModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				AB66D3092BFC736E000D72DA /* UserModel.xcdatamodel */,
+				2E75EB332BFC844200FB8AB9 /* UserModel.xcdatamodel */,
 			);
-			currentVersion = AB66D3092BFC736E000D72DA /* UserModel.xcdatamodel */;
+			currentVersion = 2E75EB332BFC844200FB8AB9 /* UserModel.xcdatamodel */;
 			name = UserModel.xcdatamodeld;
-			path = /Users/myhan601/Documents/WakeUpNow/WakeUpNow/UserModel.xcdatamodeld;
+			path = "/Users/seohyelim/Downloads/WakeUpNow-develop/WakeUpNow/UserModel.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
