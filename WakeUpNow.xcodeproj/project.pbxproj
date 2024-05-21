@@ -34,6 +34,8 @@
 		F162EC4A2BF75D9000720B64 /* UserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F162EC482BF75D9000720B64 /* UserModel.xcdatamodeld */; };
 		F162EC4C2BF7685C00720B64 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4B2BF7685C00720B64 /* CoreData.swift */; };
 		F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */; };
+		AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3012BF76C93000D72DA /* Alarm.swift */; };
+		AB66D3042BFBAFA9000D72DA /* WakeUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,8 @@
 		F162EC492BF75D9000720B64 /* UserModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserModel.xcdatamodel; sourceTree = "<group>"; };
 		F162EC4B2BF7685C00720B64 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		AB66D3012BF76C93000D72DA /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,7 @@
 				AB118D372BF2478F00672AB1 /* SetAlarmVC.swift */,
 				AB118D392BF24E9000672AB1 /* SetDayVC.swift */,
 				AB118D3B2BF24FEB00672AB1 /* SetSoundVC.swift */,
+				AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 				AB66D2EF2BF5F6C7000D72DA /* VocaData.swift */,
 				F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */,
 				F162EC4B2BF7685C00720B64 /* CoreData.swift */,
+				AB66D3012BF76C93000D72DA /* Alarm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 				2EC95FAD2BF5CAE50043FDF7 /* CircularTimerViewController.swift in Sources */,
 				11D4CAD02BF4E09E00C01E5A /* LabTimeTableViewCell.swift in Sources */,
 				11D4CACE2BF4C9E900C01E5A /* StopWatchViewController.swift in Sources */,
+				AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */,
 				AB118D3C2BF24FEB00672AB1 /* SetSoundVC.swift in Sources */,
 				AB118D3A2BF24E9000672AB1 /* SetDayVC.swift in Sources */,
 				F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */,
@@ -299,6 +306,7 @@
 				AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */,
 				AB66D2FA2BF5F706000D72DA /* MissionSuccessVC.swift in Sources */,
 				AB66D2F22BF5F6C7000D72DA /* VocaData.swift in Sources */,
+				AB66D3042BFBAFA9000D72DA /* WakeUpVC.swift in Sources */,
 				AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */,
 				AB118D2C2BF1E5A900672AB1 /* AlarmPageVC.swift in Sources */,
 				AB118D382BF2478F00672AB1 /* SetAlarmVC.swift in Sources */,

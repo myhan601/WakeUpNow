@@ -7,8 +7,17 @@
 
 import UIKit
 import SnapKit
+import UserNotifications
 
-class SetAlarmVC: UIViewController {
+class SetAlarmVC: UIViewController, SetDayVCDelegate {
+    // MARK: - variable
+    
+    var alarm: Alarm?
+    var onSave: ((Alarm) -> Void)?
+    var alarms = [Alarm]()
+    var selectedDays = [String]()
+    var isMissionEnabled = false
+    var isReminderEnabled = false
     
     let amPm = ["오전", "오후"]
     let hours: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
@@ -39,11 +48,12 @@ class SetAlarmVC: UIViewController {
         configureNavigationBar()
         setupDayButton()
         setupSoundSettingButton()
-//        setupLabels()
         setupPickerView()
         setupTableView()
+        setInitialPickerViewTime()
     }
     
+    // MARK: - func
     private func configureNavigationBar() {
         self.title = "알람 추가"
         
@@ -67,18 +77,16 @@ class SetAlarmVC: UIViewController {
         numberLabel.textAlignment = .center
         view.addSubview(numberLabel)
         
-        // SnapKit을 사용하여 label의 위치와 크기를 설정합니다.
         label.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-200) // 화면 하단으로부터 100pt 위에 위치하도록 설정
+            make.bottom.equalToSuperview().offset(-200)
             make.width.equalTo(200)
             make.height.equalTo(40)
         }
         
-        // SnapKit을 사용하여 numberLabel의 위치와 크기를 설정합니다.
         numberLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(label.snp.top).offset(-20) // label 위로 20pt 떨어진 위치에 설정
+            make.bottom.equalTo(label.snp.top).offset(-20)
             make.width.equalTo(200)
             make.height.equalTo(40)
         }
@@ -106,8 +114,8 @@ class SetAlarmVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layer.cornerRadius = 10
-        tableView.layer.borderColor = UIColor.black.cgColor // 테두리 색상을 설정합니다.
-        tableView.layer.borderWidth = 0.7 // 테두리 두께를 설정합니다.
+        tableView.layer.borderColor = UIColor.black.cgColor
+        tableView.layer.borderWidth = 0.7
         tableView.isScrollEnabled = false
         view.addSubview(tableView)
         
@@ -119,7 +127,6 @@ class SetAlarmVC: UIViewController {
             make.height.equalTo(225)
         }
     }
-    
     
     func setupDayButton() {
         let nextButton = UIButton(type: .system)
@@ -151,12 +158,56 @@ class SetAlarmVC: UIViewController {
         }
     }
     
+    func setInitialPickerViewTime() {
+        // 현재 시간을 가져옵니다.
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: currentDate)
+        
+        // pickerView의 시간 및 분 구성 요소의 초기 선택된 행을 설정합니다.
+        if let hour = components.hour, let minute = components.minute {
+            // 시간을 12시간 형식으로 변환하여 pickerView의 시간 컴포넌트 초기 선택 행을 설정
+            let displayHour = hour % 12 == 0 ? 12 : hour % 12 // 0시를 12시로 표시
+            pickerView.selectRow(displayHour - 1, inComponent: 1, animated: false) // displayHour - 1: 인덱스가 0부터 시작하기 때문에 조정
+            
+            // 분을 1분 단위로 설정: 분에 해당하는 컴포넌트의 정확한 행을 선택
+            pickerView.selectRow(minute, inComponent: 2, animated: false) // 분을 직접 사용하여 해당하는 행 선택
+            
+            // AM/PM 설정
+            let selectedAmPmIndex = hour < 12 ? 0 : 1
+            pickerView.selectRow(selectedAmPmIndex, inComponent: 0, animated: false)
+            
+            // 레이블 업데이트
+            label.text = amPm[selectedAmPmIndex]
+            numberLabel.text = String(format: "%02d", displayHour)
+        }
+    }
+    
+    func didSelectDays(_ selectedDays: [String]) {
+        self.selectedDays = selectedDays
+        tableView.reloadData()
+    }
+    
+    // 사용자가 입력한 메모를 가져오는 함수
+    func getMemoText() -> String {
+        if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 1)) {
+            if let textField = cell.viewWithTag(100) as? UITextField {
+                // textField.text가 빈 문자열인 경우도 처리하도록 수정
+                return textField.text?.isEmpty == false ? textField.text! : "알람"
+            }
+        }
+        return "알람" // 아무것도 입력하지 않았을 경우
+    }
+    
+    // MARK: - @objc func
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
     @objc func repDayButtonTapped() {
         let nextVC = SetDayVC()
+        nextVC.selectedDays = selectedDays
+        nextVC.delegate = self
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -169,13 +220,109 @@ class SetAlarmVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @objc func missionSwitchValueChanged(_ sender: UISwitch) {
+        isMissionEnabled = sender.isOn
+        print(isMissionEnabled)
+    }
+    
+    @objc func reminderSwitchValueChanged(_ sender: UISwitch) {
+        isReminderEnabled = sender.isOn
+        print(isReminderEnabled)
+    }
+    
     @objc func saveButtonTapped() {
-        print("알람이 저장되었습니다.")
+        // 현재 시간을 가져옵니다.
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: currentDate)
+
+        // pickerView에서 선택한 시간 정보를 가져옵니다.
+        let selectedAmPmIndex = pickerView.selectedRow(inComponent: 0)
+        let selectedHourIndex = pickerView.selectedRow(inComponent: 1)
+        let selectedMinuteIndex = pickerView.selectedRow(inComponent: 2)
+
+        // 시간과 분을 문자열에서 정수로 변환합니다.
+        let amPm = self.amPm[selectedAmPmIndex]
+        let hourComponent = selectedHourIndex % hours.count
+        let minuteComponent = selectedMinuteIndex % minutes.count
+
+        // 24시간제로 변환하여 현재 시간과 비교합니다.
+        var hour = Int(hours[hourComponent]) ?? 0
+        if amPm == "오후" && hour != 12 {
+            hour += 12
+        } else if amPm == "오전" && hour == 12 {
+            hour = 0
+        }
+        let minute = Int(minutes[minuteComponent]) ?? 0
+
+        // 선택한 시간과 현재 시간을 비교하여 알림을 띄울지 결정합니다.
+        if let selectedHour = components.hour, let selectedMinute = components.minute {
+            if hour == selectedHour && minute == selectedMinute {
+                // 현재 시간과 선택한 시간이 동일한 경우 알림을 띄웁니다.
+                let alert = UIAlertController(title: "알림", message: "현재 시간과 동일한 시간으로 알람을 설정할 수 없습니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+        }
+
+        // 12시간제로 변환하여 알람 저장
+        var alarmHour = hour
+        let alarmAmPm: String
+        if hour >= 12 {
+            alarmAmPm = "오후"
+            if hour > 12 {
+                alarmHour -= 12
+            }
+        } else {
+            alarmAmPm = "오전"
+            if hour == 0 {
+                alarmHour = 12
+            }
+        }
+
         // 알람을 저장하는 로직
+        let alarm = Alarm(
+            isMissionEnabled: isMissionEnabled,
+            amPm: alarmAmPm,
+            hour: alarmHour,
+            minute: minute,
+            selectedDays: selectedDays,
+            memo: getMemoText(),
+            isReminderEnabled: isReminderEnabled,
+            isAlarmOn: true
+        )
+
+        // 클로저 호출하여 알람 전달
+        onSave?(alarm)
+
+        // 알람 데이터 확인
+        print(alarm)
+
+        // 로컬 알림 스케줄링
+        let content = UNMutableNotificationContent()
+        content.title = "알람"
+        content.body = "일어날 시간입니다!"
+        content.sound = UNNotificationSound.default
+
+        var dateComponents = DateComponents()
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("알림 스케줄링 중 오류 발생: \(error)")
+            }
+        }
+
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: - UIPickerViewDataSource
 extension SetAlarmVC: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         let infiniteRows = 10000 // 순환을 위한 충분히 큰 값
@@ -207,6 +354,7 @@ extension SetAlarmVC: UIPickerViewDataSource {
     }
 }
 
+// MARK: - UIPickerViewDelegate
 extension SetAlarmVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
@@ -223,7 +371,7 @@ extension SetAlarmVC: UIPickerViewDelegate {
     }
 }
 
-
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2 // 섹션을 두 개로 나눔: '미션여부'와 나머지 셀들
@@ -245,11 +393,36 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "미션여부"
             
             let switchView = UISwitch()
+            switchView.isOn = isMissionEnabled
+            switchView.addTarget(self, action: #selector(missionSwitchValueChanged(_:)), for: .valueChanged)
             cell.accessoryView = switchView
         } else {
-            // 나머지 셀들 구성
             if indexPath.row == 0 {
                 cell.textLabel?.text = "반복요일"
+                let detailLabel = UILabel()
+                detailLabel.text = selectedDaysText()
+                detailLabel.textColor = .gray
+                detailLabel.sizeToFit()
+                
+                let accessory = UIView(frame: CGRect(x: 0, y: 0, width: detailLabel.frame.width + 20, height: detailLabel.frame.height))
+                accessory.addSubview(detailLabel)
+                
+                detailLabel.snp.makeConstraints { make in
+                    make.left.equalToSuperview()
+                    make.centerY.equalToSuperview()
+                }
+                
+                let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+                arrowImageView.tintColor = .gray
+                accessory.addSubview(arrowImageView)
+                
+                arrowImageView.snp.makeConstraints { make in
+                    make.left.equalTo(detailLabel.snp.right).offset(5)
+                    make.centerY.equalToSuperview()
+                    make.right.equalToSuperview()
+                }
+                
+                cell.accessoryView = accessory
             } else if indexPath.row == 1 {
                 // "메모" 셀 구성이 여기에 들어갑니다.
                 let label = UILabel()
@@ -257,6 +430,7 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                 cell.contentView.addSubview(label)
                 
                 let textField = UITextField()
+                textField.tag = 100
                 textField.placeholder = "메모 입력"
                 textField.textAlignment = .right
                 textField.clearButtonMode = .whileEditing
@@ -276,15 +450,30 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                 }
             } else if indexPath.row == 2 {
                 cell.textLabel?.text = "소리 설정"
-            } else if indexPath.row == 3 {
+            } else if indexPath.section == 1 && indexPath.row == 3 {
                 cell.textLabel?.text = "다시 알림"
                 
                 let switchView = UISwitch()
+                switchView.isOn = isReminderEnabled
+                switchView.addTarget(self, action: #selector(reminderSwitchValueChanged(_:)), for: .valueChanged)
                 cell.accessoryView = switchView
             }
         }
-        
         return cell
+    }
+    
+    private func selectedDaysText() -> String {
+        switch selectedDays.count {
+        case 0:
+            return "선택 안 함"
+        case 1:
+            return "\(selectedDays[0])요일마다"
+        default:
+            let lastDay = selectedDays.removeLast()
+            let daysText = selectedDays.joined(separator: ", ")
+            selectedDays.append(lastDay)
+            return "\(daysText) 및 \(lastDay)"
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -295,14 +484,12 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.row == 2 {
                 soundSettingButtonTapped()
             }
-            // '미션여부' 셀에 대한 액션도 추가할 수 있습니다.
         }
     }
     
-    // 섹션 헤더 높이를 조절하여 '미션여부' 섹션과 나머지 섹션 사이의 간격을 조절할 수 있습니다.
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 1 {
-            return 50 // 원하는 간격
+            return 50
         }
         return 0
     }
