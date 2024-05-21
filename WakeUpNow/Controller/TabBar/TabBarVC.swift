@@ -32,6 +32,10 @@ class TabBarVC: UITabBarController {
 
         // 탭바 컨트롤러에 뷰 컨트롤러 설정
         viewControllers = [alarmPageNav, stopWatchNav, timerNav]
+        
+        // 탭 바의 색상 설정
+        UITabBar.appearance().tintColor = ColorPalette.wakeRed // 선택된 아이템의 색상
+        UITabBar.appearance().unselectedItemTintColor = UIColor.black // 선택되지 않은 아이템의 색상
     }
 }
 
