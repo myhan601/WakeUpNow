@@ -100,8 +100,13 @@ extension AlarmPageVC: UITableViewDataSource {
 
 extension AlarmPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // 첫 번째 셀의 높이를 조정하고 싶다면 여기서 조정
-        return 80
+        if indexPath.row == 0 {
+            // 첫 번째 셀의 높이 설정
+            return 70
+        } else {
+            // 나머지 셀의 높이 설정
+            return 80
+        }
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
