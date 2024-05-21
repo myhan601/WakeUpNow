@@ -31,7 +31,9 @@ class AlarmPageVC: UIViewController, AlarmTableViewCellDelegate {
 
         view.backgroundColor = .systemBackground
 
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(editButtonTapped))
+        let editButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(editButtonTapped))
+        editButtonItem.tintColor = .black // 여기에서 버튼 색상을 검은색으로 설정합니다.
+        self.navigationItem.leftBarButtonItem = editButtonItem
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
 
         setupTableView()
@@ -88,6 +90,11 @@ extension AlarmPageVC: UITableViewDataSource {
             cell.delegate = self
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // 첫 번째 셀의 경우 편집 불가능
+        return indexPath.row != 0
     }
 }
 
