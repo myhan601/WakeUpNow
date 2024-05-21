@@ -18,7 +18,7 @@ class SetSoundVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorPalette.wakeLightBeige
         
         configureTableView()
         configureNavigationBar()

@@ -29,7 +29,7 @@ class AlarmPageVC: UIViewController, AlarmTableViewCellDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorPalette.wakeLightBeige
 
         let editButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(editButtonTapped))
         editButtonItem.tintColor = .black // 여기에서 버튼 색상을 검은색으로 설정합니다.

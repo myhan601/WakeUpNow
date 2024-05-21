@@ -38,7 +38,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorPalette.wakeLightBeige
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         // 제스처가 테이블뷰 셀 선택에 영향을 주지 않도록 설정
