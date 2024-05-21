@@ -67,27 +67,46 @@ class AlarmPageVC: UIViewController, AlarmTableViewCellDelegate {
 
 extension AlarmPageVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return alarms.count
+        // alarms 배열의 길이에 1을 더함
+        return alarms.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AlarmTableViewCell.identifier, for: indexPath) as! AlarmTableViewCell
-        let alarm = alarms[indexPath.row]
-        cell.configure(with: alarm)
-        cell.delegate = self
-        return cell
+        // 첫 번째 셀인 경우
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell") ?? UITableViewCell(style: .default, reuseIdentifier: "BasicCell")
+            cell.textLabel?.text = "알람"
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 35, weight: .medium)
+            cell.textLabel?.textAlignment = .left
+            return cell
+        } else {
+            // indexPath.row에 1을 빼서 실제 alarms 배열의 인덱스에 맞춤
+            let alarmIndex = indexPath.row - 1
+            let cell = tableView.dequeueReusableCell(withIdentifier: AlarmTableViewCell.identifier, for: indexPath) as! AlarmTableViewCell
+            let alarm = alarms[alarmIndex]
+            cell.configure(with: alarm)
+            cell.delegate = self
+            return cell
+        }
     }
 }
 
 extension AlarmPageVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // 첫 번째 셀의 높이를 조정하고 싶다면 여기서 조정
         return 80
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            alarms.remove(at: indexPath.row)
+        if editingStyle == .delete && indexPath.row != 0 { // 첫 번째 셀은 삭제 불가능하게
+            let alarmIndex = indexPath.row - 1
+            alarms.remove(at: alarmIndex)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+    
+    // 첫 번째 셀을 선택할 수 없게 만드는 옵션
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return indexPath.row == 0 ? nil : indexPath
     }
 }
