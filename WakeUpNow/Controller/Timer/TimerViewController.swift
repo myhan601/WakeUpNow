@@ -19,15 +19,69 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     private var isTimerRunning: Bool = false
     private var remainingTimeInSeconds: Int = 0
     private var startTime: Date?
-    private var audioPlayer: AVAudioPlayer?
-    private var selectedSound: String = "alarmSound1"
+    private var endTime: Date?
+    private var alarmPlayer: AVAudioPlayer?
+    private var selectedSound: String = "Alarm.mp3"
     
     // UI Components
     lazy var timerStartBtn: UIButton = mainBtn(title: "시작", action: #selector(startTimer))
     lazy var timerCancelBtn: UIButton = mainBtn(title: "취소", action: #selector(cancelTimer), isEnabled: false)
     lazy var countDownLabel: UILabel = timeLabel(text: "00:00")
     lazy var endTimeLabel: UILabel = subLabel(text: "탭하여 설정")
-    lazy var soundSettingBtn: UIButton = subBtn(title: "알람 사운드 설정", action: #selector(soundSettingTapped))
+    
+    // 사운드 설정 버튼
+    lazy var soundSettingBtn: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .wakeBeige
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "알람 사운드"
+        titleLabel.textColor = .wakeNavy
+        titleLabel.font = .systemFont(ofSize: 18)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        button.addSubview(titleLabel)
+        
+        let soundNameLabel = UILabel()
+        soundNameLabel.text = selectedSound
+        soundNameLabel.textColor = .wakeNavy
+        soundNameLabel.font = .systemFont(ofSize: 18)
+        soundNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        soundNameLabel.textAlignment = .left
+        button.addSubview(soundNameLabel)
+        self.soundNameLabel = soundNameLabel
+        
+        let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+        arrowImageView.tintColor = .wakeNavy
+        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        button.addSubview(arrowImageView)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 10),
+            titleLabel.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+            
+            soundNameLabel.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+            soundNameLabel.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -30),
+            
+            arrowImageView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -10),
+            arrowImageView.centerYAnchor.constraint(equalTo: button.centerYAnchor)
+        ])
+        
+        button.addTarget(self, action: #selector(soundSettingTapped), for: .touchUpInside)
+        
+        return button
+    }()
+
+    
+    lazy var soundNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .wakeNavy
+        label.font = .systemFont(ofSize: 18)
+        return label
+    }()
+    
     private var circularTimerView: CircularTimerView = {
         let view = CircularTimerView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +92,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 244/255, green: 241/255, blue: 236/255, alpha: 1)
-        timerStartBtn.setTitleColor(UIColor(red: 190/255, green: 66/255, blue: 54/255, alpha: 1), for: .normal)
+//        timerStartBtn.setTitleColor(.wakeRed, for: .normal)
         timerStartBtn.titleLabel?.font = .boldSystemFont(ofSize: 20)
         setupSubviews()
         setupConstraints()
@@ -76,10 +130,10 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
             circularTimerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
             
             endTimeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            endTimeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200),
+            endTimeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -190),
             
             countDownLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            countDownLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
+            countDownLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -140),
             
             timerCancelBtn.topAnchor.constraint(equalTo: circularTimerView.bottomAnchor, constant: 20),
             timerCancelBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -107,8 +161,8 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
-        button.backgroundColor = isEnabled ? UIColor(red: 230/255, green: 224/255, blue: 212/255, alpha: 1) : UIColor(red: 220/255, green: 218/255, blue: 214/255, alpha: 1)
-        button.setTitleColor(isEnabled ? UIColor(red: 30/255, green: 38/255, blue: 41/255, alpha: 1) : .gray, for: .normal)
+        button.backgroundColor = isEnabled ? .wakeBeige : .wakeLightGray
+        button.setTitleColor(isEnabled ? .wakeNavy : .gray, for: .normal)
         button.setTitleColor(.white, for: .highlighted)
         button.isEnabled = isEnabled
         button.addTarget(self, action: action, for: .touchUpInside)
@@ -120,8 +174,8 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18)
-        button.backgroundColor = UIColor(red: 230/255, green: 224/255, blue: 212/255, alpha: 1)
-        button.setTitleColor(isEnabled ? UIColor(red: 30/255, green: 38/255, blue: 41/255, alpha: 1) : .lightGray, for: .normal)
+        button.backgroundColor = .wakeBeige
+        button.setTitleColor(isEnabled ? .wakeNavy : .lightGray, for: .normal)
         button.setTitleColor(.white, for: .highlighted)
         button.isEnabled = isEnabled
         button.addTarget(self, action: action, for: .touchUpInside)
@@ -131,7 +185,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     private func timeLabel(text: String) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor =  UIColor(red: 137/255, green: 139/255, blue: 138/255, alpha: 1)
+        label.textColor = .wakeGray
         label.font = .systemFont(ofSize: 65)
         label.text = text
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didSelectTimeTapped))
@@ -142,7 +196,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     
     private func subLabel(text: String) -> UILabel {
         let label = UILabel()
-        label.textColor =  UIColor(red: 137/255, green: 139/255, blue: 138/255, alpha: 1)
+        label.textColor = .wakeGray
         label.font = .systemFont(ofSize: 20)
         label.text = text
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -167,7 +221,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         selectedSeconds = seconds
         
         remainingTimeInSeconds = selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds
-        countDownLabel.textColor = UIColor(red: 30/255, green: 38/255, blue: 41/255, alpha: 1)
+        countDownLabel.textColor = .wakeNavy
         updateTimerLabel()
         isTimerSet = true
     }
@@ -189,11 +243,12 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
                 remainingTimeInSeconds = selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds
             }
             setupTimer(with: Double(remainingTimeInSeconds))
+            calculateEndTime()
             timerStartBtn.setTitle("일시정지", for: .normal)
             isTimerRunning = true
         }
         timerCancelBtn.isEnabled = true
-        timerCancelBtn.setTitleColor(UIColor(red: 190/255, green: 66/255, blue: 54/255, alpha: 1), for: .normal)
+        timerCancelBtn.setTitleColor(.wakeRed, for: .normal)
     }
     
     @objc func cancelTimer() {
@@ -210,6 +265,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         timerCancelBtn.setTitleColor(.lightGray, for: .normal)
         
         circularTimerView.resetProgress()
+        endTimeLabel.text = "탭하여 설정"
     }
     
     private func setupTimer(with totalSeconds: Double) {
@@ -266,16 +322,27 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     }
     
     private func playAlarmSound() {
-        guard let url = Bundle.main.url(forResource: selectedSound, withExtension: "mp3") else {
-            print("Sound file not found.")
+        guard let soundURL = Bundle.main.url(forResource: selectedSound, withExtension: "mp3", subdirectory: "Ringtones") else {
+            print("사운드 파일을 찾을 수 없습니다.")
             return
         }
         
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer?.play()
+            alarmPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            alarmPlayer?.prepareToPlay()
+            alarmPlayer?.play()
         } catch {
-            print("Failed to play sound: \(error.localizedDescription)")
+            print("사운드 파일을 재생할 수 없습니다: \(error.localizedDescription)")
+        }
+    }
+    
+    private func calculateEndTime() {
+        guard isTimerSet else { return }
+        endTime = Calendar.current.date(byAdding: .second, value: remainingTimeInSeconds, to: Date())
+        let formatter = DateFormatter()
+        formatter.dateFormat = "a h:mm"
+        if let endTime = endTime {
+            endTimeLabel.text = "종료 " + formatter.string(from: endTime)
         }
     }
     
@@ -293,6 +360,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     
     func setAlarmSound(named soundName: String) {
         self.selectedSound = soundName
+        soundNameLabel.text = soundName
     }
 }
 

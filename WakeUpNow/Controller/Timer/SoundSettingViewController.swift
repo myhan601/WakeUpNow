@@ -13,8 +13,8 @@ protocol SoundSettingDelegate: AnyObject {
 
 class SoundSettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var selectedSound: String = "forest"
-    var soundOptions = ["forest", "correct", "ttang"]
+    var selectedSound: String = "Alarm"
+    var soundOptions: [String] = []
     weak var delegate: SoundSettingDelegate?
     
     lazy var tableView: UITableView = {
@@ -33,6 +33,8 @@ class SoundSettingViewController: UIViewController, UITableViewDelegate, UITable
         view.backgroundColor = .white
         setupSubviews()
         setupConstraints()
+        loadSoundOptions()
+        tableView.reloadData()
     }
     
     private func setupSubviews() {
@@ -48,11 +50,25 @@ class SoundSettingViewController: UIViewController, UITableViewDelegate, UITable
         ])
     }
     
+    private func loadSoundOptions() {
+        let bundlePath = Bundle.main.bundlePath
+        let ringtonesPath = (bundlePath as NSString).appendingPathComponent("Ringtones")
+        let ringtonesURL = URL(fileURLWithPath: ringtonesPath)
+        
+        do {
+            let contents = try FileManager.default.contentsOfDirectory(at: ringtonesURL, includingPropertiesForKeys: nil, options: [])
+            soundOptions = contents.filter { $0.pathExtension == "mp3" }.map { $0.deletingPathExtension().lastPathComponent }
+            print("Sound options: \(soundOptions)") // 디버깅용
+        } catch {
+            print("Ringtones 폴더 내용을 읽는 중 에러 발생: \(error.localizedDescription)")
+        }
+    }
+
     // MARK: - UITableViewDataSource Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return soundOptions.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = soundOptions[indexPath.row]
@@ -69,7 +85,7 @@ class SoundSettingViewController: UIViewController, UITableViewDelegate, UITable
         
         return cell
     }
-    
+
     // MARK: - UITableViewDelegate Methods
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let soundName = soundOptions[indexPath.row]
