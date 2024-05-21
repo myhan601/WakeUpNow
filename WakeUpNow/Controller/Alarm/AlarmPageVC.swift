@@ -34,7 +34,10 @@ class AlarmPageVC: UIViewController, AlarmTableViewCellDelegate {
         let editButtonItem = UIBarButtonItem(title: "편집", style: .plain, target: self, action: #selector(editButtonTapped))
         editButtonItem.tintColor = .black // 여기에서 버튼 색상을 검은색으로 설정합니다.
         self.navigationItem.leftBarButtonItem = editButtonItem
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        
+        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        addButtonItem.tintColor = ColorPalette.wakeBlue
+        self.navigationItem.rightBarButtonItem = addButtonItem
 
         setupTableView()
     }
