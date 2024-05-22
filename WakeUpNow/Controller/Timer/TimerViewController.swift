@@ -99,18 +99,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         setupConstraints()
         setupAudioSession()
         
-        // 알림 권한 요청
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            DispatchQueue.main.async {
-                if granted {
-                    print("사용자가 알림을 허용했습니다.")
-                } else {
-                    print("사용자가 알림을 허용하지 않았습니다.")
-                }
-            }
-        }
-        
-        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().delegate = (UIApplication.shared.delegate as? AppDelegate)
         
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -350,7 +339,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     // 타이머 종료 시
     private func timerDidFinish() {
         playAlarmSound()
-        scheduleLocalNotification()
+//        scheduleLocalNotification()
         
         let alertController = UIAlertController(title: "타이머 종료", message: "설정한 시간이 종료되었습니다.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "확인", style: .default) { [weak self] _ in
@@ -451,27 +440,45 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         }
     }
     
-    private func scheduleLocalNotification() {
-        if remainingTimeInSeconds > 0 {
-            let content = UNMutableNotificationContent()
-            content.title = "타이머 종료"
-            content.body = "설정한 시간이 종료되었습니다."
-            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(selectedSound).mp3"))
-            
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(remainingTimeInSeconds), repeats: false)
-            let request = UNNotificationRequest(identifier: "timerFinished", content: content, trigger: trigger)
-            
-            UNUserNotificationCenter.current().add(request) { (error) in
-                if let error = error {
-                    print("알림 요청 에러: \(error.localizedDescription)")
-                }
-            }
-        }
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        completionHandler()
-    }
+//    private func scheduleLocalNotification() {
+//        guard remainingTimeInSeconds > 0 else {
+//            return
+//        }
+//        
+//        let content = UNMutableNotificationContent()
+//        content.userInfo = ["name": "timerFinished"]
+//        content.title = "타이머 종료"
+//        content.body = "설정한 시간이 종료되었습니다."
+//        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(selectedSound).mp3"))
+//        
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(remainingTimeInSeconds), repeats: false)
+//        let request = UNNotificationRequest(identifier: "timerFinished", content: content, trigger: trigger)
+//        
+//        UNUserNotificationCenter.current().add(request) { (error) in
+//            if let error = error {
+//                print("알림 요청 에러: \(error.localizedDescription)")
+//            }
+//        }
+//    }
+//    
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        if #available(iOS 14.0, *) {
+//            completionHandler([.banner, .sound])
+//        } else {
+//            completionHandler([.alert, .sound])
+//        }
+//    }
+//    
+//    // 알림을 클릭했을 때 처리
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        // 타이머를 표시하는 로직
+//        if let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController {
+//            let timerVC = TimerViewController() // 전체화면으로 표시할 뷰 컨트롤러
+//            timerVC.modalPresentationStyle = .fullScreen
+//            rootViewController.present(timerVC, animated: true, completion: nil)
+//        }
+//        completionHandler()
+//    }
 }
 
 extension Int {
