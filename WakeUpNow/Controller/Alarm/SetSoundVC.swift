@@ -9,8 +9,12 @@
 import UIKit
 import SnapKit
 
+protocol SetSoundVCDelegate: AnyObject {
+    func didSelectSound(_ sound: String)
+}
+
 class SetSoundVC: UIViewController {
-    
+    weak var delegate: SetSoundVCDelegate?
     var tableView: UITableView!
     let sounds = ["Alarm", "Apex", "Ascending", "Bark", "Beacon", "Bell Tower", "Blues", "Boing", "Bullentin", "By The Seaside", "Chimes", "Circuit"]
     var selectedSound: String?
@@ -62,6 +66,9 @@ extension SetSoundVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedSound = sounds[indexPath.row]
         tableView.reloadData()
+        
+        // 델리게이트에 선택된 사운드를 전달합니다.
+        delegate?.didSelectSound(selectedSound ?? "nil")
     }
 }
 

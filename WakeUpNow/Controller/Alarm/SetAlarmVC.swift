@@ -10,7 +10,7 @@ import SnapKit
 import UserNotifications
 import AVFoundation
 
-class SetAlarmVC: UIViewController, SetDayVCDelegate {
+class SetAlarmVC: UIViewController, SetDayVCDelegate, SetSoundVCDelegate {
     // MARK: - variable
     
     var audioPlayer: AVAudioPlayer?
@@ -18,6 +18,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
     var onSave: ((Alarm) -> Void)?
     var alarms = [Alarm]()
     var selectedDays = [String]()
+    var selectedSound: String = ""
     var isMissionEnabled = false
     var isReminderEnabled = false
     
@@ -212,6 +213,20 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         tableView.reloadData()
     }
     
+    func didSelectSound(_ sound: String) {
+        // 선택된 사운드를 사용합니다.
+        selectedSound = sound
+        tableView.reloadData() // 선택된 사운드를 테이블 뷰에 반영
+        // 소리 설정 셀에 선택된 사운드 텍스트를 업데이트합니다.
+            if let soundCell = tableView.cellForRow(at: IndexPath(row: 2, section: 1)) {
+                for view in soundCell.accessoryView?.subviews ?? [] {
+                    if let label = view as? UILabel {
+                        label.text = selectedSound
+                    }
+                }
+            }
+    }
+    
     // 사용자가 입력한 메모를 가져오는 함수
     func getMemoText() -> String {
         if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 1)) {
@@ -237,6 +252,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
     
     @objc func soundSettingButtonTapped() {
         let nextVC = SetSoundVC()
+        nextVC.delegate = self
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
