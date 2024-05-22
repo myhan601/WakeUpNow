@@ -328,6 +328,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate, SetSoundVCDelegate {
             hour: alarmHour,
             minute: minute,
             selectedDays: selectedDays,
+            selectedSound: selectedSound,
             memo: getMemoText(),
             isReminderEnabled: isReminderEnabled,
             isAlarmOn: true
