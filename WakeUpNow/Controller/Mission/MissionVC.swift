@@ -25,6 +25,7 @@ class MissionVC: UIViewController {
     var time: Float = 0.0
     var timer = Timer()
     
+    var audioPlayer: AVAudioPlayer?
     var ttangSoundPlayer: AVAudioPlayer?
     var correctSoundPlayer: AVAudioPlayer?
     
@@ -168,6 +169,10 @@ class MissionVC: UIViewController {
     
     //정답 버튼 클릭 시 사전페이지로
     private func successScreen() {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            // 소리 멈추기
+            appDelegate.stopAlarmSound()
+        }
         let successVC = MissionSuccessVC()
         successVC.modalPresentationStyle = .overFullScreen
         successVC.score = self.score //Total점수
