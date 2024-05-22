@@ -478,7 +478,33 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                     make.height.equalTo(30)
                 }
             } else if indexPath.row == 2 {
+                // "소리 설정" 셀 구성
                 cell.textLabel?.text = "소리 설정"
+                // 소리 설정에 대한 상세 레이블과 화살표 이미지 추가
+                let detailLabel = UILabel()
+                detailLabel.text = "설정 안 됨" // 소리 설정 상태에 따라 적절한 텍스트 추가
+                detailLabel.textColor = .gray
+                detailLabel.sizeToFit()
+                
+                let accessory = UIView(frame: CGRect(x: 0, y: 0, width: detailLabel.frame.width + 20, height: detailLabel.frame.height))
+                accessory.addSubview(detailLabel)
+                
+                detailLabel.snp.makeConstraints { make in
+                    make.left.equalToSuperview()
+                    make.centerY.equalToSuperview()
+                }
+                
+                let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+                arrowImageView.tintColor = .gray
+                accessory.addSubview(arrowImageView)
+                
+                arrowImageView.snp.makeConstraints { make in
+                    make.left.equalTo(detailLabel.snp.right).offset(5)
+                    make.centerY.equalToSuperview()
+                    make.right.equalToSuperview()
+                }
+                
+                cell.accessoryView = accessory
             } else if indexPath.section == 1 && indexPath.row == 3 {
                 cell.textLabel?.text = "다시 알림"
                 
