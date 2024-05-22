@@ -99,15 +99,16 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         setupConstraints()
         setupAudioSession()
         
+        // 알림 권한 요청
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-                    DispatchQueue.main.async {
-                        if granted {
-                            print("사용자가 알림을 허용했습니다.")
-                        } else {
-                            print("사용자가 알림을 허용하지 않았습니다.")
-                        }
-                    }
+            DispatchQueue.main.async {
+                if granted {
+                    print("사용자가 알림을 허용했습니다.")
+                } else {
+                    print("사용자가 알림을 허용하지 않았습니다.")
                 }
+            }
+        }
         
         UNUserNotificationCenter.current().delegate = self
         
@@ -277,11 +278,12 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
                 isTimerRunning = true
             }
         }
-        // 취소 버튼 활성화
+        // 취소 버튼 활성화, 외형 변경
         timerCancelBtn.isEnabled = true
         timerCancelBtn.setTitleColor(ColorPalette.wakeRed, for: .normal)
     }
     
+    // 타이머 취소, 종료 후 초기화 시에도 사용
     @objc func cancelTimer() {
         timer.invalidate()
         resetTimerLabel()
@@ -303,6 +305,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         alarmPlayer?.stop()
     }
     
+    // 남은 시간 계산 및 업데이트
     private func setupTimer(with totalSeconds: Double) {
         remainingTimeInSeconds = Int(totalSeconds)
         timer.invalidate()
@@ -324,8 +327,11 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
                 self.updateTimerLabel()
             }
         }
+        let totalDuration = totalSeconds
+        circularTimerView.updateProgress(1.0, withAnimationDuration: totalDuration)
     }
     
+    // 남은 시간에 따른 카운트 다운 레이블 업데이트 및 서큘러 타이머 업데이트
     private func updateTimerLabel() {
         let hours = remainingTimeInSeconds / 3600
         let minutes = (remainingTimeInSeconds % 3600) / 60
@@ -338,9 +344,10 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         }
         
         let totalSeconds = Double(selectedHours * 3600 + selectedMinutes * 60 + selectedSeconds)
-        circularTimerView.updateProgress(CGFloat(remainingTimeInSeconds) / CGFloat(totalSeconds))
+        circularTimerView.updateProgress(CGFloat(remainingTimeInSeconds) / CGFloat(totalSeconds), withAnimationDuration: 1.0)
     }
     
+    // 타이머 종료 시
     private func timerDidFinish() {
         playAlarmSound()
         scheduleLocalNotification()
@@ -352,11 +359,13 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         present(alertController, animated: true, completion: nil)
     }
     
+    // 카운트 다운 레이블 및 서클러 타이머 초기화
     private func resetTimerLabel() {
         countDownLabel.text = "00:00"
         circularTimerView.resetProgress()
     }
     
+    // 알람 사운드 재생 메소드
     private func playAlarmSound() {
         let soundName = selectedSound.isEmpty ? "Alarm" : selectedSound
         guard let soundURL = Bundle.main.url(forResource: soundName, withExtension: "mp3") else {
@@ -373,6 +382,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         }
     }
     
+    // 오디오 세션 설정
     private func setupAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         do {
@@ -383,6 +393,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         }
     }
     
+    // 끝나는 실제 시간 계산
     private func calculateEndTime() {
         guard isTimerSet else { return }
         endTime = Calendar.current.date(byAdding: .second, value: remainingTimeInSeconds, to: Date())
@@ -393,6 +404,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         }
     }
     
+    // 사운드 설정 모달
     @objc func soundSettingTapped() {
         let soundSettingVC = SoundSettingViewController()
         soundSettingVC.delegate = self
@@ -405,6 +417,7 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
         present(soundSettingVC, animated: true, completion: nil)
     }
     
+    // 알람 사운드 레이블 업데이트
     func setAlarmSound(named soundName: String) {
         self.selectedSound = soundName
         soundNameLabel.text = soundName
@@ -453,14 +466,6 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
                     print("알림 요청 에러: \(error.localizedDescription)")
                 }
             }
-        }
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        if #available(iOS 14.0, *) {
-            completionHandler([.banner, .sound, .badge])
-        } else {
-            completionHandler([.alert, .sound, .badge])
         }
     }
     
