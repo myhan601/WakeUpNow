@@ -68,6 +68,7 @@ extension SetDayVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let day = days[indexPath.row]
+        cell.backgroundColor = ColorPalette.wakeBeige
         cell.textLabel?.text = "\(day)요일마다"
         cell.accessoryType = selectedDays.contains(day) ? .checkmark : .none
         return cell

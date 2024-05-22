@@ -8,10 +8,12 @@
 import UIKit
 import SnapKit
 import UserNotifications
+import AVFoundation
 
 class SetAlarmVC: UIViewController, SetDayVCDelegate {
     // MARK: - variable
     
+    var audioPlayer: AVAudioPlayer?
     var alarm: Alarm?
     var onSave: ((Alarm) -> Void)?
     var alarms = [Alarm]()
@@ -20,15 +22,8 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
     var isReminderEnabled = false
     
     let amPm = ["오전", "오후"]
-    let hours: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-    let minutes: [String] = [
-        "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
-        "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
-        "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
-        "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
-        "40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
-        "50", "51", "52", "53", "54", "55", "56", "57", "58", "59",
-    ]
+    let hours = Array(1...12).map { "\($0)" }
+    let minutes = Array(0...59).map { String(format: "%02d", $0) }
     
     let pickerView = UIPickerView()
     let label = UILabel()
@@ -40,20 +35,43 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         
         view.backgroundColor = ColorPalette.wakeLightBeige
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        // 제스처가 테이블뷰 셀 선택에 영향을 주지 않도록 설정
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
+        setupView()
+        setInitialPickerViewTime()
+    }
+    
+    // MARK: - func
+    
+    func playAlarmSound() {
+        guard let soundURL = Bundle.main.url(forResource: "Beacon", withExtension: "mp3") else {
+            print("소리 파일을 찾을 수 없습니다.")
+            return
+        }
         
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.numberOfLoops = -1 // 무한 반복
+            audioPlayer?.play()
+        } catch {
+            print("소리 파일을 재생할 수 없습니다: \(error)")
+        }
+    }
+    
+    private func setupView() {
+        view.backgroundColor = ColorPalette.wakeLightBeige
         configureNavigationBar()
         setupDayButton()
         setupSoundSettingButton()
         setupPickerView()
         setupTableView()
-        setInitialPickerViewTime()
+        setupGestureRecognizers()
     }
     
-    // MARK: - func
+    private func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
     private func configureNavigationBar() {
         self.title = "알람 추가"
         
@@ -65,7 +83,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         let saveButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
         saveButtonItem.tintColor = ColorPalette.wakeBlue
         self.navigationItem.rightBarButtonItem = saveButtonItem
-    
+        
         // 네비게이션바 배경과 구분선을 투명하게 만듭니다.
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -241,17 +259,17 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         let currentDate = Date()
         let calendar = Calendar.current
         let components = calendar.dateComponents([.hour, .minute], from: currentDate)
-
+        
         // pickerView에서 선택한 시간 정보를 가져옵니다.
         let selectedAmPmIndex = pickerView.selectedRow(inComponent: 0)
         let selectedHourIndex = pickerView.selectedRow(inComponent: 1)
         let selectedMinuteIndex = pickerView.selectedRow(inComponent: 2)
-
+        
         // 시간과 분을 문자열에서 정수로 변환합니다.
         let amPm = self.amPm[selectedAmPmIndex]
         let hourComponent = selectedHourIndex % hours.count
         let minuteComponent = selectedMinuteIndex % minutes.count
-
+        
         // 24시간제로 변환하여 현재 시간과 비교합니다.
         var hour = Int(hours[hourComponent]) ?? 0
         if amPm == "오후" && hour != 12 {
@@ -260,7 +278,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
             hour = 0
         }
         let minute = Int(minutes[minuteComponent]) ?? 0
-
+        
         // 선택한 시간과 현재 시간을 비교하여 알림을 띄울지 결정합니다.
         if let selectedHour = components.hour, let selectedMinute = components.minute {
             if hour == selectedHour && minute == selectedMinute {
@@ -271,7 +289,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
                 return
             }
         }
-
+        
         // 12시간제로 변환하여 알람 저장
         var alarmHour = hour
         let alarmAmPm: String
@@ -286,7 +304,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
                 alarmHour = 12
             }
         }
-
+        
         // 알람을 저장하는 로직
         let alarm = Alarm(
             isMissionEnabled: isMissionEnabled,
@@ -298,32 +316,31 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
             isReminderEnabled: isReminderEnabled,
             isAlarmOn: true
         )
-
+        
         // 클로저 호출하여 알람 전달
         onSave?(alarm)
-
+        
         // 알람 데이터 확인
         print(alarm)
-
+        
         // 로컬 알림 스케줄링
         let content = UNMutableNotificationContent()
         content.title = "알람"
         content.body = "일어날 시간입니다!"
-        content.sound = UNNotificationSound.default
-
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "Beacon.mp3"))
+        
         var dateComponents = DateComponents()
-        dateComponents.hour = hour
-        dateComponents.minute = minute
-
+        dateComponents.hour = hour // 사용자가 선택한 시간
+        dateComponents.minute = minute // 사용자가 선택한 분
+        
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
+        
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("알림 스케줄링 중 오류 발생: \(error)")
             }
         }
-
         self.dismiss(animated: true, completion: nil)
     }
 }

@@ -52,7 +52,7 @@ class SetSoundVC: UIViewController {
             make.centerX.equalToSuperview() // 부모 뷰의 중앙에 위치
             make.top.equalToSuperview().offset(100) // 상단에서 100포인트 떨어진 위치
             make.width.equalToSuperview().multipliedBy(0.8) // 부모 뷰 너비의 80% 만큼
-            make.height.equalTo(400) // 높이는 315포인트
+            make.height.equalTo(405)
         }
     }
 }

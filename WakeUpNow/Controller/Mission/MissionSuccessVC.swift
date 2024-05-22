@@ -131,7 +131,7 @@ Total score
 
     //버튼 누르면 알람페이지로 이동
     @objc private func tappedBackButton() {
-        let arlmPage = AlarmPageVC()
+        let arlmPage = TabBarVC()
         navigationController?.pushViewController(arlmPage, animated: true)
         print("연결확인")
     }
