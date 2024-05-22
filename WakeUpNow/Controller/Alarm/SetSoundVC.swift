@@ -12,7 +12,7 @@ import SnapKit
 class SetSoundVC: UIViewController {
     
     var tableView: UITableView!
-    let sounds = ["사운드1", "사운드2", "사운드3", "사운드4", "사운드5", "사운드6", "사운드7", "사운드8", "사운드9", "사운드10"]
+    let sounds = ["Alarm", "Apex", "Ascending", "Bark", "Beacon", "Bell Tower", "Blues", "Boing", "Bullentin", "By The Seaside", "Chimes", "Circuit"]
     var selectedSound: String?
     
     override func viewDidLoad() {
@@ -52,7 +52,7 @@ class SetSoundVC: UIViewController {
             make.centerX.equalToSuperview() // 부모 뷰의 중앙에 위치
             make.top.equalToSuperview().offset(100) // 상단에서 100포인트 떨어진 위치
             make.width.equalToSuperview().multipliedBy(0.8) // 부모 뷰 너비의 80% 만큼
-            make.height.equalTo(405)
+            make.height.equalTo(540)
         }
     }
 }
