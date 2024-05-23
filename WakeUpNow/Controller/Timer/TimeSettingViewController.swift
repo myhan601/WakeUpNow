@@ -31,7 +31,10 @@ class TimeSettingViewController: UIViewController, UIPickerViewDelegate, UIPicke
     lazy var confirmButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = .systemFont(ofSize: 20)
         button.setTitle("확인", for: .normal)
+        button.setTitleColor(ColorPalette.wakeLightBeige, for: .normal)
+        button.backgroundColor = ColorPalette.wakeBlue
         button.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -39,7 +42,7 @@ class TimeSettingViewController: UIViewController, UIPickerViewDelegate, UIPicke
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = ColorPalette.wakeBeige
         setupSubviews()
         setupConstraints()
     }
@@ -57,8 +60,12 @@ class TimeSettingViewController: UIViewController, UIPickerViewDelegate, UIPicke
             timePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
             confirmButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 20),
-            confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            confirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            confirmButton.heightAnchor.constraint(equalToConstant: 55)
         ])
+        confirmButton.layer.cornerRadius = 10
     }
     
     @objc func confirmButtonTapped() {

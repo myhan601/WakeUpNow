@@ -10,10 +10,11 @@ import UIKit
 class CircularTimerView: UIView {
     private var backgroundLayer: CAShapeLayer!
     private var foregroundLayer: CAShapeLayer!
+    private var animationDuration: CFTimeInterval = 0
 
     var progress: CGFloat = 0 {
         didSet {
-            foregroundLayer.strokeEnd = progress
+            setProgress(progress)
         }
     }
 
@@ -56,11 +57,22 @@ class CircularTimerView: UIView {
         layer.path = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: bounds.width / 2, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi - CGFloat.pi / 2, clockwise: true).cgPath
     }
 
-    func updateProgress(_ progress: CGFloat) {
-        self.progress = progress
+    func updateProgress(_ progress: CGFloat, withAnimationDuration duration: CFTimeInterval) {
+        self.animationDuration = duration
+        setProgress(progress)
+    }
+
+    private func setProgress(_ progress: CGFloat) {
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = foregroundLayer.strokeEnd
+        animation.toValue = progress
+        animation.duration = animationDuration
+        foregroundLayer.strokeEnd = progress
+        foregroundLayer.add(animation, forKey: "progressAnim")
     }
 
     func resetProgress() {
+        foregroundLayer.removeAllAnimations()
         progress = 0.0
     }
 }

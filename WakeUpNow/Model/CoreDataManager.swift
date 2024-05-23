@@ -16,7 +16,7 @@ class CoreDataManager {
     
     func saveUser(user: User) {
         guard let context = self.persistent?.viewContext else { return }
-//        let newPd = UserData(context: context)
+        let newPd = UserData(context: context)
         newPd.score = Int64(user.score)
         try? context.save()
     }
