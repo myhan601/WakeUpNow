@@ -397,14 +397,16 @@ class TimerViewController: UIViewController, TimeSettingDelegate, SoundSettingDe
     @objc func soundSettingTapped() {
         let soundSettingVC = SoundSettingViewController()
         soundSettingVC.delegate = self
-        soundSettingVC.modalPresentationStyle = .pageSheet
-        if let sheet = soundSettingVC.sheetPresentationController {
+        let navController = UINavigationController(rootViewController: soundSettingVC)
+        navController.modalPresentationStyle = .pageSheet
+        if let sheet = navController.sheetPresentationController {
             sheet.detents = [.large()]
-            sheet.prefersGrabberVisible = true
-            sheet.selectedDetentIdentifier = .medium
+//            sheet.prefersGrabberVisible = true
+            sheet.selectedDetentIdentifier = .large
         }
-        present(soundSettingVC, animated: true, completion: nil)
+        present(navController, animated: true, completion: nil)
     }
+
     
     // 알람 사운드 레이블 업데이트
     func setAlarmSound(named soundName: String) {
