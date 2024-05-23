@@ -41,22 +41,6 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate, SetSoundVCDelegate {
     }
     
     // MARK: - func
-    
-    func playAlarmSound() {
-        guard let soundURL = Bundle.main.url(forResource: "Beacon", withExtension: "mp3") else {
-            print("소리 파일을 찾을 수 없습니다.")
-            return
-        }
-        
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-            audioPlayer?.numberOfLoops = -1 // 무한 반복
-            audioPlayer?.play()
-        } catch {
-            print("소리 파일을 재생할 수 없습니다: \(error)")
-        }
-    }
-    
     private func setupView() {
         view.backgroundColor = ColorPalette.wakeLightBeige
         configureNavigationBar()
@@ -213,10 +197,17 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate, SetSoundVCDelegate {
         tableView.reloadData()
     }
     
+    func userSelectedSound(url: URL) {
+        SoundManager.shared.alarmSoundURL = url
+    }
+    
     func didSelectSound(_ sound: String) {
         // 선택된 사운드를 사용합니다.
         selectedSound = sound
         tableView.reloadData() // 선택된 사운드를 테이블 뷰에 반영
+        if let soundURL = Bundle.main.url(forResource: "\(selectedSound)", withExtension: "mp3") {
+            userSelectedSound(url: soundURL)
+        }
         // 소리 설정 셀에 선택된 사운드 텍스트를 업데이트합니다.
             if let soundCell = tableView.cellForRow(at: IndexPath(row: 2, section: 1)) {
                 for view in soundCell.accessoryView?.subviews ?? [] {
@@ -344,7 +335,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate, SetSoundVCDelegate {
         let content = UNMutableNotificationContent()
         content.title = "알람"
         content.body = "일어날 시간입니다!"
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "Beacon.mp3"))
+//        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(selectedSound).mp3"))
         
         var dateComponents = DateComponents()
         dateComponents.hour = hour // 사용자가 선택한 시간
