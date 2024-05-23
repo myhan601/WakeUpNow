@@ -101,7 +101,7 @@ class StopWatchViewController: UIViewController {
         labTimeTableView.snp.makeConstraints {
             $0.top.equalTo(rightButton.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
     }
 
