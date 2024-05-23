@@ -8,27 +8,23 @@
 import UIKit
 import SnapKit
 import UserNotifications
+import AVFoundation
 
-class SetAlarmVC: UIViewController, SetDayVCDelegate {
+class SetAlarmVC: UIViewController, SetDayVCDelegate, SetSoundVCDelegate {
     // MARK: - variable
     
+    var audioPlayer: AVAudioPlayer?
     var alarm: Alarm?
     var onSave: ((Alarm) -> Void)?
     var alarms = [Alarm]()
     var selectedDays = [String]()
+    var selectedSound: String = ""
     var isMissionEnabled = false
     var isReminderEnabled = false
     
     let amPm = ["오전", "오후"]
-    let hours: [String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-    let minutes: [String] = [
-        "00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
-        "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
-        "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
-        "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
-        "40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
-        "50", "51", "52", "53", "54", "55", "56", "57", "58", "59",
-    ]
+    let hours = Array(1...12).map { "\($0)" }
+    let minutes = Array(0...59).map { String(format: "%02d", $0) }
     
     let pickerView = UIPickerView()
     let label = UILabel()
@@ -38,28 +34,41 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorPalette.wakeLightBeige
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        // 제스처가 테이블뷰 셀 선택에 영향을 주지 않도록 설정
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
-        
+        setupView()
+        setInitialPickerViewTime()
+    }
+    
+    // MARK: - func
+    private func setupView() {
+        view.backgroundColor = ColorPalette.wakeLightBeige
         configureNavigationBar()
         setupDayButton()
         setupSoundSettingButton()
         setupPickerView()
         setupTableView()
-        setInitialPickerViewTime()
+        setupGestureRecognizers()
     }
     
-    // MARK: - func
+    private func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
     private func configureNavigationBar() {
         self.title = "알람 추가"
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelButtonTapped))
+        let cancelButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelButtonTapped))
+        cancelButtonItem.tintColor = .black
+        self.navigationItem.leftBarButtonItem = cancelButtonItem
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
+        
+        let saveButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
+        saveButtonItem.tintColor = ColorPalette.wakeBlue
+        self.navigationItem.rightBarButtonItem = saveButtonItem
+        
         // 네비게이션바 배경과 구분선을 투명하게 만듭니다.
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -188,6 +197,27 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         tableView.reloadData()
     }
     
+    func userSelectedSound(url: URL) {
+        SoundManager.shared.alarmSoundURL = url
+    }
+    
+    func didSelectSound(_ sound: String) {
+        // 선택된 사운드를 사용합니다.
+        selectedSound = sound
+        tableView.reloadData() // 선택된 사운드를 테이블 뷰에 반영
+        if let soundURL = Bundle.main.url(forResource: "\(selectedSound)", withExtension: "mp3") {
+            userSelectedSound(url: soundURL)
+        }
+        // 소리 설정 셀에 선택된 사운드 텍스트를 업데이트합니다.
+            if let soundCell = tableView.cellForRow(at: IndexPath(row: 2, section: 1)) {
+                for view in soundCell.accessoryView?.subviews ?? [] {
+                    if let label = view as? UILabel {
+                        label.text = selectedSound
+                    }
+                }
+            }
+    }
+    
     // 사용자가 입력한 메모를 가져오는 함수
     func getMemoText() -> String {
         if let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 1)) {
@@ -213,6 +243,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
     
     @objc func soundSettingButtonTapped() {
         let nextVC = SetSoundVC()
+        nextVC.delegate = self
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -235,17 +266,17 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
         let currentDate = Date()
         let calendar = Calendar.current
         let components = calendar.dateComponents([.hour, .minute], from: currentDate)
-
+        
         // pickerView에서 선택한 시간 정보를 가져옵니다.
         let selectedAmPmIndex = pickerView.selectedRow(inComponent: 0)
         let selectedHourIndex = pickerView.selectedRow(inComponent: 1)
         let selectedMinuteIndex = pickerView.selectedRow(inComponent: 2)
-
+        
         // 시간과 분을 문자열에서 정수로 변환합니다.
         let amPm = self.amPm[selectedAmPmIndex]
         let hourComponent = selectedHourIndex % hours.count
         let minuteComponent = selectedMinuteIndex % minutes.count
-
+        
         // 24시간제로 변환하여 현재 시간과 비교합니다.
         var hour = Int(hours[hourComponent]) ?? 0
         if amPm == "오후" && hour != 12 {
@@ -254,7 +285,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
             hour = 0
         }
         let minute = Int(minutes[minuteComponent]) ?? 0
-
+        
         // 선택한 시간과 현재 시간을 비교하여 알림을 띄울지 결정합니다.
         if let selectedHour = components.hour, let selectedMinute = components.minute {
             if hour == selectedHour && minute == selectedMinute {
@@ -265,7 +296,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
                 return
             }
         }
-
+        
         // 12시간제로 변환하여 알람 저장
         var alarmHour = hour
         let alarmAmPm: String
@@ -280,7 +311,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
                 alarmHour = 12
             }
         }
-
+        
         // 알람을 저장하는 로직
         let alarm = Alarm(
             isMissionEnabled: isMissionEnabled,
@@ -288,36 +319,36 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate {
             hour: alarmHour,
             minute: minute,
             selectedDays: selectedDays,
+            selectedSound: selectedSound,
             memo: getMemoText(),
             isReminderEnabled: isReminderEnabled,
             isAlarmOn: true
         )
-
+        
         // 클로저 호출하여 알람 전달
         onSave?(alarm)
-
+        
         // 알람 데이터 확인
         print(alarm)
-
+        
         // 로컬 알림 스케줄링
         let content = UNMutableNotificationContent()
         content.title = "알람"
         content.body = "일어날 시간입니다!"
-        content.sound = UNNotificationSound.default
-
+//        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(selectedSound).mp3"))
+        
         var dateComponents = DateComponents()
-        dateComponents.hour = hour
-        dateComponents.minute = minute
-
+        dateComponents.hour = hour // 사용자가 선택한 시간
+        dateComponents.minute = minute // 사용자가 선택한 분
+        
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
+        
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("알림 스케줄링 중 오류 발생: \(error)")
             }
         }
-
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -388,11 +419,16 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         
+        // 셀의 배경색 설정
+        cell.backgroundColor = ColorPalette.wakeBeige
+        cell.textLabel?.textColor = ColorPalette.wakeDarkGray
+        
         // '미션여부' 셀 구성
         if indexPath.section == 0 {
             cell.textLabel?.text = "미션여부"
             
             let switchView = UISwitch()
+            switchView.onTintColor = ColorPalette.wakeBlue
             switchView.isOn = isMissionEnabled
             switchView.addTarget(self, action: #selector(missionSwitchValueChanged(_:)), for: .valueChanged)
             cell.accessoryView = switchView
@@ -427,6 +463,7 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                 // "메모" 셀 구성이 여기에 들어갑니다.
                 let label = UILabel()
                 label.text = "메모"
+                label.textColor = ColorPalette.wakeDarkGray
                 cell.contentView.addSubview(label)
                 
                 let textField = UITextField()
@@ -449,11 +486,38 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                     make.height.equalTo(30)
                 }
             } else if indexPath.row == 2 {
+                // "소리 설정" 셀 구성
                 cell.textLabel?.text = "소리 설정"
+                // 소리 설정에 대한 상세 레이블과 화살표 이미지 추가
+                let detailLabel = UILabel()
+                detailLabel.text = "설정 안 됨" // 소리 설정 상태에 따라 적절한 텍스트 추가
+                detailLabel.textColor = .gray
+                detailLabel.sizeToFit()
+                
+                let accessory = UIView(frame: CGRect(x: 0, y: 0, width: detailLabel.frame.width + 20, height: detailLabel.frame.height))
+                accessory.addSubview(detailLabel)
+                
+                detailLabel.snp.makeConstraints { make in
+                    make.left.equalToSuperview()
+                    make.centerY.equalToSuperview()
+                }
+                
+                let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+                arrowImageView.tintColor = .gray
+                accessory.addSubview(arrowImageView)
+                
+                arrowImageView.snp.makeConstraints { make in
+                    make.left.equalTo(detailLabel.snp.right).offset(5)
+                    make.centerY.equalToSuperview()
+                    make.right.equalToSuperview()
+                }
+                
+                cell.accessoryView = accessory
             } else if indexPath.section == 1 && indexPath.row == 3 {
                 cell.textLabel?.text = "다시 알림"
                 
                 let switchView = UISwitch()
+                switchView.onTintColor = ColorPalette.wakeBlue
                 switchView.isOn = isReminderEnabled
                 switchView.addTarget(self, action: #selector(reminderSwitchValueChanged(_:)), for: .valueChanged)
                 cell.accessoryView = switchView

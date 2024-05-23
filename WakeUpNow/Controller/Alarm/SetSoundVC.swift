@@ -9,16 +9,20 @@
 import UIKit
 import SnapKit
 
+protocol SetSoundVCDelegate: AnyObject {
+    func didSelectSound(_ sound: String)
+}
+
 class SetSoundVC: UIViewController {
-    
+    weak var delegate: SetSoundVCDelegate?
     var tableView: UITableView!
-    let sounds = ["사운드1", "사운드2", "사운드3", "사운드4", "사운드5", "사운드6", "사운드7", "사운드8", "사운드9", "사운드10"]
+    let sounds = ["Alarm", "Apex", "Ascending", "Bark", "Beacon", "Bell Tower", "Blues", "Boing", "Bullentin", "By The Seaside", "Chimes", "Circuit"]
     var selectedSound: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorPalette.wakeLightBeige
         
         configureTableView()
         configureNavigationBar()
@@ -52,7 +56,7 @@ class SetSoundVC: UIViewController {
             make.centerX.equalToSuperview() // 부모 뷰의 중앙에 위치
             make.top.equalToSuperview().offset(100) // 상단에서 100포인트 떨어진 위치
             make.width.equalToSuperview().multipliedBy(0.8) // 부모 뷰 너비의 80% 만큼
-            make.height.equalTo(400) // 높이는 315포인트
+            make.height.equalTo(540)
         }
     }
 }
@@ -62,6 +66,9 @@ extension SetSoundVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedSound = sounds[indexPath.row]
         tableView.reloadData()
+        
+        // 델리게이트에 선택된 사운드를 전달합니다.
+        delegate?.didSelectSound(selectedSound ?? "nil")
     }
 }
 

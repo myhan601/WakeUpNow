@@ -25,6 +25,7 @@ class MissionVC: UIViewController {
     var time: Float = 0.0
     var timer = Timer()
     
+    var audioPlayer: AVAudioPlayer?
     var ttangSoundPlayer: AVAudioPlayer?
     var correctSoundPlayer: AVAudioPlayer?
     
@@ -45,60 +46,61 @@ class MissionVC: UIViewController {
         
         questionLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(100)
-            make.leading.equalToSuperview().offset(30)
-            make.trailing.equalToSuperview().offset(-30)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview().offset(-400)
         }
         answer1.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(500)
-            make.leading.equalToSuperview().offset(30)
-            make.trailing.equalToSuperview().offset(-30)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview().offset(-280)
         }
         answer2.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(600)
-            make.leading.equalToSuperview().offset(30)
-            make.trailing.equalToSuperview().offset(-30)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview().offset(-180)
         }
         answer3.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(700)
-            make.leading.equalToSuperview().offset(30)
-            make.trailing.equalToSuperview().offset(-30)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview().offset(-80)
         }
         progressView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(50)
-            make.leading.equalToSuperview().offset(30)
-            make.trailing.equalToSuperview().offset(-30)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview().offset(-800)
         }
     }
     
     private func setPage() {
         
-        view.backgroundColor = #colorLiteral(red: 0.9594840407, green: 0.9445981383, blue: 0.9232942462, alpha: 1)
+        view.backgroundColor = ColorPalette.wakeLightBeige
         
-        questionLabel.backgroundColor = #colorLiteral(red: 0.890609324, green: 0.86582762, blue: 0.8187091351, alpha: 1)
+        questionLabel.backgroundColor = ColorPalette.wakeBeige
         questionLabel.layer.masksToBounds = true
         questionLabel.layer.cornerRadius = 10
         questionLabel.textAlignment = .center
+        questionLabel.textColor = ColorPalette.wakeDeepNavy
         questionLabel.numberOfLines = 0
         questionLabel.font = UIFont.boldSystemFont(ofSize: 35)
         
-        answer1.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
+        answer1.backgroundColor = ColorPalette.wakeLightSky
         answer1.layer.cornerRadius = 10
-        answer1.setTitleColor(.black, for: .normal)
+        answer1.setTitleColor(ColorPalette.wakeDeepNavy, for: .normal)
         answer1.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
         
-        answer2.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
+        answer2.backgroundColor = ColorPalette.wakeLightSky
         answer2.layer.cornerRadius = 10
-        answer2.setTitleColor(.black, for: .normal)
+        answer2.setTitleColor(ColorPalette.wakeDeepNavy, for: .normal)
         answer2.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
         
-        answer3.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
+        answer3.backgroundColor = ColorPalette.wakeLightSky
         answer3.layer.cornerRadius = 10
-        answer3.setTitleColor(.black, for: .normal)
+        answer3.setTitleColor(ColorPalette.wakeDeepNavy, for: .normal)
         answer3.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
         
         progressView.progressViewStyle = .default
@@ -168,6 +170,10 @@ class MissionVC: UIViewController {
     
     //정답 버튼 클릭 시 사전페이지로
     private func successScreen() {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            // 소리 멈추기
+            appDelegate.stopAlarmSound()
+        }
         let successVC = MissionSuccessVC()
         successVC.modalPresentationStyle = .overFullScreen
         successVC.score = self.score //Total점수
@@ -188,12 +194,12 @@ class MissionVC: UIViewController {
         answer1.setTitle(nil, for: .normal)
         answer2.setTitle(nil, for: .normal)
         answer3.setTitle(nil, for: .normal)
-        answer1.setTitleColor(.black, for: .normal)
-        answer2.setTitleColor(.black, for: .normal)
-        answer3.setTitleColor(.black, for: .normal)
-        answer1.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
-        answer2.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
-        answer3.backgroundColor = #colorLiteral(red: 0.740773499, green: 0.7857543826, blue: 0.7978796959, alpha: 1)
+        answer1.setTitleColor(ColorPalette.wakeDeepNavy, for: .normal)
+        answer2.setTitleColor(ColorPalette.wakeDeepNavy, for: .normal)
+        answer3.setTitleColor(ColorPalette.wakeDeepNavy, for: .normal)
+        answer1.backgroundColor = ColorPalette.wakeLightSky
+        answer2.backgroundColor = ColorPalette.wakeLightSky
+        answer3.backgroundColor = ColorPalette.wakeLightSky
         fetchRandom()
         resetTimer() //다른 문제로 넘어갔을 떄, progressBar도 초기화
     }
@@ -237,8 +243,8 @@ class MissionVC: UIViewController {
         }
         //정답 버튼 클릭 시
         if selectedWord == currentWord?.furigana {
-            sender.backgroundColor = #colorLiteral(red: 0.1250983775, green: 0.4217019081, blue: 0.532646358, alpha: 1)
-            sender.setTitleColor(.white, for: .normal)
+            sender.backgroundColor = ColorPalette.wakeBlue
+            sender.setTitleColor(ColorPalette.wakeLightBeige, for: .normal)
             correctSoundPlayer?.play()
             score += 5 //정답 클릭 시 점수 변동
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -246,8 +252,8 @@ class MissionVC: UIViewController {
             }
         } else {
             //오답 버튼 클릭 시
-            sender.backgroundColor = #colorLiteral(red: 0.745804131, green: 0.2601789236, blue: 0.2126921713, alpha: 1)
-            sender.setTitleColor(.white, for: .normal)
+            sender.backgroundColor = ColorPalette.wakeRed
+            sender.setTitleColor(ColorPalette.wakeLightBeige, for: .normal)
             ttangSoundPlayer?.play()
             wrongCount += 1 //오답 클릭 시 틀린 개수 증가
             score -= 2 //오답 클릭 시 점수 변동
