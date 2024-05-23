@@ -113,7 +113,8 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate, SetSoundVCDelegate {
         pickerView.snp.makeConstraints { make in
             make.centerX.equalToSuperview() // 중앙 정렬
             make.top.equalToSuperview().offset(100) // 상단으로부터 100의 거리에 위치
-            make.width.equalToSuperview().multipliedBy(0.8) // 화면 너비의 80%
+            make.left.equalToSuperview().offset(20) // 왼쪽에서 20만큼 간격
+            make.right.equalToSuperview().offset(-20)
             make.height.equalTo(200) // 높이는 200으로 설정
         }
     }
@@ -132,7 +133,8 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate, SetSoundVCDelegate {
         tableView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(pickerView.snp.bottom).offset(20)
-            make.width.equalToSuperview().multipliedBy(0.8)
+            make.left.equalToSuperview().offset(20) // 왼쪽에서 20만큼 간격
+            make.right.equalToSuperview().offset(-20) // 오른쪽에서 20만큼 간격
             make.height.equalTo(225)
         }
     }
@@ -312,6 +314,9 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate, SetSoundVCDelegate {
             }
         }
         
+        // 기존 알람 제거
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        
         // 알람을 저장하는 로직
         let alarm = Alarm(
             isMissionEnabled: isMissionEnabled,
@@ -333,7 +338,7 @@ class SetAlarmVC: UIViewController, SetDayVCDelegate, SetSoundVCDelegate {
         
         // 로컬 알림 스케줄링
         let content = UNMutableNotificationContent()
-        content.title = "알람"
+        content.title = getMemoText()
         content.body = "일어날 시간입니다!"
 //        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "\(selectedSound).mp3"))
         
@@ -474,7 +479,7 @@ extension SetAlarmVC: UITableViewDelegate, UITableViewDataSource {
                 cell.contentView.addSubview(textField)
                 
                 label.snp.makeConstraints { make in
-                    make.left.equalToSuperview().offset(15)
+                    make.left.equalToSuperview().offset(20)
                     make.centerY.equalToSuperview()
                     make.width.equalTo(50)
                 }

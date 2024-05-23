@@ -48,7 +48,8 @@ class SetDayVC: UIViewController {
         tableView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(100)
-            make.width.equalToSuperview().multipliedBy(0.8)
+            make.left.equalToSuperview().offset(20) // 왼쪽에서 20만큼 간격
+            make.right.equalToSuperview().offset(-20) // 오른쪽에서 20만큼 간격
             make.height.equalTo(315)
         }
     }

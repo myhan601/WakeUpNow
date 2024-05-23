@@ -55,7 +55,8 @@ class SetSoundVC: UIViewController {
         tableView.snp.makeConstraints { make in
             make.centerX.equalToSuperview() // 부모 뷰의 중앙에 위치
             make.top.equalToSuperview().offset(100) // 상단에서 100포인트 떨어진 위치
-            make.width.equalToSuperview().multipliedBy(0.8) // 부모 뷰 너비의 80% 만큼
+            make.left.equalToSuperview().offset(20) // 왼쪽에서 20만큼 간격
+            make.right.equalToSuperview().offset(-20) // 오른쪽에서 20만큼 간격
             make.height.equalTo(540)
         }
     }
@@ -81,6 +82,7 @@ extension SetSoundVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "soundCell", for: indexPath)
         let sound = sounds[indexPath.row]
+        cell.backgroundColor = ColorPalette.wakeBeige
         cell.textLabel?.text = "\(sound)" // 왼쪽 여백 추가
         cell.accessoryType = (sound == selectedSound) ? .checkmark : .none
         return cell
