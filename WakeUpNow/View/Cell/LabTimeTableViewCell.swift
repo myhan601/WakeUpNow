@@ -36,7 +36,7 @@ class LabTimeTableViewCell: UITableViewCell {
     }
 
     func configureLayout() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = ColorPalette.wakeBeige
 
         let inset = CGFloat(10)
         indexLabel.snp.makeConstraints {
@@ -46,13 +46,9 @@ class LabTimeTableViewCell: UITableViewCell {
 
         timeLabel.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.top.bottom.trailing.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(20)
         }
     }
-
-//    override func prepareForReuse() {
-//        indexLabel.textColor = .black
-//        timeLabel.textColor = .black
-//    }
 }
 
