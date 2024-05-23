@@ -26,7 +26,7 @@ class SetDayVC: UIViewController {
     
     private func configureNavigationBar() {
         self.title = "반복"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = ColorPalette.wakeLightBeige
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: self, action: #selector(goBack))
         // 네비게이션바 배경과 구분선을 투명하게 만듭니다.
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -68,6 +68,7 @@ extension SetDayVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let day = days[indexPath.row]
+        cell.backgroundColor = ColorPalette.wakeBeige
         cell.textLabel?.text = "\(day)요일마다"
         cell.accessoryType = selectedDays.contains(day) ? .checkmark : .none
         return cell

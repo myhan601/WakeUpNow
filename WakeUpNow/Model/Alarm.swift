@@ -13,6 +13,7 @@ struct Alarm {
     var hour: Int
     var minute: Int
     var selectedDays: [String]
+    var selectedSound: String?
     var memo: String?
     var isReminderEnabled: Bool
     var isAlarmOn: Bool
