@@ -47,7 +47,6 @@
 		AB66D2FA2BF5F706000D72DA /* MissionSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */; };
 		AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */; };
 		AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3012BF76C93000D72DA /* Alarm.swift */; };
-		AB66D3042BFBAFA9000D72DA /* WakeUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */; };
 		F162EC4C2BF7685C00720B64 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4B2BF7685C00720B64 /* CoreData.swift */; };
 		F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
@@ -94,7 +93,6 @@
 		AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionSuccessVC.swift; sourceTree = "<group>"; };
 		AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		AB66D3012BF76C93000D72DA /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
-		AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpVC.swift; sourceTree = "<group>"; };
 		F162EC4B2BF7685C00720B64 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,7 +192,6 @@
 				AB118D372BF2478F00672AB1 /* SetAlarmVC.swift */,
 				AB118D392BF24E9000672AB1 /* SetDayVC.swift */,
 				AB118D3B2BF24FEB00672AB1 /* SetSoundVC.swift */,
-				AB66D3032BFBAFA9000D72DA /* WakeUpVC.swift */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -377,7 +374,6 @@
 				2EF10D1E2BFADD0E00343D24 /* SoundSettingViewController.swift in Sources */,
 				AB66D2FA2BF5F706000D72DA /* MissionSuccessVC.swift in Sources */,
 				AB66D2F22BF5F6C7000D72DA /* VocaData.swift in Sources */,
-				AB66D3042BFBAFA9000D72DA /* WakeUpVC.swift in Sources */,
 				AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */,
 				AB118D2C2BF1E5A900672AB1 /* AlarmPageVC.swift in Sources */,
 				AB118D382BF2478F00672AB1 /* SetAlarmVC.swift in Sources */,

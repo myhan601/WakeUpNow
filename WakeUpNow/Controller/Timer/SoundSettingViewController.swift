@@ -18,18 +18,33 @@ class SoundSettingViewController: UIViewController, UITableViewDataSource, UITab
     
     let soundOptions = ["Alarm", "Apex", "Ascending", "Bark", "Beacon", "Bell Tower", "Blues", "Boing", "Bullentin", "By The Seaside", "Chimes", "Circuit"]
     
-    private let tableView = UITableView()
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = ColorPalette.wakeLightBeige
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.layer.cornerRadius = 10
+        tableView.clipsToBounds = true
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 0)
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
-        tableView.frame = self.view.bounds
         view.addSubview(tableView)
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,6 +54,17 @@ class SoundSettingViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = soundOptions[indexPath.row]
+        cell.backgroundColor = ColorPalette.wakeBeige
+        cell.textLabel?.textColor = ColorPalette.wakeDarkGray
+        
+        if indexPath.row == 0 {
+            cell.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
+        } else if indexPath.row == soundOptions.count - 1 {
+            cell.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10.0)
+        } else {
+            cell.roundCorners(corners: [], radius: 0.0)
+        }
+        
         return cell
     }
     
@@ -47,5 +73,14 @@ class SoundSettingViewController: UIViewController, UITableViewDataSource, UITab
         let selectedSound = soundOptions[indexPath.row]
         delegate?.setAlarmSound(named: selectedSound)
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension UIView {
+    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
     }
 }
