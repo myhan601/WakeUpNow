@@ -617,7 +617,6 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
-
 /* Begin XCVersionGroup section */
 		AB66D30E2BFC8895000D72DA /* UserModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
