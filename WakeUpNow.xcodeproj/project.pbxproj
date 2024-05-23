@@ -25,7 +25,6 @@
 		2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FA82BF369190043FDF7 /* TimerViewController.swift */; };
 		2EC95FAB2BF369330043FDF7 /* TimeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */; };
 		2EC95FAD2BF5CAE50043FDF7 /* CircularTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */; };
-		2ECED4E02BFEDE2C00B3DCBF /* UserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2ECED4DE2BFEDE2C00B3DCBF /* UserModel.xcdatamodeld */; };
 		2EF10D1E2BFADD0E00343D24 /* SoundSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF10D1D2BFADD0E00343D24 /* SoundSettingViewController.swift */; };
 		AB0766892BF1C5C200CDA2D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */; };
 		AB07668B2BF1C5C200CDA2D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB07668A2BF1C5C200CDA2D2 /* SceneDelegate.swift */; };
@@ -47,6 +46,7 @@
 		AB66D2FA2BF5F706000D72DA /* MissionSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */; };
 		AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */; };
 		AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3012BF76C93000D72DA /* Alarm.swift */; };
+		AB66D3182BFEE1B9000D72DA /* UserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3162BFEE1B9000D72DA /* UserModel.xcdatamodeld */; };
 		F162EC4C2BF7685C00720B64 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4B2BF7685C00720B64 /* CoreData.swift */; };
 		F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
@@ -70,7 +70,6 @@
 		2EC95FA82BF369190043FDF7 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		2EC95FAA2BF369330043FDF7 /* TimeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingViewController.swift; sourceTree = "<group>"; };
 		2EC95FAC2BF5CAE50043FDF7 /* CircularTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTimerView.swift; sourceTree = "<group>"; };
-		2ECED4DF2BFEDE2C00B3DCBF /* UserModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserModel.xcdatamodel; sourceTree = "<group>"; };
 		2EF10D1D2BFADD0E00343D24 /* SoundSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingViewController.swift; sourceTree = "<group>"; };
 		AB0766852BF1C5C200CDA2D2 /* WakeUpNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeUpNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0766882BF1C5C200CDA2D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +92,7 @@
 		AB66D2F82BF5F706000D72DA /* MissionSuccessVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionSuccessVC.swift; sourceTree = "<group>"; };
 		AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		AB66D3012BF76C93000D72DA /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		AB66D3172BFEE1B9000D72DA /* UserModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserModel.xcdatamodel; sourceTree = "<group>"; };
 		F162EC4B2BF7685C00720B64 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,7 +180,7 @@
 				AB66D2F42BF5F6F0000D72DA /* ttang.wav */,
 				AB0766932BF1C5C300CDA2D2 /* LaunchScreen.storyboard */,
 				AB0766962BF1C5C300CDA2D2 /* Info.plist */,
-				2ECED4DE2BFEDE2C00B3DCBF /* UserModel.xcdatamodeld */,
+				AB66D3162BFEE1B9000D72DA /* UserModel.xcdatamodeld */,
 			);
 			path = WakeUpNow;
 			sourceTree = "<group>";
@@ -353,7 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2ECED4E02BFEDE2C00B3DCBF /* UserModel.xcdatamodeld in Sources */,
+				AB66D3182BFEE1B9000D72DA /* UserModel.xcdatamodeld in Sources */,
 				2EC95FA92BF369190043FDF7 /* TimerViewController.swift in Sources */,
 				AB66D2F12BF5F6C7000D72DA /* APIDataManager.swift in Sources */,
 				AB07668D2BF1C5C200CDA2D2 /* ViewController.swift in Sources */,
@@ -619,14 +619,14 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		2ECED4DE2BFEDE2C00B3DCBF /* UserModel.xcdatamodeld */ = {
+		AB66D3162BFEE1B9000D72DA /* UserModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2ECED4DF2BFEDE2C00B3DCBF /* UserModel.xcdatamodel */,
+				AB66D3172BFEE1B9000D72DA /* UserModel.xcdatamodel */,
 			);
-			currentVersion = 2ECED4DF2BFEDE2C00B3DCBF /* UserModel.xcdatamodel */;
+			currentVersion = AB66D3172BFEE1B9000D72DA /* UserModel.xcdatamodel */;
 			name = UserModel.xcdatamodeld;
-			path = "/Users/seohyelim/Downloads/WakeUpNow-develop/WakeUpNow/UserModel.xcdatamodeld";
+			path = /Users/myhan601/Desktop/Development/WakeUpNow/WakeUpNow/UserModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
