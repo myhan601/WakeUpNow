@@ -31,7 +31,8 @@
 ## 페이지 기능별 소개 
 ### 알람 페이지
 <img src="https://github.com/myhan601/WakeUpNow/assets/59227948/fb67aaff-57ed-4252-9e67-5355d818e722" width="800">
-
+### 기능설명
+> 기능설명입니다
 ---
 
 ### 스톱워치 페이지
