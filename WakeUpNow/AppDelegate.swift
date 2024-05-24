@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         } catch {
             print("오디오 세션 설정 중 오류 발생: \(error)")
         }
-        
+        Thread.sleep(forTimeInterval: 1.5)
         return true
     }
     

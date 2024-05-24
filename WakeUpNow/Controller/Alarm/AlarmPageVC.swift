@@ -48,6 +48,7 @@ class AlarmPageVC: UIViewController, AlarmTableViewCellDelegate {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = ColorPalette.wakeLightBeige
+        tableView.isScrollEnabled = false
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in

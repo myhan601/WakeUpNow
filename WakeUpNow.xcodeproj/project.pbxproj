@@ -47,6 +47,7 @@
 		AB66D2FE2BF5FE58000D72DA /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */; };
 		AB66D3022BF76C93000D72DA /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3012BF76C93000D72DA /* Alarm.swift */; };
 		AB66D3182BFEE1B9000D72DA /* UserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB66D3162BFEE1B9000D72DA /* UserModel.xcdatamodeld */; };
+		AB66D31C2BFF85A5000D72DA /* 미션.png in Resources */ = {isa = PBXBuildFile; fileRef = AB66D31B2BFF85A5000D72DA /* 미션.png */; };
 		F162EC4C2BF7685C00720B64 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4B2BF7685C00720B64 /* CoreData.swift */; };
 		F162EC4E2BF7686B00720B64 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
@@ -93,6 +94,7 @@
 		AB66D2FD2BF5FE58000D72DA /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		AB66D3012BF76C93000D72DA /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		AB66D3172BFEE1B9000D72DA /* UserModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserModel.xcdatamodel; sourceTree = "<group>"; };
+		AB66D31B2BFF85A5000D72DA /* 미션.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "미션.png"; sourceTree = "<group>"; };
 		F162EC4B2BF7685C00720B64 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		F162EC4D2BF7686B00720B64 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +177,7 @@
 				AB07668C2BF1C5C200CDA2D2 /* ViewController.swift */,
 				2E75EB0B2BFC4CCB00FB8AB9 /* Ringtones */,
 				AB07668E2BF1C5C200CDA2D2 /* Main.storyboard */,
+				AB66D31B2BFF85A5000D72DA /* 미션.png */,
 				AB0766912BF1C5C300CDA2D2 /* Assets.xcassets */,
 				AB66D2F32BF5F6F0000D72DA /* correct.wav */,
 				AB66D2F42BF5F6F0000D72DA /* ttang.wav */,
@@ -342,6 +345,7 @@
 				2E75EB222BFC4D4700FB8AB9 /* Circuit.mp3 in Resources */,
 				2E75EB1C2BFC4D4700FB8AB9 /* Beacon.mp3 in Resources */,
 				2E75EB192BFC4D4700FB8AB9 /* Boing.mp3 in Resources */,
+				AB66D31C2BFF85A5000D72DA /* 미션.png in Resources */,
 				2E75EB202BFC4D4700FB8AB9 /* Bulletin.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
